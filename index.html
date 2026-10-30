@@ -409,15 +409,15 @@
   }
   .play-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
 
-  .tetris-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-  #tetrisCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-  .tetris-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
-  .tetris-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
-  .tetris-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-  .tetris-info .stat-value { color: #ffd700; font-size: 18px; font-weight: 700; }
-  .tetris-info .stat-value.earned { color: #00ff88; text-shadow: 0 0 6px rgba(0, 255, 136, 0.5); }
-  .tetris-controls { margin-top: 12px; font-size: 11px; color: #b8a8d0; line-height: 1.6; }
-  .tetris-controls kbd { background: rgba(255, 255, 255, 0.1); border: 1px solid #b8a8d0; border-radius: 3px; padding: 1px 6px; font-family: monospace; color: #ffd700; }
+  .game-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  #tetrisCanvas, #snakeCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  .game-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
+  .game-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
+  .game-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .game-info .stat-value { color: #ffd700; font-size: 18px; font-weight: 700; }
+  .game-info .stat-value.earned { color: #00ff88; text-shadow: 0 0 6px rgba(0, 255, 136, 0.5); }
+  .game-controls { margin-top: 12px; font-size: 11px; color: #b8a8d0; line-height: 1.6; }
+  .game-controls kbd { background: rgba(255, 255, 255, 0.1); border: 1px solid #b8a8d0; border-radius: 3px; padding: 1px 6px; font-family: monospace; color: #ffd700; }
 
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5, 2, 15, 0.85);
     backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;
@@ -425,7 +425,7 @@
   .modal-overlay.active { display: flex; }
   .modal { background: linear-gradient(135deg, rgba(30, 10, 60, 0.95), rgba(50, 15, 80, 0.95));
     backdrop-filter: blur(20px); border: 4px solid #ff69b4; border-radius: 16px;
-    padding: 28px; max-width: 460px; width: 100%; max-height: 90vh; overflow-y: auto;
+    padding: 28px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;
     text-align: center; color: #f0e8ff; box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
     animation: modal-wiggle 1.2s ease-in-out infinite;
   }
@@ -451,6 +451,29 @@
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
   }
   .cart-empty { color: #888; font-style: italic; padding: 16px; }
+
+  /* Save notification */
+  .save-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #00ff88, #00aa55);
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+    z-index: 4000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .save-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 </head>
 <body>
@@ -584,9 +607,9 @@
     <div class="game-card">
       <span class="game-emoji">🐍</span>
       <h4>Змейка-пришелец</h4>
-      <p class="game-desc">Скоро! Наша змейка улетела на обед. Возвращается через 3-5 световых лет.</p>
+      <p class="game-desc">Космическая змейка собирает инопланетные яблоки! Управляй ею стрелками и не врезайся в себя.</p>
       <p class="game-reward">💰 0,1 🌸 за каждое яблоко</p>
-      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+      <button class="play-btn" onclick="startSnake()">▶ ИГРАТЬ</button>
     </div>
     <div class="game-card">
       <span class="game-emoji">🎯</span>
@@ -637,8 +660,55 @@
   </div>
 </div>
 
+<!-- SAVE TOAST -->
+<div class="save-toast" id="saveToast">💾 Прогресс сохранён!</div>
+
 <script>
-  // STARFIELD
+  // ========== LOCAL STORAGE (SAVE/LOAD) ==========
+  const STORAGE_KEY_BALANCE = 'kpp_swagoviki_balance';
+  const STORAGE_KEY_CART = 'kpp_swagoviki_cart';
+
+  function loadState() {
+    try {
+      const savedBalance = localStorage.getItem(STORAGE_KEY_BALANCE);
+      if (savedBalance !== null) {
+        balance = parseFloat(savedBalance);
+        if (isNaN(balance)) balance = 0;
+      }
+      const savedCart = localStorage.getItem(STORAGE_KEY_CART);
+      if (savedCart !== null) {
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) cart = parsed;
+      }
+    } catch (e) {
+      console.warn('Не удалось загрузить сохранение:', e);
+      balance = 0;
+      cart = [];
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY_BALANCE, String(balance));
+      localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart));
+      showSaveToast();
+    } catch (e) {
+      console.warn('Не удалось сохранить:', e);
+    }
+  }
+
+  let saveToastTimeout = null;
+  function showSaveToast() {
+    const toast = document.getElementById('saveToast');
+    if (!toast) return;
+    toast.classList.add('show');
+    if (saveToastTimeout) clearTimeout(saveToastTimeout);
+    saveToastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 1500);
+  }
+
+  // ========== STARFIELD ==========
   const starCount = 180;
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
@@ -671,7 +741,7 @@
   }
   setInterval(() => { if (Math.random() > 0.5) createShootingStar(); }, 4000);
 
-  // NAVIGATION
+  // ========== NAVIGATION ==========
   const navBtns = document.querySelectorAll('.nav-btn');
   const pages = document.querySelectorAll('.page');
   const floatingCart = document.getElementById('floatingCart');
@@ -690,7 +760,7 @@
 
   function openEarnPage() { navigateTo('earn'); }
 
-  // HIT COUNTER
+  // ========== HIT COUNTER ==========
   let hits = 42069;
   function updateCounter() {
     hits += Math.floor(Math.random() * 3);
@@ -699,7 +769,7 @@
   setInterval(updateCounter, 2000);
   updateCounter();
 
-  // MODALS
+  // ========== MODALS ==========
   const modalBox = document.getElementById('modalBox');
   function showModal(title, bodyHTML, noShake = false) {
     document.getElementById('modalTitle').textContent = title;
@@ -713,6 +783,11 @@
     if (tetrisState && tetrisState.handleKey) {
       document.removeEventListener('keydown', tetrisState.handleKey);
       tetrisState = null;
+    }
+    if (snakeInterval) { clearInterval(snakeInterval); snakeInterval = null; }
+    if (snakeState && snakeState.handleKey) {
+      document.removeEventListener('keydown', snakeState.handleKey);
+      snakeState = null;
     }
     modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.remove('active');
@@ -731,7 +806,7 @@
       '<p>Ваши сваговики будут переданы в межгалактический фонд. Пришельцы очень любят сваговики!</p>');
   }
 
-  // IMAGE VIEWER
+  // ========== IMAGE VIEWER ==========
   function openImageViewer(src, caption, author) {
     document.getElementById('viewerImage').src = src;
     document.getElementById('viewerCaption').textContent = caption;
@@ -751,9 +826,12 @@
     }
   }
 
-  // SHOP
+  // ========== SHOP ==========
   let balance = 0;
   let cart = [];
+
+  // Load saved state FIRST
+  loadState();
 
   const limitedItems = [
     { emoji: '🧪', name: 'Зелье исполнения желаний', price: 999999,
@@ -828,6 +906,9 @@
     document.getElementById('cartBadge').textContent = cart.length;
   }
 
+  // Initial UI update with loaded state
+  updateShopUI();
+
   function buy(idx) {
     const item = shopItems[idx];
     if (balance < item.price) {
@@ -839,6 +920,7 @@
     balance = Math.round(balance * 10) / 10;
     cart.push({ name: item.name, price: item.price, emoji: item.emoji });
     updateShopUI();
+    saveState();
     showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
       '<p>Вы купили "<b>' + item.name + '</b>"! Курьер-пришелец доставит заказ в течение 3-5 световых лет. Спасибо за сваговики! 🌸</p>');
   }
@@ -859,6 +941,7 @@
     balance = Math.round(balance * 10) / 10;
     cart.push({ name: item.name, price: item.price, emoji: item.emoji });
     updateShopUI();
+    saveState();
     if (item.type === 'legendary') {
       showModal('✨ ЖЕЛАНИЕ ИСПОЛНЕНО! ✨',
         '<p>Вы приобрели "<b style="color:#ffd700;">' + item.name + '</b>"! Ваше желание уже в пути к вам на межгалактической почте. Ожидайте доставку через 1000 лет. 🌟</p>');
@@ -895,18 +978,18 @@
     showModal('🛒 ВАША КОРЗИНА 🛒', bodyHTML);
   }
 
-  // TETRIS
+  // ========== TETRIS ==========
   let tetrisInterval = null;
   let tetrisState = null;
 
   function startTetris() {
     const bodyHTML = `
-      <div class="tetris-container">
+      <div class="game-container">
         <canvas id="tetrisCanvas" width="200" height="400"></canvas>
-        <div class="tetris-info">
+        <div class="game-info">
           <div class="stat"><div class="stat-label">ЛИНИИ</div><div class="stat-value" id="tetrisLines">0</div></div>
           <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="tetrisEarned">0 🌸</div></div>
-          <div class="tetris-controls">
+          <div class="game-controls">
             <div><kbd>←</kbd> <kbd>→</kbd> движение</div>
             <div><kbd>↑</kbd> поворот</div>
             <div><kbd>↓</kbd> ускорить</div>
@@ -989,6 +1072,7 @@
         balance += cleared * 0.1;
         balance = Math.round(balance * 10) / 10;
         updateShopUI();
+        saveState();
         const linesEl = document.getElementById('tetrisLines');
         const earnedEl = document.getElementById('tetrisEarned');
         if (linesEl) linesEl.textContent = lines;
@@ -1071,6 +1155,254 @@
     newPiece();
     lastTime = performance.now();
     update();
+  }
+
+  // ========== SNAKE ==========
+  let snakeInterval = null;
+  let snakeState = null;
+
+  function startSnake() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">ЯБЛОКИ</div><div class="stat-value" id="snakeApples">0</div></div>
+          <div class="stat"><div class="stat-label">ДЛИНА</div><div class="stat-value" id="snakeLength">3</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="snakeEarned">0 🌸</div></div>
+          <div class="game-controls">
+            <div><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd></div>
+            <div>движение</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждое съеденное яблоко</p>
+    `;
+    showModal('🐍 ЗМЕЙКА-ПРИШЕЛЕЦ 🐍', bodyHTML, true);
+    setTimeout(initSnake, 50);
+  }
+
+  function initSnake() {
+    const canvas = document.getElementById('snakeCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const GRID = 20;
+    const CELL = canvas.width / GRID;
+    const SPEED = 130;
+
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+    let direction = { x: 1, y: 0 };
+    let nextDirection = { x: 1, y: 0 };
+    let food = spawnFood();
+    let apples = 0;
+    let earned = 0;
+    let paused = false;
+    let gameOver = false;
+
+    function spawnFood() {
+      let newFood;
+      let attempts = 0;
+      do {
+        newFood = {
+          x: Math.floor(Math.random() * GRID),
+          y: Math.floor(Math.random() * GRID)
+        };
+        attempts++;
+        if (attempts > 200) break;
+      } while (snake.some(seg => seg.x === newFood.x && seg.y === newFood.y));
+      return newFood;
+    }
+
+    function update() {
+      if (gameOver || paused) return;
+
+      direction = { ...nextDirection };
+      const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+      if (head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID) {
+        gameOver = true;
+        endGame();
+        return;
+      }
+      if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
+        gameOver = true;
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === food.x && head.y === food.y) {
+        apples++;
+        earned += 0.1;
+        earned = Math.round(earned * 10) / 10;
+        balance += 0.1;
+        balance = Math.round(balance * 10) / 10;
+        updateShopUI();
+        saveState();
+        const applesEl = document.getElementById('snakeApples');
+        const lengthEl = document.getElementById('snakeLength');
+        const earnedEl = document.getElementById('snakeEarned');
+        if (applesEl) applesEl.textContent = apples;
+        if (lengthEl) lengthEl.textContent = snake.length;
+        if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+        food = spawnFood();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+    }
+
+    function draw() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.07)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= GRID; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * CELL, 0);
+        ctx.lineTo(i * CELL, canvas.height);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, i * CELL);
+        ctx.lineTo(canvas.width, i * CELL);
+        ctx.stroke();
+      }
+
+      const foodX = food.x * CELL + CELL / 2;
+      const foodY = food.y * CELL + CELL / 2;
+      const gradient = ctx.createRadialGradient(foodX, foodY, 2, foodX, foodY, CELL);
+      gradient.addColorStop(0, 'rgba(255, 80, 80, 0.8)');
+      gradient.addColorStop(1, 'rgba(255, 80, 80, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(food.x * CELL - CELL/2, food.y * CELL - CELL/2, CELL * 2, CELL * 2);
+      ctx.fillStyle = '#ff4444';
+      ctx.beginPath();
+      ctx.arc(foodX, foodY, CELL / 2 - 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.beginPath();
+      ctx.arc(foodX - 3, foodY - 3, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#4a2818';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(foodX, foodY - CELL/2 + 2);
+      ctx.lineTo(foodX + 2, foodY - CELL/2 - 2);
+      ctx.stroke();
+
+      snake.forEach((seg, idx) => {
+        const x = seg.x * CELL;
+        const y = seg.y * CELL;
+        if (idx === 0) {
+          ctx.fillStyle = '#00ff88';
+          ctx.shadowColor = '#00ff88';
+          ctx.shadowBlur = 10;
+        } else {
+          const t = idx / snake.length;
+          const r = Math.round(0 + t * 50);
+          const g = Math.round(255 - t * 100);
+          const b = Math.round(136 - t * 50);
+          ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+          ctx.shadowBlur = 0;
+        }
+        ctx.fillRect(x + 1, y + 1, CELL - 2, CELL - 2);
+
+        if (idx === 0) {
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = '#000';
+          const eyeSize = 3;
+          let eye1x, eye1y, eye2x, eye2y;
+          const cx = x + CELL / 2;
+          const cy = y + CELL / 2;
+          if (direction.x === 1) {
+            eye1x = cx + 4; eye1y = cy - 4;
+            eye2x = cx + 4; eye2y = cy + 4;
+          } else if (direction.x === -1) {
+            eye1x = cx - 4; eye1y = cy - 4;
+            eye2x = cx - 4; eye2y = cy + 4;
+          } else if (direction.y === -1) {
+            eye1x = cx - 4; eye1y = cy - 4;
+            eye2x = cx + 4; eye2y = cy - 4;
+          } else {
+            eye1x = cx - 4; eye1y = cy + 4;
+            eye2x = cx + 4; eye2y = cy + 4;
+          }
+          ctx.beginPath();
+          ctx.arc(eye1x, eye1y, eyeSize, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(eye2x, eye2y, eyeSize, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+      ctx.shadowBlur = 0;
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '16px Comic Neue, sans-serif';
+        ctx.fillText('Съедено яблок: ' + apples, canvas.width / 2, canvas.height / 2 + 10);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', canvas.width / 2, canvas.height / 2 + 35);
+      }
+
+      if (paused && !gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏸ ПАУЗА', canvas.width / 2, canvas.height / 2);
+      }
+    }
+
+    function endGame() {
+      clearInterval(snakeInterval);
+      snakeInterval = null;
+      draw();
+    }
+
+    function handleKey(e) {
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
+        if (!gameOver) {
+          paused = !paused;
+          draw();
+        }
+        return;
+      }
+      if (paused || gameOver) return;
+
+      const key = e.key;
+      if (key === 'ArrowUp' && direction.y !== 1) {
+        nextDirection = { x: 0, y: -1 };
+      } else if (key === 'ArrowDown' && direction.y !== -1) {
+        nextDirection = { x: 0, y: 1 };
+      } else if (key === 'ArrowLeft' && direction.x !== 1) {
+        nextDirection = { x: -1, y: 0 };
+      } else if (key === 'ArrowRight' && direction.x !== -1) {
+        nextDirection = { x: 1, y: 0 };
+      } else {
+        return;
+      }
+      e.preventDefault();
+    }
+
+    document.addEventListener('keydown', handleKey);
+    snakeState = { handleKey };
+
+    draw();
+    snakeInterval = setInterval(update, SPEED);
   }
 
   document.querySelector('.header h1').addEventListener('click', () => {
