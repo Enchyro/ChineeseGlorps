@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>★ КИТАЙСКАЯ ПРИШЕЛЬЦЕВА ПАРТИЯ ★ ОФИЦИАЛЬНЫЙ САЙТ</title>
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/comic-neue@latest/latin-400-normal.woff2" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/comic-neue@latest/latin-700-normal.woff2" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Comic Neue'; src: url('https://cdn.jsdelivr.net/fontsource/fonts/comic-neue@latest/latin-400-normal.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Comic Neue'; src: url('https://cdn.jsdelivr.net/fontsource/fonts/comic-neue@latest/latin-700-normal.woff2') format('woff2'); font-weight: 700; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+
+  body {
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    background: #05020f;
+    color: #f0e8ff;
+    min-height: 100vh;
+    line-height: 1.6;
+    position: relative;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="24" font-size="24">👽</text></svg>'), auto;
+  }
+
+  .starfield { position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(102, 51, 153, 0.35), transparent 55%),
+      radial-gradient(ellipse at 85% 75%, rgba(0, 150, 200, 0.2), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(200, 50, 150, 0.15), transparent 60%),
+      linear-gradient(180deg, #05020f 0%, #0a0520 50%, #05020f 100%);
+  }
+  .star { position: fixed; background: #fff; border-radius: 50%; pointer-events: none; z-index: -1; }
+  .star.twinkle { animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.6); } }
+  .shooting-star { position: fixed; width: 2px; height: 2px; background: #fff; border-radius: 50%; z-index: -1; pointer-events: none; box-shadow: 0 0 4px #fff, 0 0 8px #fff; }
+  .shooting-star::after { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8)); transform-origin: right; transform: rotate(45deg); }
+
+  .top-marquee {
+    background: rgba(15, 5, 35, 0.85); backdrop-filter: blur(8px); color: #ffd700;
+    font-weight: 700; font-size: 16px; padding: 10px 0;
+    border-top: 2px dashed #ff69b4; border-bottom: 2px dashed #00e5ff;
+    white-space: nowrap; overflow: hidden;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); letter-spacing: 1px;
+  }
+  .top-marquee .track { display: inline-block; animation: scroll-left 30s linear infinite; padding-left: 100%; }
+  @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+  .nav { display: flex; justify-content: center; gap: 10px; padding: 14px 10px;
+    background: rgba(15, 5, 35, 0.75); backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 105, 180, 0.3); flex-wrap: wrap;
+  }
+  .nav-btn { background: rgba(255, 255, 255, 0.05); color: #ffd700;
+    font-family: 'Comic Neue', cursive; font-size: 16px; font-weight: 700;
+    padding: 8px 20px; border: 2px solid #ff69b4; border-radius: 20px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .nav-btn:hover { background: rgba(255, 105, 180, 0.15); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4); }
+  .nav-btn.active { background: linear-gradient(135deg, #ff69b4, #ff1493); color: #fff; border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 105, 180, 0.6); }
+
+  .header { text-align: center; padding: 40px 20px; margin: 20px; border-radius: 16px;
+    background: rgba(20, 10, 50, 0.5); backdrop-filter: blur(12px); border: 3px ridge #ffd700;
+  }
+  .header h1 { font-size: 46px; font-weight: 700; color: #ffd700;
+    text-shadow: 2px 2px 0 #ff69b4, 4px 4px 0 #00e5ff, 0 0 20px rgba(255, 215, 0, 0.5);
+    animation: wiggle 3s ease-in-out infinite; letter-spacing: 2px; line-height: 1.2;
+  }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .header h2 { font-size: 18px; color: #fff; background: rgba(0, 0, 0, 0.5);
+    display: inline-block; padding: 6px 20px; margin-top: 16px; border: 2px dashed #ff69b4; border-radius: 20px;
+  }
+  .header .slogan { margin-top: 16px; color: #00e5ff; font-size: 16px;
+    display: inline-block; padding: 6px 18px; background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px; font-weight: 700; text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  }
+
+  .under-construction {
+    background: repeating-linear-gradient(45deg, #ffd700, #ffd700 18px, #222 18px, #222 36px);
+    color: #ff0000; text-align: center; padding: 12px; font-size: 18px; font-weight: 700;
+    margin: 20px; border: 3px solid #ff0000; border-radius: 10px;
+    -webkit-text-stroke: 2px #fff;
+    text-shadow: 0 0 4px #fff, 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
+    paint-order: stroke fill;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+  @media (max-width: 700px) { .content { grid-template-columns: 1fr; } .header h1 { font-size: 28px; } }
+
+  .panel { background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
+    border: 3px solid #00e5ff; border-radius: 14px; padding: 22px;
+    box-shadow: 5px 5px 0 rgba(255, 215, 0, 0.4);
+  }
+  .panel h3 { color: #ffd700; font-size: 22px; text-align: center; margin-bottom: 14px; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+  .panel p, .panel li { font-size: 15px; line-height: 1.7; color: #e8dcff; }
+  .panel ul { list-style: '👽 '; padding-left: 28px; }
+  .panel li { margin-bottom: 8px; }
+
+  .leader { text-align: center; background: rgba(30, 10, 60, 0.55); backdrop-filter: blur(12px);
+    border: 3px double #ff69b4; padding: 28px 20px; margin: 20px; border-radius: 18px;
+  }
+  .leader-photo { width: 160px; height: 160px; margin: 0 auto 16px; border: 4px solid #ffd700;
+    border-radius: 50%; background: rgba(0, 0, 0, 0.5); object-fit: cover;
+    animation: spin 15s linear infinite; box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .leader .title { color: #ff69b4; font-size: 24px; font-weight: 700; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255, 105, 180, 0.6); }
+  .leader .name { font-size: 20px; color: #00e5ff; font-weight: 700; margin-bottom: 16px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); }
+  .leader .quote { font-size: 17px; color: #f0e8ff; padding: 12px 18px; background: rgba(0, 0, 0, 0.4);
+    border-left: 4px solid #ff69b4; border-right: 4px solid #00e5ff; border-radius: 10px;
+    display: inline-block; max-width: 90%; line-height: 1.5;
+  }
+  .leader .quote .w1 { font-weight: 700; font-size: 22px; color: #ff0000; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+  .leader .quote .w2 { font-style: italic; color: #b088ff; font-size: 16px; }
+  .leader .quote .w3 { font-weight: 700; font-size: 20px; color: #00e5ff; text-transform: uppercase; text-shadow: 0 0 8px #00e5ff; animation: blink 1.8s infinite; }
+  .leader .quote .w4 { font-style: italic; font-weight: 700; color: #ffd700; font-size: 18px; text-decoration: underline wavy #ff69b4; }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0.6; } }
+
+  .btn-container { text-align: center; margin: 30px 20px; }
+  .bad-btn { display: inline-block; background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff;
+    font-family: 'Comic Neue', cursive; font-size: 16px; font-weight: 700;
+    padding: 12px 26px; border: 3px solid #ffd700; border-radius: 25px;
+    cursor: pointer; margin: 6px; box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  }
+  .bad-btn:hover { background: linear-gradient(180deg, #00e5ff, #0088aa); transform: scale(1.05) rotate(-2deg); }
+
+  .counter { background: rgba(10, 5, 25, 0.7); backdrop-filter: blur(10px); color: #fff;
+    text-align: center; padding: 22px; margin: 20px; border-radius: 14px; border: 2px solid #ffd700;
+  }
+  .counter p { font-size: 15px; color: #ffd700; letter-spacing: 1px; }
+  .counter .num { font-size: 36px; font-weight: 700; color: #00ff88; letter-spacing: 6px;
+    background: #000; padding: 10px 20px; border: 2px inset #444; border-radius: 8px;
+    display: inline-block; margin: 10px 0; font-family: 'Courier New', monospace; text-shadow: 0 0 10px #00ff88;
+  }
+
+  .guestbook { background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
+    border: 3px solid #b088ff; border-radius: 14px; padding: 22px; margin: 20px;
+  }
+  .guestbook h3 { color: #ffd700; text-align: center; font-size: 22px; margin-bottom: 14px; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+  .guest-entry { background: rgba(0, 0, 0, 0.4); color: #f0e8ff; padding: 12px; margin: 10px 0;
+    border-left: 4px solid #ff69b4; border-radius: 8px; font-size: 14px;
+  }
+  .guest-entry .name { font-weight: 700; color: #00e5ff; margin-bottom: 4px; }
+  .guest-entry .date { font-size: 12px; color: #888; margin-top: 6px; }
+
+  .shop-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
+    text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
+  }
+  .shop-subtitle { text-align: center; font-size: 15px; color: #00e5ff; margin-bottom: 22px; font-style: italic; }
+
+  .limited-section { margin: 20px; padding: 22px;
+    background: linear-gradient(135deg, rgba(60, 30, 10, 0.4), rgba(80, 50, 20, 0.4));
+    border: 3px solid #ffd700; border-radius: 16px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  }
+  .limited-title { text-align: center; font-size: 28px; color: #ffd700; margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); letter-spacing: 2px;
+    animation: limited-glow 2s ease-in-out infinite;
+  }
+  @keyframes limited-glow {
+    0%, 100% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+    50% { text-shadow: 0 0 25px rgba(255, 215, 0, 1), 0 0 35px rgba(255, 215, 0, 0.5); }
+  }
+  .limited-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+
+  .regular-title { text-align: center; font-size: 24px; color: #00e5ff; margin: 20px 20px 10px;
+    letter-spacing: 1px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+  }
+  .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; padding: 0 20px 20px; }
+
+  .shop-item { background: rgba(20, 10, 50, 0.6); backdrop-filter: blur(10px);
+    border: 2px solid #ff69b4; border-radius: 14px; padding: 18px; text-align: center;
+    transition: all 0.2s; display: flex; flex-direction: column;
+    box-shadow: 4px 4px 0 rgba(255, 215, 0, 0.3);
+  }
+  .shop-item:hover { transform: translateY(-4px) rotate(-1deg); border-color: #ffd700; box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4); }
+  .shop-item .emoji { font-size: 60px; margin-bottom: 10px; display: block; }
+  .shop-item h4 { color: #ffd700; font-size: 17px; margin-bottom: 8px; text-shadow: 0 0 6px rgba(255, 215, 0, 0.4); }
+  .shop-item .desc { color: #d8c8f0; font-size: 13px; line-height: 1.5; margin-bottom: 12px; flex-grow: 1; }
+  .shop-item .price { font-size: 20px; font-weight: 700; color: #00e5ff; margin-bottom: 12px; text-shadow: 0 0 6px rgba(0, 229, 255, 0.4); }
+  .shop-item .price small { font-size: 12px; color: #888; font-weight: 400; }
+  .shop-item .old-price { text-decoration: line-through; color: #888; font-size: 16px; margin-right: 6px; }
+  .shop-item .discount-tag { display: inline-block; background: #ff0000; color: #fff;
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; animation: blink 1.5s infinite;
+  }
+  .buy-btn { background: linear-gradient(180deg, #00e5ff, #0088aa); color: #000;
+    border: 2px solid #ffd700; border-radius: 18px; padding: 8px 18px;
+    font-family: 'Comic Neue', cursive; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s;
+  }
+  .buy-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff; }
+
+  .shop-item.legendary { background: linear-gradient(135deg, rgba(60, 30, 10, 0.7), rgba(80, 50, 20, 0.7));
+    border: 3px solid transparent; background-clip: padding-box; position: relative;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+  .shop-item.legendary::before { content: ''; position: absolute; inset: -3px; border-radius: 16px; padding: 3px;
+    background: linear-gradient(135deg, #ffd700, #fff8dc, #ffd700, #ffed4e, #ffd700);
+    background-size: 300% 300%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    animation: gold-shimmer 3s linear infinite; z-index: -1;
+  }
+  @keyframes gold-shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+  .shop-item.legendary::after { content: '✨ ЛЕГЕНДАРНЫЙ ✨'; position: absolute; top: -14px; left: 50%;
+    transform: translateX(-50%); background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+    color: #3a1f00; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 10px;
+    letter-spacing: 1px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  }
+  .shop-item.legendary .emoji { font-size: 80px; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+    animation: legendary-pulse 2s ease-in-out infinite;
+  }
+  @keyframes legendary-pulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1)); }
+  }
+  .shop-item.legendary h4 { font-size: 22px; color: #ffd700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); margin-bottom: 12px; }
+  .shop-item.legendary .desc { font-size: 15px; color: #ffe4b5; font-weight: 700; }
+  .shop-item.legendary .price { font-size: 28px; color: #ffd700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+  .shop-item.legendary .sponsor { display: block; font-size: 10px; color: #8a7040; font-style: italic; margin-top: 8px; opacity: 0.7; }
+  .shop-item.legendary .buy-btn { background: linear-gradient(180deg, #ffd700, #b8860b); color: #3a1f00;
+    border: 2px solid #fff8dc; font-size: 16px; padding: 10px 24px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  }
+  .shop-item.legendary .buy-btn:hover { background: linear-gradient(180deg, #ffed4e, #ffd700); color: #3a1f00; }
+
+  .shop-item.collab { background: linear-gradient(135deg, rgba(90, 30, 60, 0.6), rgba(120, 50, 90, 0.6));
+    border: 2px solid #ff69b4; position: relative;
+  }
+  .shop-item.collab::after { content: '🎀 КОЛЛАБОРАЦИЯ 🎀'; position: absolute; top: -14px; left: 50%;
+    transform: translateX(-50%); background: linear-gradient(90deg, #ff69b4, #ff1493, #ff69b4);
+    color: #fff; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 10px;
+    letter-spacing: 1px; box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
+  }
+  .shop-item.collab .emoji { font-size: 70px; filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.7));
+    animation: collab-bounce 2s ease-in-out infinite;
+  }
+  @keyframes collab-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .shop-item.collab h4 { color: #ff69b4; font-size: 19px; }
+  .shop-item.collab .desc { color: #ffb6c1; }
+  .shop-item.collab .collab-note { display: block; font-size: 10px; color: #d8a8d0; font-style: italic; margin-top: 8px; opacity: 0.8; }
+  .shop-item.collab .buy-btn { background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff; border: 2px solid #ffd700; }
+  .shop-item.collab .buy-btn:hover { background: linear-gradient(180deg, #ff1493, #ff69b4); }
+
+  .cart-info { text-align: center; background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
+    border: 2px dashed #ff69b4; border-radius: 12px; padding: 14px; margin: 20px; font-size: 15px;
+  }
+  .cart-info strong { color: #ffd700; font-size: 18px; }
+
+  .vip-card { background: linear-gradient(135deg, rgba(60, 30, 90, 0.7), rgba(90, 30, 60, 0.7));
+    backdrop-filter: blur(12px); border: 3px double #ffd700; border-radius: 14px;
+    padding: 22px; margin: 20px; text-align: center; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  .vip-card h3 { color: #ffd700; font-size: 22px; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+  .vip-card p { color: #f0e8ff; font-size: 14px; line-height: 1.6; }
+  .vip-card .vip-emoji { font-size: 28px; margin: 0 6px; }
+
+  .floating-cart { position: fixed; bottom: 25px; left: 25px;
+    background: linear-gradient(135deg, #ff69b4, #c71585); color: #fff;
+    border: 3px solid #ffd700; border-radius: 50%; width: 65px; height: 65px;
+    font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(255, 105, 180, 0.5);
+    z-index: 1500; display: none; align-items: center; justify-content: center; transition: transform 0.2s;
+  }
+  .floating-cart.visible { display: flex; }
+  .floating-cart:hover { transform: scale(1.1) rotate(-10deg); }
+  .floating-cart .cart-badge { position: absolute; top: -5px; right: -5px; background: #ffd700; color: #000;
+    border: 2px solid #ff69b4; border-radius: 50%; width: 26px; height: 26px;
+    font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+
+  .gallery-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
+    text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
+  }
+  .gallery-subtitle { text-align: center; font-size: 15px; color: #00e5ff; margin-bottom: 22px; font-style: italic; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; padding: 20px; }
+  .gallery-item { background: rgba(20, 10, 50, 0.6); backdrop-filter: blur(10px);
+    border: 3px solid #b088ff; border-radius: 14px; overflow: hidden; transition: transform 0.2s;
+    box-shadow: 4px 4px 0 rgba(255, 105, 180, 0.3); cursor: pointer;
+  }
+  .gallery-item:hover { transform: scale(1.03) rotate(1deg); border-color: #00e5ff; box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4); }
+  .gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; background: #0a0520; }
+  .gallery-item .caption { padding: 14px; background: rgba(0, 0, 0, 0.5); text-align: center;
+    color: #00e5ff; font-size: 15px; font-weight: 700; border-top: 2px dashed #b088ff;
+  }
+
+  /* IMAGE VIEWER MODAL */
+  .image-viewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 2, 15, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .image-viewer.active { display: flex; }
+  .image-viewer-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    animation: zoom-in 0.3s ease-out;
+  }
+  @keyframes zoom-in {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .image-viewer img {
+    max-width: 100%;
+    max-height: 75vh;
+    border: 4px solid #ff69b4;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+  }
+  .image-viewer-caption {
+    text-align: center;
+    color: #00e5ff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 15px;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  }
+  .image-viewer-author {
+    text-align: center;
+    color: #b8a8d0;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 105, 180, 0.4);
+    border-radius: 20px;
+    display: inline-block;
+    font-style: italic;
+  }
+  .image-viewer-author a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .image-viewer-author a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  }
+  .image-viewer-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: linear-gradient(135deg, #ff69b4, #c71585);
+    color: #fff;
+    border: 3px solid #ffd700;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    font-family: 'Comic Neue', cursive;
+  }
+  .image-viewer-close:hover {
+    transform: scale(1.15) rotate(90deg);
+    background: linear-gradient(135deg, #00e5ff, #0088aa);
+  }
+
+  .footer { background: rgba(5, 2, 15, 0.85); backdrop-filter: blur(10px); color: #b8a8d0;
+    text-align: center; padding: 28px 20px; border-top: 3px double #ffd700; margin-top: 20px; font-size: 13px;
+  }
+  .footer a { color: #00e5ff; text-decoration: none; }
+  .footer a:hover { color: #ffd700; text-shadow: 0 0 6px #ffd700; }
+  .badges { margin-top: 14px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .badge { background: rgba(255, 255, 255, 0.05); color: #ffd700; padding: 5px 12px;
+    border: 2px solid #ff69b4; border-radius: 16px; font-size: 12px; font-weight: 700;
+  }
+
+  .secret-trigger { display: inline-block; margin-top: 20px; padding: 6px 18px;
+    font-size: 14px; font-weight: 700; color: rgba(255, 215, 0, 0.35);
+    background: rgba(255, 215, 0, 0.03); border: 1px dashed rgba(255, 215, 0, 0.25);
+    border-radius: 14px; cursor: pointer; font-family: 'Comic Neue', cursive;
+    transition: all 0.3s; user-select: none; letter-spacing: 3px;
+  }
+  .secret-trigger:hover { color: rgba(255, 215, 0, 0.7); background: rgba(255, 215, 0, 0.08);
+    border-color: rgba(255, 215, 0, 0.5); text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); transform: scale(1.05);
+  }
+
+  .earn-title { text-align: center; font-size: 32px; color: #ffd700; margin: 30px 20px 8px;
+    text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
+  }
+  .earn-subtitle { text-align: center; font-size: 14px; color: #00e5ff; margin-bottom: 22px; font-style: italic; }
+  .earn-warning { text-align: center; background: rgba(60, 20, 20, 0.5); border: 2px dashed #ff69b4;
+    border-radius: 12px; padding: 14px; margin: 20px; font-size: 13px; color: #ffb6c1;
+  }
+  .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; padding: 20px; }
+  .game-card { background: rgba(20, 10, 50, 0.6); backdrop-filter: blur(10px);
+    border: 2px solid #00e5ff; border-radius: 14px; padding: 20px; text-align: center;
+    box-shadow: 4px 4px 0 rgba(0, 229, 255, 0.3);
+  }
+  .game-card .game-emoji { font-size: 56px; margin-bottom: 10px; display: block; }
+  .game-card h4 { color: #ffd700; font-size: 18px; margin-bottom: 8px; }
+  .game-card .game-desc { color: #d8c8f0; font-size: 13px; margin-bottom: 10px; line-height: 1.5; }
+  .game-card .game-reward { color: #00ff88; font-size: 14px; font-weight: 700; margin-bottom: 14px; text-shadow: 0 0 6px rgba(0, 255, 136, 0.5); }
+  .play-btn { background: linear-gradient(180deg, #ffd700, #b8860b); color: #3a1f00;
+    border: 2px solid #fff8dc; border-radius: 18px; padding: 8px 22px;
+    font-family: 'Comic Neue', cursive; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s;
+  }
+  .play-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
+
+  .tetris-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  #tetrisCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  .tetris-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
+  .tetris-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
+  .tetris-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .tetris-info .stat-value { color: #ffd700; font-size: 18px; font-weight: 700; }
+  .tetris-info .stat-value.earned { color: #00ff88; text-shadow: 0 0 6px rgba(0, 255, 136, 0.5); }
+  .tetris-controls { margin-top: 12px; font-size: 11px; color: #b8a8d0; line-height: 1.6; }
+  .tetris-controls kbd { background: rgba(255, 255, 255, 0.1); border: 1px solid #b8a8d0; border-radius: 3px; padding: 1px 6px; font-family: monospace; color: #ffd700; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5, 2, 15, 0.85);
+    backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal { background: linear-gradient(135deg, rgba(30, 10, 60, 0.95), rgba(50, 15, 80, 0.95));
+    backdrop-filter: blur(20px); border: 4px solid #ff69b4; border-radius: 16px;
+    padding: 28px; max-width: 460px; width: 100%; max-height: 90vh; overflow-y: auto;
+    text-align: center; color: #f0e8ff; box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+    animation: modal-wiggle 1.2s ease-in-out infinite;
+  }
+  @keyframes modal-wiggle { 0%, 100% { transform: rotate(-0.3deg); } 50% { transform: rotate(0.3deg); } }
+  .modal.no-shake { animation: none; }
+  .modal h2 { font-size: 24px; margin-bottom: 14px; color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+  .modal p { font-size: 15px; margin-bottom: 18px; line-height: 1.6; }
+  .modal button { background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff;
+    border: 2px solid #ffd700; padding: 10px 26px; font-family: 'Comic Neue', cursive;
+    font-size: 15px; font-weight: 700; cursor: pointer; border-radius: 20px; transition: transform 0.2s;
+  }
+  .modal button:hover { transform: scale(1.05); background: linear-gradient(180deg, #00e5ff, #0088aa); color: #000; }
+
+  .cart-list { text-align: left; margin: 14px 0; }
+  .cart-list-item { background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(255, 105, 180, 0.4);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 6px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+  }
+  .cart-list-item .item-name { font-weight: 700; color: #ff69b4; }
+  .cart-list-item .item-price { color: #00e5ff; font-weight: 700; }
+  .cart-total { font-size: 18px; font-weight: 700; color: #ffd700; margin: 14px 0; padding: 10px;
+    background: rgba(0, 0, 0, 0.4); border: 2px solid #ffd700; border-radius: 8px;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  }
+  .cart-empty { color: #888; font-style: italic; padding: 16px; }
+</style>
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+
+<div class="top-marquee">
+  <div class="track">
+    ★ ВНИМАНИЕ! ★ СРОЧНОЕ СООБЩЕНИЕ! ★ Пришельцы подтвердили контакт с нашим Великим Императором! ★ Завтра в 18:00 — общий сбор на крыше! ★ Не забудьте принести фольгу! ★ Новая программа партии: "50 пунктов к звёздам" ★ Вступительный взнос: 3 сваговика или 1 НЛО-модель ★ Мы не секта, мы ПАРТИЯ! ★ Следующее заседание перенесено на Марс ★
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" data-page="home">🏠 Главная</button>
+  <button class="nav-btn" data-page="shop">🛒 Магазин</button>
+  <button class="nav-btn" data-page="gallery">🖼️ Галерея</button>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="header">
+    <h1>👽 КИТАЙСКАЯ ПРИШЕЛЬЦЕВА ПАРТИЯ 👽</h1>
+    <h2>★ ОФИЦИАЛЬНЫЙ САЙТ ★ с 2026 года ★</h2>
+    <p class="slogan">🌟 "ВМЕСТЕ К ЗВЁЗДАМ! (ИЛИ ХОТЯ БЫ К СОСЕДЯМ)" 🌟</p>
+  </div>
+  <div class="under-construction">🚧 САЙТ В ВЕЧНОЙ РАЗРАБОТКЕ 🚧 <br>(потому что наши программисты улетели домой)</div>
+  <div class="content">
+    <div class="panel">
+      <h3>📜 О НАШЕЙ ПАРТИИ</h3>
+      <p><b>Китайская Пришельцева Партия</b> (КПП) — это единственная в мире политическая сила, которая представляет интересы <u>инопланетян</u>, <u>полу-инопланетян</u> и <u>людей, которые просто очень хотят быть инопланетянами</u>.</p><br>
+      <p>Основана в <b>2026 году</b> на крутом <b>МиоСервере</b>, после того как император вернулся из долгой командировки.</p><br>
+      <p style="color: #ff69b4; font-size: 16px; font-weight: 700;">💫 Наш девиз: "Мы не одни. И это хорошо." 💫</p>
+    </div>
+    <div class="panel">
+      <h3>🚀 ПРОГРАММА ПАРТИИ</h3>
+      <ul>
+        <li>Построить межгалактический метрополитен</li>
+        <li>Выплаты за вложения в партию</li>
+        <li>Заменить все памятники на статуи пришельцев</li>
+        <li>Ввести выходной в день прилёта НЛО</li>
+        <li>Бесплатная шаурма для всех гуманоидов</li>
+        <li>Создать министерство по делам НЛО</li>
+        <li>Запретить скучные законы</li>
+      </ul>
+    </div>
+  </div>
+  <div class="leader">
+    <img class="leader-photo" src="https://i.imgur.com/yhlbo8H.png" alt="Великий Император">
+    <div class="title">★ ВЕЛИКИЙ ИМПЕРАТОР ★</div>
+    <div class="name">Лавен из МиоМира</div>
+    <div class="quote">
+      <span class="w1">ПРАВА</span> <span class="w2">крутых</span> <span class="w3">ПРИШЕЛЬЦЕВ</span> <span class="w4">важны!</span>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button class="bad-btn" onclick="joinParty()">🛸 ВСТУПИТЬ В ПАРТИЮ</button>
+    <button class="bad-btn" onclick="contactAliens()">📡 СВЯЗАТЬСЯ С ПРИШЕЛЬЦАМИ</button>
+    <button class="bad-btn" onclick="donate()">🌸 ПОЖЕРТВОВАТЬ СВАГОВИКИ</button>
+  </div>
+  <div class="counter">
+    <p>👁️ НАС УЖЕ ПОСЕТИЛИ:</p>
+    <div class="num" id="hitCounter">000000</div>
+    <p style="font-size: 12px; color: #888; margin-top: 8px;">(включая 3-х пришельцев и кота)</p>
+  </div>
+  <div class="guestbook">
+    <h3>📖 ГОСТЕВАЯ КНИГА</h3>
+    <div class="guest-entry"><div class="name">Зорг-7 с Альфы Центавра:</div><div>Отличный сайт! Наконец-то нас поняли! 10/10 👽</div><div class="date">12.10.2026</div></div>
+    <div class="guest-entry"><div class="name">Координатор:</div><div>Спасибо за предметы! Очень выручают</div><div class="date">10.10.2026</div></div>
+    <div class="guest-entry"><div class="name">Анонимный пришелец:</div><div>Ваши арты - лучшее, что есть в этой галактике!</div><div class="date">09.10.2026</div></div>
+  </div>
+</div>
+
+<!-- SHOP PAGE -->
+<div class="page" id="page-shop">
+  <h2 class="shop-title">🛒 МАГАЗИН ПРИШЕЛЬЦЕВ 🛒</h2>
+  <p class="shop-subtitle">Лучшие товары из других галактик! Оплата — сваговиками 🌸</p>
+  <div class="cart-info">
+    🛍️ В вашей корзине: <strong id="cartCount">0</strong> товаров | 💰 Баланс сваговиков: <strong id="balance">0</strong> 🌸
+  </div>
+  <div class="vip-card">
+    <h3><span class="vip-emoji">💎</span> VIP-КАРТА <span class="vip-emoji">💎</span></h3>
+    <p>После единовременной покупки на сумму свыше <b style="color: #ffd700;">200 сваговиков</b> можно получить <b style="color: #ff69b4;">скидку 20%</b> и стать <b style="color: #ffd700;">VIP-клиентом!</b> 👑✨</p>
+  </div>
+
+  <div class="limited-section">
+    <h3 class="limited-title">✨ 🌟 ЛИМИТИРОВАННЫЕ ТОВАРЫ 🌟 ✨</h3>
+    <div class="limited-grid" id="limitedGrid"></div>
+  </div>
+
+  <h3 class="regular-title">🛍️ Обычные товары</h3>
+  <div class="shop-grid" id="shopGrid"></div>
+</div>
+
+<!-- GALLERY PAGE -->
+<div class="page" id="page-gallery">
+  <h2 class="gallery-title">🖼️ ГАЛЕРЕЯ ПАРТИИ 🖼️</h2>
+  <p class="gallery-subtitle">Чудесные работы наших партийцев!</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openImageViewer('https://i.imgur.com/eI6BHxh.png', '+15 Социального рейтинга', 'Автор: Ксюква — <a href=\'https://t.me/ksuukva\' target=\'_blank\'>@ksuukva</a>')">
+      <img src="https://i.imgur.com/eI6BHxh.png" alt="+15 Социального рейтинга">
+      <div class="caption">+15 Социального рейтинга</div>
+    </div>
+    <div class="gallery-item" onclick="openImageViewer('https://i.imgur.com/iDqCDqV.png', '-15 Социального рейтинга', 'Автор: Ксюква — <a href=\'https://t.me/ksuukva\' target=\'_blank\'>@ksuukva</a>')">
+      <img src="https://i.imgur.com/iDqCDqV.png" alt="-15 Социального рейтинга">
+      <div class="caption">-15 Социального рейтинга</div>
+    </div>
+    <div class="gallery-item" onclick="openImageViewer('https://i.imgur.com/LNHNXQ9.png', 'Купюра 0.1 Сваговика', 'Автор: Император Лавен 👑')">
+      <img src="https://i.imgur.com/LNHNXQ9.png" alt="Купюра 0.1 Сваговика">
+      <div class="caption">Купюра 0.1 Сваговика</div>
+    </div>
+    <div class="gallery-item" onclick="openImageViewer('https://i.imgur.com/3iEMjOl.png', 'Купюра 0.67 Сваговика', 'Автор: Император Лавен 👑')">
+      <img src="https://i.imgur.com/3iEMjOl.png" alt="Купюра 0.67 Сваговика">
+      <div class="caption">Купюра 0.67 Сваговика</div>
+    </div>
+  </div>
+</div>
+
+<!-- EARN PAGE -->
+<div class="page" id="page-earn">
+  <h2 class="earn-title">🎮 ЗАРАБОТОК СВАГОВИКОВ 🎮</h2>
+  <p class="earn-subtitle">Тсс... это секретный раздел. Играй и зарабатывай! 🤫</p>
+  <div class="earn-warning">⚠️ ВНИМАНИЕ! Все заработанные сваговики идут напрямую в ваш баланс. Читерство карается превращением в жабу. 🐸</div>
+  <div class="games-grid">
+    <div class="game-card">
+      <span class="game-emoji">🧱</span>
+      <h4>Космо-Тетрис</h4>
+      <p class="game-desc">Классический тетрис, но с пришельцами! Собирай линии и получай сваговики.</p>
+      <p class="game-reward">💰 0,1 🌸 за каждую линию</p>
+      <button class="play-btn" onclick="startTetris()">▶ ИГРАТЬ</button>
+    </div>
+    <div class="game-card">
+      <span class="game-emoji">🐍</span>
+      <h4>Змейка-пришелец</h4>
+      <p class="game-desc">Скоро! Наша змейка улетела на обед. Возвращается через 3-5 световых лет.</p>
+      <p class="game-reward">💰 0,1 🌸 за каждое яблоко</p>
+      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+    </div>
+    <div class="game-card">
+      <span class="game-emoji">🎯</span>
+      <h4>Стрелялка по НЛО</h4>
+      <p class="game-desc">Скоро! Пушка сломалась, пока чиним. Приходите позже.</p>
+      <p class="game-reward">💰 0,1 🌸 за каждое НЛО</p>
+      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+    </div>
+    <div class="game-card">
+      <span class="game-emoji">🧩</span>
+      <h4>Пазл "Лицо Императора"</h4>
+      <p class="game-desc">Скоро! Пазл разбежался по галактике. Ловим его.</p>
+      <p class="game-reward">💰 0,5 🌸 за сборку</p>
+      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+    </div>
+  </div>
+</div>
+
+<button class="floating-cart" id="floatingCart" onclick="openCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+
+<div class="footer">
+  <p>© 2026 Китайская Пришельцева Партия</p>
+  <p style="margin-top: 8px;">Все права защищены межгалактическим договором 🛸</p>
+  <p style="margin-top: 8px; font-size: 12px;">Сайт лучше всего смотрится в <b>Netscape Navigator 4.0</b> при разрешении 800x600</p>
+  <div class="badges">
+    <div class="badge">🏆 САЙТ С 2026 ГОДА</div>
+    <div class="badge">👽 ОДОБРЕНО ПРИШЕЛЬЦАМИ</div>
+    <div class="badge">🚀 БЕЗ КОСМИЧЕСКИХ ОШИБОК</div>
+    <div class="badge">⭐ 5 ЗВЁЗД ИЗ 5-ТИ ИЗМЕРЕНИЙ</div>
+  </div>
+  <p style="margin-top: 14px; font-size: 11px; color: #6b5d85;">Сделано с ❤️ и щупальцами | <a href="#">webmaster@ufo-party.kp</a></p>
+  <button class="secret-trigger" onclick="openEarnPage()">🔮 · · · · ·</button>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modalBox">
+    <h2 id="modalTitle">🎉 ПОЗДРАВЛЯЕМ! 🎉</h2>
+    <div id="modalBody"><p id="modalText">Текст</p></div>
+    <button onclick="closeModal()">ЗАКРЫТЬ</button>
+  </div>
+</div>
+
+<!-- IMAGE VIEWER -->
+<div class="image-viewer" id="imageViewer" onclick="closeImageViewer(event)">
+  <div class="image-viewer-content">
+    <button class="image-viewer-close" onclick="closeImageViewer(event)">✕</button>
+    <img id="viewerImage" src="" alt="">
+    <div class="image-viewer-caption" id="viewerCaption"></div>
+    <div class="image-viewer-author" id="viewerAuthor"></div>
+  </div>
+</div>
+
+<script>
+  // STARFIELD
+  const starCount = 180;
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star' + (Math.random() > 0.5 ? ' twinkle' : '');
+    const size = Math.random() * 2.5 + 0.5;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    star.style.animationDuration = (2 + Math.random() * 3) + 's';
+    const colors = ['#fff', '#fff', '#fff', '#ffe4b5', '#b0c4de', '#ffb6c1'];
+    star.style.background = colors[Math.floor(Math.random() * colors.length)];
+    star.style.boxShadow = size > 1.8 ? `0 0 ${size * 2}px ${star.style.background}` : 'none';
+    document.body.appendChild(star);
+  }
+
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.left = Math.random() * 80 + '%';
+    star.style.top = Math.random() * 50 + '%';
+    star.style.transition = 'transform 1.5s linear, opacity 1.5s linear';
+    document.body.appendChild(star);
+    requestAnimationFrame(() => {
+      star.style.transform = 'translate(300px, 300px)';
+      star.style.opacity = '0';
+    });
+    setTimeout(() => star.remove(), 1600);
+  }
+  setInterval(() => { if (Math.random() > 0.5) createShootingStar(); }, 4000);
+
+  // NAVIGATION
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const pages = document.querySelectorAll('.page');
+  const floatingCart = document.getElementById('floatingCart');
+
+  function navigateTo(pageId) {
+    navBtns.forEach(b => b.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+    const targetBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
+    if (targetBtn) targetBtn.classList.add('active');
+    document.getElementById('page-' + pageId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (pageId === 'shop') floatingCart.classList.add('visible');
+    else floatingCart.classList.remove('visible');
+  }
+  navBtns.forEach(btn => btn.addEventListener('click', () => navigateTo(btn.dataset.page)));
+
+  function openEarnPage() { navigateTo('earn'); }
+
+  // HIT COUNTER
+  let hits = 42069;
+  function updateCounter() {
+    hits += Math.floor(Math.random() * 3);
+    document.getElementById('hitCounter').textContent = String(hits).padStart(6, '0');
+  }
+  setInterval(updateCounter, 2000);
+  updateCounter();
+
+  // MODALS
+  const modalBox = document.getElementById('modalBox');
+  function showModal(title, bodyHTML, noShake = false) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML = bodyHTML;
+    if (noShake) modalBox.classList.add('no-shake');
+    else modalBox.classList.remove('no-shake');
+    document.getElementById('modal').classList.add('active');
+  }
+  function closeModal() {
+    if (tetrisInterval) { cancelAnimationFrame(tetrisInterval); tetrisInterval = null; }
+    if (tetrisState && tetrisState.handleKey) {
+      document.removeEventListener('keydown', tetrisState.handleKey);
+      tetrisState = null;
+    }
+    modalBox.classList.remove('no-shake');
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  function joinParty() {
+    showModal('👽 ДОБРО ПОЖАЛОВАТЬ! 👽',
+      '<p>Вы приняты в партию! Ваш номер: #' + Math.floor(Math.random() * 99999) + '. Пожалуйста, принесите 3 сваговика в ближайший ларёк. И не забудьте надеть шапочку из фольги!</p>');
+  }
+  function contactAliens() {
+    showModal('📡 СВЯЗЬ УСТАНОВЛЕНА! 📡',
+      '<p>Ало, да? Да, да, Верити итд</p>');
+  }
+  function donate() {
+    showModal('🌸 СПАСИБО ЗА СВАГОВИКИ! 🌸',
+      '<p>Ваши сваговики будут переданы в межгалактический фонд. Пришельцы очень любят сваговики!</p>');
+  }
+
+  // IMAGE VIEWER
+  function openImageViewer(src, caption, author) {
+    document.getElementById('viewerImage').src = src;
+    document.getElementById('viewerCaption').textContent = caption;
+    const authorEl = document.getElementById('viewerAuthor');
+    if (author) {
+      authorEl.innerHTML = '🎨 ' + author;
+      authorEl.style.display = 'inline-block';
+    } else {
+      authorEl.innerHTML = '';
+      authorEl.style.display = 'none';
+    }
+    document.getElementById('imageViewer').classList.add('active');
+  }
+  function closeImageViewer(event) {
+    if (event.target.id === 'imageViewer' || event.target.classList.contains('image-viewer-close')) {
+      document.getElementById('imageViewer').classList.remove('active');
+    }
+  }
+
+  // SHOP
+  let balance = 0;
+  let cart = [];
+
+  const limitedItems = [
+    { emoji: '🧪', name: 'Зелье исполнения желаний', price: 999999,
+      desc: 'Зелье, позволяющее исполнить любое заветное желание.',
+      sponsor: 'Спонсировано DayDream inc.', type: 'legendary' },
+    { emoji: '🧸', name: 'Добрый Друг', price: 50,
+      desc: 'Розовый плюшевый медведь размером с брелок, твой добрый друг!',
+      collabNote: 'В коллаборации с Тематическим Парком', type: 'collab' },
+    { emoji: '🥐', name: 'Голубой Чуррос', price: 4,
+      desc: 'Восхитительный на вкус, полезный перекус для детей.',
+      collabNote: 'В коллаборации с Тематическим Парком', type: 'collab' }
+  ];
+
+  const shopItems = [
+    { emoji: '🧺', name: 'Набор для пикника Алисы', price: 10, desc: 'Продуктовый набор в ржавой жестяной коробке с сказочными иллюстрациями.' },
+    { emoji: '🐍', name: 'Серебряная змея', price: 15, desc: 'Блестящая серебряная монета размером примерно с значок, на которой выгравирована змея, кусающая свой хвост.' },
+    { emoji: '🍴', name: 'Кровососущие столовые приборы', price: 6, oldPrice: 12, desc: 'Оружие в виде маленьких вилки и ножа, которое питается кровью жертвы и постепенно растёт и становится острее.' },
+    { emoji: '🛁', name: 'Кровавая ванна', price: 25, desc: 'Принятие ванны способствует заживлению ран, восстановлению сил, лечению артрита и уходу за кожей. Включает 10-летнее бесплатное обслуживание.' },
+    { emoji: '🕯️', name: 'Набор таинственных свечей', price: 19, desc: 'Выглядит как красочная детская игрушка.' },
+    { emoji: '🍎', name: 'Яблоко Белоснежки', price: 8, desc: 'После употребления вызывает сон, подобный смерти, при котором все жизненные функции останавливаются.' },
+    { emoji: '💉', name: 'Happy Maker', price: 25, desc: 'Набор обезболивающих в виде палочки-шприца.' },
+    { emoji: '📦', name: 'Упаковочный материал 12B357НА', price: 10, desc: 'Современный и чистый экологичный амортизирующий упаковочный материал.' },
+    { emoji: '📕', name: 'Некрономикон', price: 40, desc: 'Древняя книга, полностью запечатанная тёмно-красным воском.' },
+    { emoji: '🆘', name: 'Мы Поможем!', price: 66.6, desc: 'Описание отсутствует.' },
+    { emoji: '🍬', name: 'Конфеты серии ностальгия', price: 10, desc: 'Вкусные конфеты, напоминают о лучшем.' }
+  ];
+
+  const limitedGrid = document.getElementById('limitedGrid');
+  limitedItems.forEach((item, idx) => {
+    const div = document.createElement('div');
+    let extraClass = item.type === 'legendary' ? ' legendary' : (item.type === 'collab' ? ' collab' : '');
+    div.className = 'shop-item' + extraClass;
+    let priceHTML = `${item.price.toLocaleString('ru-RU')} 🌸 <small>/ сваговиков</small>`;
+    let extraHTML = '';
+    if (item.sponsor) extraHTML = `<span class="sponsor">${item.sponsor}</span>`;
+    if (item.collabNote) extraHTML = `<span class="collab-note">${item.collabNote}</span>`;
+    div.innerHTML = `
+      <span class="emoji">${item.emoji}</span>
+      <h4>${item.name}</h4>
+      <p class="desc">${item.desc}</p>
+      <div class="price">${priceHTML}</div>
+      ${extraHTML}
+      <button class="buy-btn" onclick="buyLimited(${idx})">✨ КУПИТЬ ✨</button>
+    `;
+    limitedGrid.appendChild(div);
+  });
+
+  const shopGrid = document.getElementById('shopGrid');
+  shopItems.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'shop-item';
+    let priceHTML;
+    if (item.oldPrice) {
+      priceHTML = `<span class="old-price">${item.oldPrice} 🌸</span> ${item.price} 🌸 <span class="discount-tag">СКИДКА 50%</span>`;
+    } else {
+      priceHTML = `${item.price} 🌸 <small>/ сваговиков</small>`;
+    }
+    div.innerHTML = `
+      <span class="emoji">${item.emoji}</span>
+      <h4>${item.name}</h4>
+      <p class="desc">${item.desc}</p>
+      <div class="price">${priceHTML}</div>
+      <button class="buy-btn" onclick="buy(${idx})">🛍️ КУПИТЬ</button>
+    `;
+    shopGrid.appendChild(div);
+  });
+
+  function updateShopUI() {
+    const balanceText = balance % 1 === 0 ? balance : (Math.round(balance * 10) / 10);
+    document.getElementById('balance').textContent = balanceText;
+    document.getElementById('cartCount').textContent = cart.length;
+    document.getElementById('cartBadge').textContent = cart.length;
+  }
+
+  function buy(idx) {
+    const item = shopItems[idx];
+    if (balance < item.price) {
+      showModal('💸 НЕ ХВАТАЕТ СВАГОВИКОВ!',
+        '<p>У вас недостаточно сваговиков для покупки "<b>' + item.name + '</b>". Попробуйте заработать больше!</p>');
+      return;
+    }
+    balance -= item.price;
+    balance = Math.round(balance * 10) / 10;
+    cart.push({ name: item.name, price: item.price, emoji: item.emoji });
+    updateShopUI();
+    showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
+      '<p>Вы купили "<b>' + item.name + '</b>"! Курьер-пришелец доставит заказ в течение 3-5 световых лет. Спасибо за сваговики! 🌸</p>');
+  }
+
+  function buyLimited(idx) {
+    const item = limitedItems[idx];
+    if (balance < item.price) {
+      let msg;
+      if (item.type === 'legendary') {
+        msg = '<p>Для покупки "<b>' + item.name + '</b>" вам нужно <b style="color:#ffd700;">' + item.price.toLocaleString('ru-RU') + ' сваговиков</b>. Попробуйте заработать больше!</p>';
+      } else {
+        msg = '<p>У вас недостаточно сваговиков для покупки "<b>' + item.name + '</b>". Попробуйте заработать больше!</p>';
+      }
+      showModal('💸 НЕ ХВАТАЕТ СВАГОВИКОВ!', msg);
+      return;
+    }
+    balance -= item.price;
+    balance = Math.round(balance * 10) / 10;
+    cart.push({ name: item.name, price: item.price, emoji: item.emoji });
+    updateShopUI();
+    if (item.type === 'legendary') {
+      showModal('✨ ЖЕЛАНИЕ ИСПОЛНЕНО! ✨',
+        '<p>Вы приобрели "<b style="color:#ffd700;">' + item.name + '</b>"! Ваше желание уже в пути к вам на межгалактической почте. Ожидайте доставку через 1000 лет. 🌟</p>');
+    } else if (item.emoji === '🧸') {
+      showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
+        '<p>Вы купили "<b>' + item.name + '</b>"! Ваш новый друг уже спешит к вам! 🧸✨</p>');
+    } else if (item.emoji === '🥐') {
+      showModal('🥐 ВКУСНЯТИНА! 🥐',
+        '<p>Вы купили "<b>' + item.name + '</b>"! Голубой чуррос уже летит к вам на межгалактической тарелке. Приятного аппетита! 🌟</p>');
+    } else {
+      showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
+        '<p>Вы купили "<b>' + item.name + '</b>"! Курьер-пришелец доставит заказ в течение 3-5 световых лет. Спасибо за сваговики! 🌸</p>');
+    }
+  }
+
+  function openCart() {
+    let bodyHTML;
+    if (cart.length === 0) {
+      bodyHTML = '<p class="cart-empty">🛒 Корзина пуста! Самое время закупиться межгалактическими товарами 🌸</p>';
+    } else {
+      let total = 0;
+      let listHTML = '<div class="cart-list">';
+      cart.forEach(item => {
+        total += item.price;
+        listHTML += `<div class="cart-list-item"><span class="item-name">${item.emoji} ${item.name}</span><span class="item-price">${item.price} 🌸</span></div>`;
+      });
+      listHTML += '</div>';
+      total = Math.round(total * 10) / 10;
+      bodyHTML = listHTML + `<div class="cart-total">💰 ИТОГО: ${total} сваговиков 🌸</div>`;
+      if (total >= 200) {
+        bodyHTML += '<p style="color: #ffd700; font-weight: 700;">👑 Поздравляем! Вы заслужили VIP-статус!</p>';
+      }
+    }
+    showModal('🛒 ВАША КОРЗИНА 🛒', bodyHTML);
+  }
+
+  // TETRIS
+  let tetrisInterval = null;
+  let tetrisState = null;
+
+  function startTetris() {
+    const bodyHTML = `
+      <div class="tetris-container">
+        <canvas id="tetrisCanvas" width="200" height="400"></canvas>
+        <div class="tetris-info">
+          <div class="stat"><div class="stat-label">ЛИНИИ</div><div class="stat-value" id="tetrisLines">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="tetrisEarned">0 🌸</div></div>
+          <div class="tetris-controls">
+            <div><kbd>←</kbd> <kbd>→</kbd> движение</div>
+            <div><kbd>↑</kbd> поворот</div>
+            <div><kbd>↓</kbd> ускорить</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждую собранную линию</p>
+    `;
+    showModal('🧱 КОСМО-ТЕТРИС 🧱', bodyHTML, true);
+    setTimeout(initTetris, 50);
+  }
+
+  function initTetris() {
+    const canvas = document.getElementById('tetrisCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COLS = 10, ROWS = 20, BLOCK = 20;
+    const COLORS = ['#00e5ff', '#ffd700', '#ff69b4', '#00ff88', '#b088ff', '#ff8844', '#ff4444'];
+    const SHAPES = [
+      [[1,1,1,1]], [[1,1],[1,1]], [[0,1,0],[1,1,1]],
+      [[1,0,0],[1,1,1]], [[0,0,1],[1,1,1]],
+      [[1,1,0],[0,1,1]], [[0,1,1],[1,1,0]]
+    ];
+    const board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+    let current = null, currentX = 0, currentY = 0;
+    let lines = 0, earned = 0, paused = false, gameOver = false;
+    let dropCounter = 0, dropInterval = 500, lastTime = 0;
+
+    function newPiece() {
+      const idx = Math.floor(Math.random() * SHAPES.length);
+      current = { shape: SHAPES[idx], color: COLORS[idx] };
+      currentX = Math.floor((COLS - current.shape[0].length) / 2);
+      currentY = 0;
+      if (collides(currentX, currentY, current.shape)) { gameOver = true; endGame(); }
+    }
+    function collides(x, y, shape) {
+      for (let r = 0; r < shape.length; r++) {
+        for (let c = 0; c < shape[r].length; c++) {
+          if (shape[r][c]) {
+            const nx = x + c, ny = y + r;
+            if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
+            if (ny >= 0 && board[ny][nx]) return true;
+          }
+        }
+      }
+      return false;
+    }
+    function merge() {
+      for (let r = 0; r < current.shape.length; r++) {
+        for (let c = 0; c < current.shape[r].length; c++) {
+          if (current.shape[r][c]) {
+            const ny = currentY + r, nx = currentX + c;
+            if (ny >= 0) board[ny][nx] = current.color;
+          }
+        }
+      }
+    }
+    function rotate(shape) {
+      const rows = shape.length, cols = shape[0].length;
+      const result = Array.from({length: cols}, () => Array(rows).fill(0));
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++)
+          result[c][rows - 1 - r] = shape[r][c];
+      return result;
+    }
+    function clearLines() {
+      let cleared = 0;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (board[r].every(cell => cell !== 0)) {
+          board.splice(r, 1);
+          board.unshift(Array(COLS).fill(0));
+          cleared++; r++;
+        }
+      }
+      if (cleared > 0) {
+        lines += cleared;
+        earned += cleared * 0.1;
+        earned = Math.round(earned * 10) / 10;
+        balance += cleared * 0.1;
+        balance = Math.round(balance * 10) / 10;
+        updateShopUI();
+        const linesEl = document.getElementById('tetrisLines');
+        const earnedEl = document.getElementById('tetrisEarned');
+        if (linesEl) linesEl.textContent = lines;
+        if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+      }
+    }
+    function draw() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.1)';
+      ctx.lineWidth = 1;
+      for (let c = 0; c <= COLS; c++) {
+        ctx.beginPath(); ctx.moveTo(c * BLOCK, 0); ctx.lineTo(c * BLOCK, canvas.height); ctx.stroke();
+      }
+      for (let r = 0; r <= ROWS; r++) {
+        ctx.beginPath(); ctx.moveTo(0, r * BLOCK); ctx.lineTo(canvas.width, r * BLOCK); ctx.stroke();
+      }
+      for (let r = 0; r < ROWS; r++)
+        for (let c = 0; c < COLS; c++)
+          if (board[r][c]) drawBlock(c, r, board[r][c]);
+      if (current && !gameOver) {
+        for (let r = 0; r < current.shape.length; r++)
+          for (let c = 0; c < current.shape[r].length; c++)
+            if (current.shape[r][c]) drawBlock(currentX + c, currentY + r, current.color);
+      }
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 20px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '14px Comic Neue, sans-serif';
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', canvas.width / 2, canvas.height / 2 + 15);
+      }
+    }
+    function drawBlock(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.fillRect(x * BLOCK + 2, y * BLOCK + 2, BLOCK - 4, 3);
+    }
+    function drop() {
+      if (!collides(currentX, currentY + 1, current.shape)) currentY++;
+      else { merge(); clearLines(); newPiece(); }
+      dropCounter = 0;
+    }
+    function update(time = 0) {
+      if (gameOver) { draw(); return; }
+      const delta = time - lastTime;
+      lastTime = time;
+      if (!paused) {
+        dropCounter += delta;
+        if (dropCounter > dropInterval) drop();
+        draw();
+      }
+      tetrisInterval = requestAnimationFrame(update);
+    }
+    function endGame() { cancelAnimationFrame(tetrisInterval); draw(); }
+    function handleKey(e) {
+      if (gameOver) return;
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') { paused = !paused; return; }
+      if (paused) return;
+      if (e.key === 'ArrowLeft') { if (!collides(currentX - 1, currentY, current.shape)) currentX--; }
+      else if (e.key === 'ArrowRight') { if (!collides(currentX + 1, currentY, current.shape)) currentX++; }
+      else if (e.key === 'ArrowDown') { drop(); }
+      else if (e.key === 'ArrowUp') {
+        const rotated = rotate(current.shape);
+        if (!collides(currentX, currentY, rotated)) current.shape = rotated;
+      } else return;
+      e.preventDefault();
+      draw();
+    }
+    document.addEventListener('keydown', handleKey);
+    tetrisState = { handleKey };
+    newPiece();
+    lastTime = performance.now();
+    update();
+  }
+
+  document.querySelector('.header h1').addEventListener('click', () => {
+    for (let i = 0; i < 15; i++) {
+      const alien = document.createElement('div');
+      alien.textContent = '👽';
+      alien.style.position = 'fixed';
+      alien.style.left = Math.random() * 100 + 'vw';
+      alien.style.top = '-50px';
+      alien.style.fontSize = '36px';
+      alien.style.zIndex = '999';
+      alien.style.pointerEvents = 'none';
+      alien.style.transition = 'top 3s linear';
+      document.body.appendChild(alien);
+      setTimeout(() => alien.style.top = '110vh', 50);
+      setTimeout(() => alien.remove(), 3500);
+    }
+  });
+</script>
+
+</body>
+</html>
