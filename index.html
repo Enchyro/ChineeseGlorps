@@ -364,7 +364,6 @@
     content: '✨'; position: absolute; top: 8px; right: 8px;
     font-size: 18px; animation: twinkle 2.5s ease-in-out infinite; z-index: 2; opacity: 0.8;
   }
-  /* Специальная VIP карточка */
   .collection-item.vip-card-collect {
     border-color: rgba(255, 215, 0, 0.8);
     background: linear-gradient(135deg, rgba(80, 50, 10, 0.6), rgba(120, 80, 20, 0.5));
@@ -498,7 +497,7 @@
   .game-card.repair .game-reward { color: #888; text-shadow: none; }
 
   .game-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-  #snakeCanvas, #asteroidCanvas, #arkanoidCanvas, #flappyCanvas, #whackCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  #snakeCanvas, #asteroidCanvas, #arkanoidCanvas, #flappyCanvas, #whackCanvas, #runnerCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
   .game-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
   .game-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
   .game-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -507,13 +506,133 @@
   .game-controls { margin-top: 12px; font-size: 11px; color: #b8a8d0; line-height: 1.6; }
   .game-controls kbd { background: rgba(255, 255, 255, 0.1); border: 1px solid #b8a8d0; border-radius: 3px; padding: 1px 6px; font-family: monospace; color: #ffd700; }
 
+  .slots-machine {
+    background: linear-gradient(135deg, #3a1f5c, #5c2d80);
+    border: 4px solid #ffd700;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.4);
+    display: inline-block;
+  }
+  .slots-display {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    background: #0a0520;
+    padding: 16px;
+    border-radius: 12px;
+    border: 3px inset #ffd700;
+  }
+  .slot-reel {
+    width: 70px;
+    height: 80px;
+    background: linear-gradient(180deg, #1a0a3a, #2a1050);
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  }
+  .slot-reel.spinning { animation: reel-blur 0.1s linear infinite; }
+  @keyframes reel-blur {
+    0% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+    100% { transform: translateY(-2px); }
+  }
+  .slot-reel.winner { animation: winner-glow 0.5s ease-in-out 4; border-color: #ffd700; }
+  @keyframes winner-glow {
+    0%, 100% { box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 5px #ffd700; }
+    50% { box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 25px #ffd700, 0 0 40px #ff69b4; }
+  }
+  .spin-btn {
+    background: linear-gradient(180deg, #ffd700, #b8860b);
+    color: #3a1f00;
+    border: 3px solid #fff8dc;
+    border-radius: 25px;
+    padding: 12px 32px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transition: all 0.2s;
+  }
+  .spin-btn:hover:not(:disabled) { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
+  .spin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .memory-card {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #3a1f5c, #5c2d80);
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+  .memory-card:hover:not(.flipped):not(.matched) {
+    transform: scale(1.05);
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  }
+  .memory-card .card-back { font-size: 28px; color: #ffd700; }
+  .memory-card .card-face { display: none; }
+  .memory-card.flipped {
+    background: linear-gradient(135deg, #0a0520, #1a0a3a);
+    border-color: #00e5ff;
+  }
+  .memory-card.flipped .card-back { display: none; }
+  .memory-card.flipped .card-face { display: block; }
+  .memory-card.matched {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 229, 255, 0.2));
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    cursor: default;
+    animation: matched-pulse 0.6s ease-out;
+  }
+  .memory-card.matched .card-back { display: none; }
+  .memory-card.matched .card-face { display: block; }
+  @keyframes matched-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .memory-stats {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 0 16px;
+    flex-wrap: wrap;
+  }
+  .memory-stat {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border-left: 3px solid #ffd700;
+    text-align: center;
+  }
+  .memory-stat-label { font-size: 10px; color: #b8a8d0; text-transform: uppercase; letter-spacing: 1px; }
+  .memory-stat-value { font-size: 18px; font-weight: 700; color: #ffd700; }
+
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5, 2, 15, 0.85);
     backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;
   }
   .modal-overlay.active { display: flex; }
   .modal { background: linear-gradient(135deg, rgba(30, 10, 60, 0.95), rgba(50, 15, 80, 0.95));
     backdrop-filter: blur(20px); border: 4px solid #ff69b4; border-radius: 16px;
-    padding: 28px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;
+    padding: 28px; max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto;
     text-align: center; color: #f0e8ff; box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
     animation: modal-wiggle 1.2s ease-in-out infinite;
   }
@@ -696,7 +815,6 @@
   <p class="earn-subtitle">Тсс... это секретный раздел. Играй и зарабатывай! 🤫</p>
   <div class="earn-warning">⚠️ ВНИМАНИЕ! Все заработанные сваговики идут напрямую в ваш баланс. Читерство карается превращением в жабу. 🐸</div>
   <div class="games-grid">
-    <!-- TETRIS — НА РЕМОНТЕ -->
     <div class="game-card repair">
       <div class="repair-banner">🔧 РЕМОНТ 🔧</div>
       <span class="game-emoji">🧱</span>
@@ -746,6 +864,30 @@
       <button class="play-btn" onclick="startWhackAMole()">▶ ИГРАТЬ</button>
     </div>
 
+    <div class="game-card">
+      <span class="game-emoji">🎰</span>
+      <h4>Космо-Слоты</h4>
+      <p class="game-desc">Крути барабаны межгалактического казино! Ставка всего 1 сваговик, а выигрыш может достичь 50! Император одобряет азарт.</p>
+      <p class="game-reward">💰 Ставка 1 🌸 | 3 в ряд = 10 🌸 | 👽 = 50 🌸</p>
+      <button class="play-btn" onclick="startSlots()">▶ ИГРАТЬ</button>
+    </div>
+
+    <div class="game-card">
+      <span class="game-emoji">🃏</span>
+      <h4>Космо-Мемори</h4>
+      <p class="game-desc">Найди все пары инопланетных существ! Тренируй память и зарабатывай сваговики. Чем меньше ходов — тем больше бонус!</p>
+      <p class="game-reward">💰 0,3 🌸 за пару | бонус за победу</p>
+      <button class="play-btn" onclick="startMemory()">▶ ИГРАТЬ</button>
+    </div>
+
+    <div class="game-card">
+      <span class="game-emoji">🏃</span>
+      <h4>Космический раннер</h4>
+      <p class="game-desc">Бесконечный полёт НЛО сквозь три полосы космоса! Уворачивайся от астероидов, собирай сваговики. Скорость растёт!</p>
+      <p class="game-reward">💰 0,1 🌸 за сваговик | 0,1 🌸 за 500м</p>
+      <button class="play-btn" onclick="startRunner()">▶ ИГРАТЬ</button>
+    </div>
+
     <div class="game-card repair">
       <div class="repair-banner">🔧 РЕМОНТ 🔧</div>
       <span class="game-emoji">🧩</span>
@@ -757,10 +899,8 @@
   </div>
 </div>
 
-<!-- FLOATING CART BUTTON -->
 <button class="floating-cart" id="floatingCart" onclick="openCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
 
-<!-- FLOATING BALANCE WIDGET -->
 <div class="floating-balance" id="floatingBalance">
   <div class="balance-icon">🌸</div>
   <div class="balance-info">
@@ -789,7 +929,6 @@
   </div>
 </div>
 
-<!-- IMAGE VIEWER -->
 <div class="image-viewer" id="imageViewer" onclick="closeImageViewer(event)">
   <div class="image-viewer-content">
     <button class="image-viewer-close" onclick="closeImageViewer(event)">✕</button>
@@ -799,10 +938,13 @@
   </div>
 </div>
 
-<!-- SAVE TOAST -->
 <div class="save-toast" id="saveToast">💾 Прогресс сохранён!</div>
 
 <script>
+  // ========== GLOBAL FPS LOCK (объявлено ОДИН раз) ==========
+  const TARGET_FPS = 60;
+  const FRAME_INTERVAL = 1000 / TARGET_FPS;
+
   // ========== LOCAL STORAGE ==========
   const STORAGE_KEY_BALANCE = 'kpp_swagoviki_balance';
   const STORAGE_KEY_CART = 'kpp_swagoviki_cart';
@@ -963,6 +1105,17 @@
       whackState.canvas.removeEventListener('click', whackState.handleClick);
     }
     whackState = null;
+    if (slotsSpinInterval) { clearInterval(slotsSpinInterval); slotsSpinInterval = null; }
+    if (slotsTimeouts.length) { slotsTimeouts.forEach(t => clearTimeout(t)); slotsTimeouts = []; }
+    slotsSpinning = false;
+    if (memoryState && memoryState.timerId) { clearInterval(memoryState.timerId); }
+    memoryState = null;
+    if (runnerInterval) { cancelAnimationFrame(runnerInterval); runnerInterval = null; }
+    if (runnerState) {
+      if (runnerState.handleKey) document.removeEventListener('keydown', runnerState.handleKey);
+      runnerState = null;
+    }
+
     modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.remove('active');
   }
@@ -1167,7 +1320,6 @@
       });
     });
 
-    // Проверяем VIP-статус и добавляем золотую карту
     let vipGranted = false;
     if (total >= 200) {
       const hasVipCard = collection.some(item => item.isVipCard === true);
@@ -1508,7 +1660,7 @@
     setTimeout(startSnake, 150);
   }
 
-  // ========== ASTEROID DODGE ==========
+  // ========== ASTEROID DODGE (60 FPS LOCK) ==========
   let asteroidInterval = null;
   let asteroidState = null;
 
@@ -1540,13 +1692,7 @@
     const W = canvas.width;
     const H = canvas.height;
 
-    const ship = {
-      x: W / 2,
-      y: H - 60,
-      width: 40,
-      height: 30,
-      speed: 7
-    };
+    const ship = { x: W / 2, y: H - 60, width: 40, height: 30, speed: 7 };
 
     let asteroids = [];
     let particles = [];
@@ -1555,17 +1701,17 @@
     let speedMultiplier = 1;
     let spawnTimer = 0;
     let spawnInterval = 50;
-    let baseSpeed = 3.5; // было 2.5, теперь быстрее
+    let baseSpeed = 3.5;
     let paused = false;
     let gameOver = false;
     let frameCount = 0;
     let keysPressed = {};
     let bgStars = [];
+    let lastFrameTime = 0;
 
     for (let i = 0; i < 40; i++) {
       bgStars.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
+        x: Math.random() * W, y: Math.random() * H,
         size: Math.random() * 1.5 + 0.5,
         speed: Math.random() * 0.8 + 0.3
       });
@@ -1604,12 +1750,8 @@
 
       frameCount++;
 
-      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
-        ship.x -= ship.speed;
-      }
-      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) {
-        ship.x += ship.speed;
-      }
+      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) ship.x -= ship.speed;
+      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) ship.x += ship.speed;
 
       if (ship.x < ship.width / 2) ship.x = ship.width / 2;
       if (ship.x > W - ship.width / 2) ship.x = W - ship.width / 2;
@@ -1620,10 +1762,7 @@
       });
 
       spawnTimer++;
-      if (spawnTimer >= spawnInterval) {
-        spawnAsteroid();
-        spawnTimer = 0;
-      }
+      if (spawnTimer >= spawnInterval) { spawnAsteroid(); spawnTimer = 0; }
 
       for (let i = asteroids.length - 1; i >= 0; i--) {
         const a = asteroids[i];
@@ -1663,17 +1802,13 @@
           }
         }
 
-        if (a.y > H + 50) {
-          asteroids.splice(i, 1);
-        }
+        if (a.y > H + 50) asteroids.splice(i, 1);
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.95;
-        p.vy *= 0.95;
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.95; p.vy *= 0.95;
         p.life--;
         if (p.life <= 0) particles.splice(i, 1);
       }
@@ -1733,7 +1868,6 @@
         ctx.restore();
       });
 
-      // НЛО вместо ракеты
       ctx.save();
       ctx.translate(ship.x, ship.y);
       ctx.font = '36px serif';
@@ -1744,7 +1878,6 @@
       ctx.fillText('🛸', 0, 0);
       ctx.restore();
 
-      // Луч от НЛО
       if (!gameOver) {
         const flicker = Math.sin(frameCount * 0.5) * 3;
         ctx.fillStyle = 'rgba(0, 229, 255, 0.3)';
@@ -1803,14 +1936,10 @@
         if (!gameOver) { paused = !paused; draw(); }
         return;
       }
-      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
-        e.preventDefault();
-      }
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) e.preventDefault();
     }
 
-    function handleKeyUp(e) {
-      keysPressed[e.key] = false;
-    }
+    function handleKeyUp(e) { keysPressed[e.key] = false; }
 
     function handleMouse(e) {
       if (gameOver || paused) return;
@@ -1829,8 +1958,13 @@
     asteroidState = { handleKey, handleKeyUp, handleMouse, canvas };
 
     draw();
-    asteroidInterval = requestAnimationFrame(function loop() {
-      update();
+    lastFrameTime = performance.now();
+    asteroidInterval = requestAnimationFrame(function loop(currentTime) {
+      const delta = currentTime - lastFrameTime;
+      if (delta >= FRAME_INTERVAL) {
+        lastFrameTime = currentTime - (delta % FRAME_INTERVAL);
+        update();
+      }
       if (!gameOver) asteroidInterval = requestAnimationFrame(loop);
     });
   }
@@ -1840,7 +1974,7 @@
     setTimeout(startAsteroidDodge, 150);
   }
 
-  // ========== ARKANOID ==========
+  // ========== ARKANOID (60 FPS LOCK) ==========
   let arkanoidInterval = null;
   let arkanoidState = null;
 
@@ -1872,21 +2006,8 @@
     const W = canvas.width;
     const H = canvas.height;
 
-    const paddle = {
-      x: W / 2 - 40,
-      y: H - 30,
-      width: 80,
-      height: 12,
-      speed: 8
-    };
-
-    const ball = {
-      x: W / 2,
-      y: H - 50,
-      radius: 7,
-      dx: 3.5,
-      dy: -3.5
-    };
+    const paddle = { x: W / 2 - 40, y: H - 30, width: 80, height: 12, speed: 8 };
+    const ball = { x: W / 2, y: H - 50, radius: 7, dx: 3.5, dy: -3.5 };
 
     const BRICK_ROWS = 5;
     const BRICK_COLS = 8;
@@ -1904,6 +2025,7 @@
     let levelComplete = false;
     let keysPressed = {};
     let particles = [];
+    let lastFrameTime = 0;
 
     function createBricks() {
       bricks = [];
@@ -1941,12 +2063,8 @@
     function update() {
       if (gameOver || paused || levelComplete) return;
 
-      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
-        paddle.x -= paddle.speed;
-      }
-      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) {
-        paddle.x += paddle.speed;
-      }
+      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) paddle.x -= paddle.speed;
+      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) paddle.x += paddle.speed;
 
       if (paddle.x < 0) paddle.x = 0;
       if (paddle.x + paddle.width > W) paddle.x = W - paddle.width;
@@ -1954,12 +2072,8 @@
       ball.x += ball.dx;
       ball.y += ball.dy;
 
-      if (ball.x - ball.radius < 0 || ball.x + ball.radius > W) {
-        ball.dx = -ball.dx;
-      }
-      if (ball.y - ball.radius < 0) {
-        ball.dy = -ball.dy;
-      }
+      if (ball.x - ball.radius < 0 || ball.x + ball.radius > W) ball.dx = -ball.dx;
+      if (ball.y - ball.radius < 0) ball.dy = -ball.dy;
 
       if (ball.y + ball.radius >= paddle.y &&
           ball.y - ball.radius <= paddle.y + paddle.height &&
@@ -2004,11 +2118,8 @@
             Math.abs(ball.y - ball.radius - (b.y + b.height))
           );
 
-          if (overlapX < overlapY) {
-            ball.dx = -ball.dx;
-          } else {
-            ball.dy = -ball.dy;
-          }
+          if (overlapX < overlapY) ball.dx = -ball.dx;
+          else ball.dy = -ball.dy;
 
           const blocksEl = document.getElementById('blocksBroken');
           const earnedEl = document.getElementById('arkanoidEarned');
@@ -2026,8 +2137,7 @@
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx; p.y += p.vy;
         p.vy += 0.1;
         p.life--;
         if (p.life <= 0) particles.splice(i, 1);
@@ -2158,14 +2268,10 @@
         if (!gameOver && !levelComplete) { paused = !paused; draw(); }
         return;
       }
-      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
-        e.preventDefault();
-      }
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) e.preventDefault();
     }
 
-    function handleKeyUp(e) {
-      keysPressed[e.key] = false;
-    }
+    function handleKeyUp(e) { keysPressed[e.key] = false; }
 
     function handleMouse(e) {
       if (gameOver || paused || levelComplete) return;
@@ -2184,8 +2290,13 @@
     arkanoidState = { handleKey, handleKeyUp, handleMouse, canvas };
 
     draw();
-    arkanoidInterval = requestAnimationFrame(function loop() {
-      update();
+    lastFrameTime = performance.now();
+    arkanoidInterval = requestAnimationFrame(function loop(currentTime) {
+      const delta = currentTime - lastFrameTime;
+      if (delta >= FRAME_INTERVAL) {
+        lastFrameTime = currentTime - (delta % FRAME_INTERVAL);
+        update();
+      }
       if (!gameOver) arkanoidInterval = requestAnimationFrame(loop);
     });
   }
@@ -2195,7 +2306,7 @@
     setTimeout(startArkanoid, 150);
   }
 
-  // ========== FLAPPY НЛО ==========
+  // ========== FLAPPY НЛО (60 FPS LOCK) ==========
   let flappyInterval = null;
   let flappyState = null;
 
@@ -2229,14 +2340,8 @@
     const H = canvas.height;
 
     const ufo = {
-      x: 80,
-      y: H / 2,
-      width: 34,
-      height: 28,
-      velocity: 0,
-      gravity: 0.3, // было 0.4 — теперь проще
-      jump: -6.5,   // было -7.5 — теперь мягче
-      rotation: 0
+      x: 80, y: H / 2, width: 34, height: 28,
+      velocity: 0, gravity: 0.3, jump: -6.5, rotation: 0
     };
 
     let pipes = [];
@@ -2247,15 +2352,15 @@
     let gameOver = false;
     let frameCount = 0;
     let spawnTimer = 0;
-    let spawnInterval = 105; // было 90 — теперь реже
-    let pipeSpeed = 2.0;     // было 2.5 — теперь медленнее
-    let gapSize = 165;       // было 150 — теперь шире
+    let spawnInterval = 105;
+    let pipeSpeed = 2.0;
+    let gapSize = 165;
     let bgStars = [];
+    let lastFrameTime = 0;
 
     for (let i = 0; i < 30; i++) {
       bgStars.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
+        x: Math.random() * W, y: Math.random() * H,
         size: Math.random() * 1.5 + 0.5,
         speed: Math.random() * 0.3 + 0.1
       });
@@ -2263,13 +2368,7 @@
 
     function spawnPipe() {
       const gapY = 80 + Math.random() * (H - 200 - gapSize);
-      pipes.push({
-        x: W,
-        gapY: gapY,
-        gapSize: gapSize,
-        width: 50,
-        passed: false
-      });
+      pipes.push({ x: W, gapY: gapY, gapSize: gapSize, width: 50, passed: false });
     }
 
     function jump() {
@@ -2292,10 +2391,7 @@
       });
 
       spawnTimer++;
-      if (spawnTimer >= spawnInterval) {
-        spawnPipe();
-        spawnTimer = 0;
-      }
+      if (spawnTimer >= spawnInterval) { spawnPipe(); spawnTimer = 0; }
 
       for (let i = pipes.length - 1; i >= 0; i--) {
         const p = pipes[i];
@@ -2321,7 +2417,6 @@
             bestEl.textContent = bestScore;
           }
 
-          // Более плавное усложнение
           if (pipesPassed % 6 === 0) {
             pipeSpeed += 0.15;
             spawnInterval = Math.max(70, spawnInterval - 2);
@@ -2339,9 +2434,7 @@
           }
         }
 
-        if (p.x + p.width < -10) {
-          pipes.splice(i, 1);
-        }
+        if (p.x + p.width < -10) pipes.splice(i, 1);
       }
 
       if (ufo.y - ufo.height / 2 < 0 || ufo.y + ufo.height / 2 > H) {
@@ -2381,7 +2474,6 @@
         ctx.fillRect(p.x - 3, p.gapY + p.gapSize, p.width + 6, 15);
       });
 
-      // НЛО
       ctx.save();
       ctx.translate(ufo.x, ufo.y);
       ctx.rotate(ufo.rotation);
@@ -2393,7 +2485,6 @@
       ctx.fillText('🛸', 0, 0);
       ctx.restore();
 
-      // Луч снизу НЛО
       if (!gameOver) {
         const flicker = Math.sin(frameCount * 0.6) * 3;
         ctx.fillStyle = 'rgba(0, 229, 255, 0.25)';
@@ -2451,16 +2542,13 @@
         if (!gameOver) { paused = !paused; draw(); }
         return;
       }
-      // Пробел УБРАН — только стрелка вверх и W
       if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === 'ц' || e.key === 'Ц') {
         e.preventDefault();
         jump();
       }
     }
 
-    function handleClick() {
-      jump();
-    }
+    function handleClick() { jump(); }
 
     document.addEventListener('keydown', handleKey);
     canvas.addEventListener('click', handleClick);
@@ -2468,8 +2556,13 @@
     flappyState = { handleKey, handleClick, canvas };
 
     draw();
-    flappyInterval = requestAnimationFrame(function loop() {
-      update();
+    lastFrameTime = performance.now();
+    flappyInterval = requestAnimationFrame(function loop(currentTime) {
+      const delta = currentTime - lastFrameTime;
+      if (delta >= FRAME_INTERVAL) {
+        lastFrameTime = currentTime - (delta % FRAME_INTERVAL);
+        update();
+      }
       if (!gameOver) flappyInterval = requestAnimationFrame(loop);
     });
   }
@@ -2479,7 +2572,7 @@
     setTimeout(startFlappy, 150);
   }
 
-  // ========== WHACK-A-MOLE ==========
+  // ========== WHACK-A-MOLE (60 FPS LOCK) ==========
   let whackInterval = null;
   let whackTimer = null;
   let whackState = null;
@@ -2523,8 +2616,6 @@
         holes.push({
           x: c * CELL_W + CELL_W / 2,
           y: r * CELL_H + CELL_H / 2,
-          row: r,
-          col: c,
           occupant: null,
           showTime: 0,
           maxShowTime: 0
@@ -2542,6 +2633,7 @@
     let frameCount = 0;
     let spawnTimer = 0;
     let spawnInterval = 40;
+    let lastFrameTime = 0;
 
     function spawnOccupant() {
       const emptyHoles = holes.filter(h => h.occupant === null);
@@ -2626,16 +2718,13 @@
       for (const hole of holes) {
         if (hole.occupant !== null) {
           hole.showTime++;
-          if (hole.showTime >= hole.maxShowTime) {
-            hole.occupant = null;
-          }
+          if (hole.showTime >= hole.maxShowTime) hole.occupant = null;
         }
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx; p.y += p.vy;
         p.vy += 0.15;
         p.life--;
         if (p.life <= 0) particles.splice(i, 1);
@@ -2762,8 +2851,13 @@
     whackState = { handleClick, canvas };
 
     draw();
-    whackInterval = requestAnimationFrame(function loop() {
-      update();
+    lastFrameTime = performance.now();
+    whackInterval = requestAnimationFrame(function loop(currentTime) {
+      const delta = currentTime - lastFrameTime;
+      if (delta >= FRAME_INTERVAL) {
+        lastFrameTime = currentTime - (delta % FRAME_INTERVAL);
+        update();
+      }
       if (!gameOver && !timeUp) whackInterval = requestAnimationFrame(loop);
     });
     whackTimer = setInterval(tickTimer, 1000);
@@ -2772,6 +2866,713 @@
   function restartWhackAMole() {
     closeModal();
     setTimeout(startWhackAMole, 150);
+  }
+
+  // ========== КОСМО-СЛОТЫ ==========
+  let slotsSpinning = false;
+  let slotsSpinInterval = null;
+  let slotsTimeouts = [];
+
+  function startSlots() {
+    const bodyHTML = `
+      <div style="text-align: center;">
+        <div class="slots-machine">
+          <div style="font-size: 14px; color: #ffd700; margin-bottom: 12px; letter-spacing: 3px; font-weight: 700;">
+            ★ МЕЖГАЛАКТИЧЕСКОЕ КАЗИНО ★
+          </div>
+          <div class="slots-display">
+            <div class="slot-reel" id="reel1">👽</div>
+            <div class="slot-reel" id="reel2">🛸</div>
+            <div class="slot-reel" id="reel3">🌸</div>
+          </div>
+          <div style="font-size: 11px; color: #b088ff; margin-top: 10px; font-style: italic;">
+            Лицензия партии №777-Лавен
+          </div>
+        </div>
+        <p style="margin: 18px 0 10px; color: #b8a8d0; font-size: 13px; line-height: 1.8;">
+          💰 Ставка: <b style="color:#ffd700;">1 🌸</b> за спин<br>
+          2 одинаковых = <b style="color:#00ff88;">2 🌸</b> | 3 одинаковых = <b style="color:#00ff88;">10 🌸</b><br>
+          👽👽👽 = <b style="color:#ffd700;">ДЖЕКПОТ 50 🌸!</b>
+        </p>
+        <button class="spin-btn" id="spinBtn" onclick="spinSlots()">🎰 КРУТИТЬ (1 🌸)</button>
+        <p id="slotsResult" style="margin-top: 15px; font-size: 16px; font-weight: 700; min-height: 26px;"></p>
+        <p style="margin-top: 8px; font-size: 12px; color: #888;">Ваш баланс: <span id="slotsBalance" style="color:#00ff88; font-weight:700;">0</span> 🌸</p>
+      </div>
+    `;
+    showModal('🎰 КОСМО-СЛОТЫ 🎰', bodyHTML, true);
+    updateSlotsBalance();
+  }
+
+  function updateSlotsBalance() {
+    const el = document.getElementById('slotsBalance');
+    if (el) {
+      const balanceText = balance % 1 === 0 ? balance : (Math.round(balance * 10) / 10);
+      el.textContent = balanceText;
+    }
+  }
+
+  function spinSlots() {
+    if (slotsSpinning) return;
+    const resultEl = document.getElementById('slotsResult');
+    if (balance < 1) {
+      resultEl.innerHTML = '<span style="color:#ff4444;">💸 Недостаточно сваговиков! Заработай в других играх!</span>';
+      return;
+    }
+
+    balance -= 1;
+    balance = Math.round(balance * 10) / 10;
+    updateShopUI();
+    updateSlotsBalance();
+    saveState();
+
+    slotsSpinning = true;
+    resultEl.textContent = '';
+    const spinBtn = document.getElementById('spinBtn');
+    if (spinBtn) spinBtn.disabled = true;
+
+    const symbols = ['👽', '', '🌸', '💎', '⭐', '🚀', '🌟', ''];
+    const reels = [
+      document.getElementById('reel1'),
+      document.getElementById('reel2'),
+      document.getElementById('reel3')
+    ];
+
+    reels.forEach(r => r.classList.add('spinning'));
+
+    slotsSpinInterval = setInterval(() => {
+      reels.forEach((reel) => {
+        if (reel.classList.contains('spinning')) {
+          reel.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        }
+      });
+    }, 70);
+
+    const results = [
+      symbols[Math.floor(Math.random() * symbols.length)],
+      symbols[Math.floor(Math.random() * symbols.length)],
+      symbols[Math.floor(Math.random() * symbols.length)]
+    ];
+
+    slotsTimeouts.push(setTimeout(() => {
+      reels[0].textContent = results[0];
+      reels[0].classList.remove('spinning');
+    }, 900));
+
+    slotsTimeouts.push(setTimeout(() => {
+      reels[1].textContent = results[1];
+      reels[1].classList.remove('spinning');
+    }, 1500));
+
+    slotsTimeouts.push(setTimeout(() => {
+      reels[2].textContent = results[2];
+      reels[2].classList.remove('spinning');
+      clearInterval(slotsSpinInterval);
+      slotsSpinInterval = null;
+      slotsSpinning = false;
+      if (spinBtn) spinBtn.disabled = false;
+      calculateSlotsWin(results, reels);
+    }, 2100));
+  }
+
+  function calculateSlotsWin(results, reels) {
+    const resultEl = document.getElementById('slotsResult');
+    let win = 0;
+    let message = '';
+
+    const [a, b, c] = results;
+
+    if (a === b && b === c) {
+      if (a === '👽') {
+        win = 50;
+        message = `🎉💎 ДЖЕКПОТ ИМПЕРАТОРА! 💎<br><b>+${win} сваговиков!</b><br><span style="font-size:12px; color:#b088ff;">Сам Император Лавен вам подмигнул!</span>`;
+      } else {
+        win = 10;
+        message = `🎊 ТРИ В РЯД! 🎊<br><b>+${win} сваговиков!</b>`;
+      }
+      reels.forEach(r => r.classList.add('winner'));
+      setTimeout(() => reels.forEach(r => r.classList.remove('winner')), 2500);
+    } else if (a === b || b === c || a === c) {
+      win = 2;
+      message = `✨ Две одинаковых! <b>+${win} сваговика!</b>`;
+    } else {
+      message = `<span style="color:#888;">Мимо... Попробуй ещё раз! 🍀</span>`;
+    }
+
+    if (win > 0) {
+      balance += win;
+      balance = Math.round(balance * 10) / 10;
+      updateShopUI();
+      saveState();
+    }
+    updateSlotsBalance();
+    resultEl.innerHTML = message;
+  }
+
+  // ========== КОСМО-МЕМОРИ ==========
+  let memoryState = null;
+
+  function startMemory() {
+    const bodyHTML = `
+      <div style="text-align: center;">
+        <div class="memory-stats">
+          <div class="memory-stat">
+            <div class="memory-stat-label">ХОДЫ</div>
+            <div class="memory-stat-value" id="memoryMoves">0</div>
+          </div>
+          <div class="memory-stat">
+            <div class="memory-stat-label">ПАРЫ</div>
+            <div class="memory-stat-value" id="memoryPairs">0/8</div>
+          </div>
+          <div class="memory-stat">
+            <div class="memory-stat-label">ЗАРАБОТАНО</div>
+            <div class="memory-stat-value" id="memoryEarned" style="color:#00ff88;">0 🌸</div>
+          </div>
+          <div class="memory-stat">
+            <div class="memory-stat-label">ВРЕМЯ</div>
+            <div class="memory-stat-value" id="memoryTime">0:00</div>
+          </div>
+        </div>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <p style="margin-top: 15px; font-size: 12px; color: #b8a8d0;">
+          💰 0,3 🌸 за каждую найденную пару<br>
+          🏆 Победа за ≤16 ходов = бонус <b style="color:#ffd700;">+5 🌸</b>!
+        </p>
+      </div>
+    `;
+    showModal('🃏 КОСМО-МЕМОРИ 🃏', bodyHTML, true);
+    setTimeout(initMemory, 50);
+  }
+
+  function initMemory() {
+    const grid = document.getElementById('memoryGrid');
+    if (!grid) return;
+
+    const emojiSet = ['👽', '', '', '💫', '⭐', '🌙', '🚀', ''];
+    const cards = [...emojiSet, ...emojiSet];
+
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+    let moves = 0;
+    let pairs = 0;
+    let earned = 0;
+    let startTime = Date.now();
+    let finished = false;
+
+    const timerId = setInterval(() => {
+      if (finished) {
+        clearInterval(timerId);
+        return;
+      }
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      const timeEl = document.getElementById('memoryTime');
+      if (timeEl) timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+
+    memoryState = { timerId };
+
+    cards.forEach((emoji, idx) => {
+      const card = document.createElement('div');
+      card.className = 'memory-card';
+      card.dataset.emoji = emoji;
+      card.dataset.index = idx;
+      card.innerHTML = `
+        <span class="card-back">❓</span>
+        <span class="card-face">${emoji}</span>
+      `;
+      card.addEventListener('click', () => flipCard(card));
+      grid.appendChild(card);
+    });
+
+    function flipCard(card) {
+      if (lockBoard) return;
+      if (card === firstCard) return;
+      if (card.classList.contains('matched')) return;
+      if (card.classList.contains('flipped')) return;
+
+      card.classList.add('flipped');
+
+      if (!firstCard) {
+        firstCard = card;
+        return;
+      }
+
+      secondCard = card;
+      moves++;
+      const movesEl = document.getElementById('memoryMoves');
+      if (movesEl) movesEl.textContent = moves;
+
+      checkMatch();
+    }
+
+    function checkMatch() {
+      const isMatch = firstCard.dataset.emoji === secondCard.dataset.emoji;
+      if (isMatch) disableCards();
+      else unflipCards();
+    }
+
+    function disableCards() {
+      firstCard.classList.remove('flipped');
+      secondCard.classList.remove('flipped');
+      firstCard.classList.add('matched');
+      secondCard.classList.add('matched');
+
+      pairs++;
+      earned += 0.3;
+      earned = Math.round(earned * 10) / 10;
+      balance += 0.3;
+      balance = Math.round(balance * 10) / 10;
+      updateShopUI();
+      saveState();
+
+      const pairsEl = document.getElementById('memoryPairs');
+      const earnedEl = document.getElementById('memoryEarned');
+      if (pairsEl) pairsEl.textContent = pairs + '/8';
+      if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+
+      resetBoard();
+
+      if (pairs === 8) {
+        finished = true;
+        setTimeout(() => {
+          let bonus = 0;
+          let bonusText = '';
+          if (moves <= 16) {
+            bonus = 5;
+            balance += bonus;
+            balance = Math.round(balance * 10) / 10;
+            earned += bonus;
+            updateShopUI();
+            saveState();
+            bonusText = `<p style="color:#ffd700; font-weight:700; font-size:18px;">🏆 БОНУС ЗА СКОРОСТЬ: +${bonus} 🌸!</p>`;
+          }
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          const minutes = Math.floor(elapsed / 60);
+          const seconds = elapsed % 60;
+          showModal('🎉 ПОБЕДА! 🎉',
+            `<p>Все пары найдены!</p>
+             <p>📊 Ходов: <b style="color:#ffd700;">${moves}</b></p>
+             <p>⏱️ Время: <b style="color:#00e5ff;">${minutes}:${seconds.toString().padStart(2, '0')}</b></p>
+             ${bonusText}
+             <p>💰 Заработано всего: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>`,
+            false,
+            `<button class="restart-btn" onclick="restartMemory()">🔄 ИГРАТЬ СНОВА</button>
+             <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+          );
+        }, 600);
+      }
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        if (firstCard) firstCard.classList.remove('flipped');
+        if (secondCard) secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 800);
+    }
+
+    function resetBoard() {
+      firstCard = null;
+      secondCard = null;
+      lockBoard = false;
+    }
+  }
+
+  function restartMemory() {
+    closeModal();
+    setTimeout(startMemory, 150);
+  }
+
+  // ========== КОСМИЧЕСКИЙ РАННЕР (60 FPS LOCK) ==========
+  let runnerInterval = null;
+  let runnerState = null;
+
+  function startRunner() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="runnerCanvas" width="500" height="300"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">ДИСТАНЦИЯ</div><div class="stat-value" id="runnerDistance">0м</div></div>
+          <div class="stat"><div class="stat-label">СВАГОВИКИ</div><div class="stat-value" id="runnerCoins">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="runnerEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">СКОРОСТЬ</div><div class="stat-value" id="runnerSpeed">1x</div></div>
+          <div class="game-controls">
+            <div><kbd>↑</kbd> / <kbd>W</kbd> — вверх</div>
+            <div><kbd>↓</kbd> / <kbd>S</kbd> — вниз</div>
+            <div>3 полосы движения</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за сваговик | 0,1 🌸 за каждые 500м</p>
+    `;
+    showModal('🏃 КОСМИЧЕСКИЙ РАННЕР 🏃', bodyHTML, true);
+    setTimeout(initRunner, 50);
+  }
+
+  function initRunner() {
+    const canvas = document.getElementById('runnerCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const LANES = 3;
+    const LANE_H = H / LANES;
+
+    const ufo = {
+      x: 80,
+      lane: 1,
+      y: LANE_H * 1 + LANE_H / 2,
+      targetY: LANE_H * 1 + LANE_H / 2,
+      size: 36
+    };
+
+    let obstacles = [];
+    let coins = [];
+    let particles = [];
+    let distance = 0;
+    let coinsCollected = 0;
+    let earned = 0;
+    let speedMultiplier = 1;
+    let baseSpeed = 4;
+    let spawnTimer = 0;
+    let spawnInterval = 60;
+    let coinSpawnTimer = 0;
+    let paused = false;
+    let gameOver = false;
+    let frameCount = 0;
+    let bgStars = [];
+    let lastFrameTime = 0;
+    let lastDistanceBonus = 0;
+
+    for (let i = 0; i < 50; i++) {
+      bgStars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        size: Math.random() * 1.5 + 0.5,
+        speed: Math.random() * 1 + 0.5
+      });
+    }
+
+    function spawnObstacle() {
+      const lane = Math.floor(Math.random() * LANES);
+      const types = ['☄️', '🌑', '💫'];
+      obstacles.push({
+        x: W + 30,
+        lane: lane,
+        y: LANE_H * lane + LANE_H / 2,
+        emoji: types[Math.floor(Math.random() * types.length)],
+        size: 32,
+        rotation: 0,
+        rotationSpeed: (Math.random() - 0.5) * 0.1
+      });
+    }
+
+    function spawnCoin() {
+      const lane = Math.floor(Math.random() * LANES);
+      const hasObstacleNear = obstacles.some(o => o.lane === lane && o.x > W - 100);
+      if (hasObstacleNear) return;
+      coins.push({
+        x: W + 30,
+        lane: lane,
+        y: LANE_H * lane + LANE_H / 2,
+        size: 24,
+        pulse: 0
+      });
+    }
+
+    function createExplosion(x, y, color) {
+      for (let i = 0; i < 15; i++) {
+        const angle = (Math.PI * 2 * i) / 15;
+        const speed = 2 + Math.random() * 3;
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 30, maxLife: 30,
+          color: color,
+          size: 2 + Math.random() * 3
+        });
+      }
+    }
+
+    function moveLane(direction) {
+      if (gameOver || paused) return;
+      const newLane = ufo.lane + direction;
+      if (newLane >= 0 && newLane < LANES) {
+        ufo.lane = newLane;
+        ufo.targetY = LANE_H * newLane + LANE_H / 2;
+      }
+    }
+
+    function update() {
+      if (gameOver || paused) return;
+
+      frameCount++;
+
+      ufo.y += (ufo.targetY - ufo.y) * 0.25;
+
+      distance += baseSpeed * speedMultiplier * 0.1;
+      const distanceInt = Math.floor(distance);
+
+      if (distanceInt > 0 && Math.floor(distanceInt / 500) > lastDistanceBonus) {
+        lastDistanceBonus = Math.floor(distanceInt / 500);
+        earned += 0.1;
+        earned = Math.round(earned * 10) / 10;
+        balance += 0.1;
+        balance = Math.round(balance * 10) / 10;
+        updateShopUI();
+        saveState();
+      }
+
+      const distanceEl = document.getElementById('runnerDistance');
+      if (distanceEl) distanceEl.textContent = distanceInt + 'м';
+
+      bgStars.forEach(s => {
+        s.x -= s.speed * speedMultiplier;
+        if (s.x < 0) { s.x = W; s.y = Math.random() * H; }
+      });
+
+      spawnTimer++;
+      if (spawnTimer >= spawnInterval) { spawnObstacle(); spawnTimer = 0; }
+
+      coinSpawnTimer++;
+      if (coinSpawnTimer >= 40) { spawnCoin(); coinSpawnTimer = 0; }
+
+      const currentSpeed = baseSpeed * speedMultiplier;
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        const o = obstacles[i];
+        o.x -= currentSpeed;
+        o.rotation += o.rotationSpeed;
+
+        const dx = o.x - ufo.x;
+        const dy = o.y - ufo.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < o.size / 2 + ufo.size / 2.5) {
+          createExplosion(ufo.x, ufo.y, '#ff6600');
+          gameOver = true;
+          endGame();
+          return;
+        }
+
+        if (o.x < -50) obstacles.splice(i, 1);
+      }
+
+      for (let i = coins.length - 1; i >= 0; i--) {
+        const c = coins[i];
+        c.x -= currentSpeed;
+        c.pulse += 0.15;
+
+        const dx = c.x - ufo.x;
+        const dy = c.y - ufo.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < c.size / 2 + ufo.size / 2.5) {
+          coinsCollected++;
+          earned += 0.1;
+          earned = Math.round(earned * 10) / 10;
+          balance += 0.1;
+          balance = Math.round(balance * 10) / 10;
+          updateShopUI();
+          saveState();
+          createExplosion(c.x, c.y, '#ff69b4');
+
+          const coinsEl = document.getElementById('runnerCoins');
+          const earnedEl = document.getElementById('runnerEarned');
+          if (coinsEl) coinsEl.textContent = coinsCollected;
+          if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+
+          coins.splice(i, 1);
+          continue;
+        }
+
+        if (c.x < -50) coins.splice(i, 1);
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.95; p.vy *= 0.95;
+        p.life--;
+        if (p.life <= 0) particles.splice(i, 1);
+      }
+
+      const newMultiplier = 1 + Math.floor(distanceInt / 300) * 0.15;
+      if (newMultiplier > speedMultiplier) {
+        speedMultiplier = Math.round(newMultiplier * 10) / 10;
+        spawnInterval = Math.max(25, 60 - Math.floor(distanceInt / 300) * 4);
+        const speedEl = document.getElementById('runnerSpeed');
+        if (speedEl) speedEl.textContent = speedMultiplier.toFixed(1) + 'x';
+      }
+
+      draw();
+    }
+
+    function draw() {
+      const bgGradient = ctx.createLinearGradient(0, 0, W, 0);
+      bgGradient.addColorStop(0, '#0a0520');
+      bgGradient.addColorStop(0.5, '#150a35');
+      bgGradient.addColorStop(1, '#1a0a3a');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      bgStars.forEach(s => {
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + s.size * 0.3})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
+
+      ctx.strokeStyle = 'rgba(0, 229, 255, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([8, 8]);
+      for (let i = 1; i < LANES; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, LANE_H * i);
+        ctx.lineTo(W, LANE_H * i);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+
+      particles.forEach(p => {
+        const alpha = p.life / p.maxLife;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      coins.forEach(c => {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        const scale = 1 + Math.sin(c.pulse) * 0.15;
+        ctx.scale(scale, scale);
+        ctx.font = c.size + 'px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#ff69b4';
+        ctx.shadowBlur = 15;
+        ctx.fillText('🌸', 0, 0);
+        ctx.restore();
+      });
+
+      obstacles.forEach(o => {
+        ctx.save();
+        ctx.translate(o.x, o.y);
+        ctx.rotate(o.rotation);
+        ctx.font = o.size + 'px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#ff4444';
+        ctx.shadowBlur = 12;
+        ctx.fillText(o.emoji, 0, 0);
+        ctx.restore();
+      });
+
+      ctx.save();
+      ctx.translate(ufo.x, ufo.y);
+      ctx.font = ufo.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#00e5ff';
+      ctx.shadowBlur = 20;
+      ctx.fillText('🛸', 0, 0);
+      ctx.restore();
+
+      if (!gameOver) {
+        const flicker = Math.sin(frameCount * 0.4) * 2;
+        ctx.fillStyle = 'rgba(0, 229, 255, 0.3)';
+        ctx.beginPath();
+        ctx.moveTo(ufo.x - 15, ufo.y - 4);
+        ctx.lineTo(ufo.x - 15, ufo.y + 4);
+        ctx.lineTo(ufo.x - 30 - flicker, ufo.y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💥 КРУШЕНИЕ! 💥', W / 2, H / 2 - 25);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '14px Comic Neue, sans-serif';
+        ctx.fillText('Дистанция: ' + Math.floor(distance) + 'м | Сваговиков: ' + coinsCollected, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 28);
+      }
+
+      if (paused && !gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏸ ПАУЗА', W / 2, H / 2);
+      }
+    }
+
+    function endGame() {
+      cancelAnimationFrame(runnerInterval);
+      runnerInterval = null;
+      draw();
+      setTimeout(() => {
+        showModal('💥 КРУШЕНИЕ! 💥',
+          `<p>📏 Дистанция: <b style="color:#ffd700;">${Math.floor(distance)}м</b></p>
+           <p>🌸 Собрано сваговиков: <b style="color:#ff69b4;">${coinsCollected}</b></p>
+           <p>⚡ Максимальная скорость: <b style="color:#00e5ff;">${speedMultiplier.toFixed(1)}x</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Лети дальше, пилот! 🛸</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartRunner()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
+
+    function handleKey(e) {
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
+        if (!gameOver) { paused = !paused; draw(); }
+        return;
+      }
+      if (gameOver || paused) return;
+
+      const key = e.key;
+      if (key === 'ArrowUp' || key === 'w' || key === 'W' || key === 'ц' || key === 'Ц') {
+        moveLane(-1);
+        e.preventDefault();
+      } else if (key === 'ArrowDown' || key === 's' || key === 'S' || key === 'ы' || key === 'Ы') {
+        moveLane(1);
+        e.preventDefault();
+      }
+    }
+
+    document.addEventListener('keydown', handleKey);
+    runnerState = { handleKey };
+
+    draw();
+    lastFrameTime = performance.now();
+    runnerInterval = requestAnimationFrame(function loop(currentTime) {
+      const delta = currentTime - lastFrameTime;
+      if (delta >= FRAME_INTERVAL) {
+        lastFrameTime = currentTime - (delta % FRAME_INTERVAL);
+        update();
+      }
+      if (!gameOver) runnerInterval = requestAnimationFrame(loop);
+    });
+  }
+
+  function restartRunner() {
+    closeModal();
+    setTimeout(startRunner, 150);
   }
 
   document.querySelector('.header h1').addEventListener('click', () => {
