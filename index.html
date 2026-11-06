@@ -271,48 +271,19 @@
   }
 
   .floating-balance {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
+    position: fixed; bottom: 25px; right: 25px;
     background: linear-gradient(135deg, rgba(20, 10, 50, 0.95), rgba(40, 15, 70, 0.95));
-    backdrop-filter: blur(12px);
-    border: 2px solid #ffd700;
-    border-radius: 16px;
-    padding: 12px 18px;
-    z-index: 1499;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 160px;
+    backdrop-filter: blur(12px); border: 2px solid #ffd700; border-radius: 16px;
+    padding: 12px 18px; z-index: 1499; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    display: flex; align-items: center; gap: 10px; min-width: 160px;
   }
-  .floating-balance .balance-icon {
-    font-size: 26px;
-    filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.6));
+  .floating-balance .balance-icon { font-size: 26px; filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.6)); }
+  .floating-balance .balance-info { display: flex; flex-direction: column; line-height: 1.2; }
+  .floating-balance .balance-label { font-size: 10px; color: #b8a8d0; text-transform: uppercase; letter-spacing: 1px; }
+  .floating-balance .balance-value { font-size: 20px; font-weight: 700; color: #00ff88;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.5); font-family: 'Courier New', monospace;
   }
-  .floating-balance .balance-info {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-  }
-  .floating-balance .balance-label {
-    font-size: 10px;
-    color: #b8a8d0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .floating-balance .balance-value {
-    font-size: 20px;
-    font-weight: 700;
-    color: #00ff88;
-    text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
-    font-family: 'Courier New', monospace;
-  }
-  .floating-balance .balance-value .currency {
-    font-size: 14px;
-    color: #ff69b4;
-    margin-left: 4px;
-  }
+  .floating-balance .balance-value .currency { font-size: 14px; color: #ff69b4; margin-left: 4px; }
 
   .gallery-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
     text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
@@ -329,7 +300,6 @@
     color: #00e5ff; font-size: 15px; font-weight: 700; border-top: 2px dashed #b088ff;
   }
 
-  /* ========== COLLECTION — МЯГКИЙ ГРАДИЕНТ ========== */
   .collection-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
     text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
   }
@@ -341,40 +311,26 @@
   .collection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
   .collection-item {
     background: linear-gradient(135deg, rgba(35, 20, 65, 0.55), rgba(50, 25, 80, 0.55));
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.35);
-    border-radius: 16px;
-    padding: 20px 16px;
-    text-align: center;
-    position: relative;
+    backdrop-filter: blur(10px); border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 16px; padding: 20px 16px; text-align: center; position: relative;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; overflow: hidden;
   }
   .collection-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
     border-color: rgba(255, 215, 0, 0.55);
   }
-  /* Мягкий полупрозрачный градиент-ореол */
   .collection-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: linear-gradient(135deg,
       rgba(255, 215, 0, 0.08),
       rgba(255, 105, 180, 0.06) 30%,
       rgba(176, 136, 255, 0.07) 60%,
       rgba(0, 229, 255, 0.08));
-    background-size: 200% 200%;
-    border-radius: 16px;
-    z-index: 0;
+    background-size: 200% 200%; border-radius: 16px; z-index: 0;
     animation: soft-shimmer 12s ease-in-out infinite;
-    pointer-events: none;
-    transition: opacity 0.3s;
+    pointer-events: none; transition: opacity 0.3s;
   }
   .collection-item > * { position: relative; z-index: 1; }
   @keyframes soft-shimmer {
@@ -382,55 +338,31 @@
     50% { background-position: 100% 50%; opacity: 1; }
   }
   .collection-item .pedestal {
-    width: 80%;
-    height: 4px;
+    width: 80%; height: 4px;
     background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
-    border-radius: 4px;
-    margin-top: 12px;
+    border-radius: 4px; margin-top: 12px;
   }
-  .collection-item .item-emoji {
-    font-size: 80px;
-    margin-bottom: 8px;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
-    animation: item-float 3s ease-in-out infinite;
+  .collection-item .item-emoji { font-size: 80px; margin-bottom: 8px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35)); animation: item-float 3s ease-in-out infinite;
   }
   @keyframes item-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-  .collection-item .item-name {
-    color: #ffd700;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    text-shadow: 0 0 6px rgba(255, 215, 0, 0.25);
-    line-height: 1.3;
+  .collection-item .item-name { color: #ffd700; font-size: 16px; font-weight: 700; margin-bottom: 6px;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.25); line-height: 1.3;
   }
   .collection-item .item-price { font-size: 13px; color: #00e5ff; font-weight: 700; margin-bottom: 4px; }
   .collection-item .item-date { font-size: 10px; color: #888; font-style: italic; margin-top: 4px; }
-  .collection-item.legendary-collect {
-    border-color: rgba(255, 215, 0, 0.5);
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
-  }
+  .collection-item.legendary-collect { border-color: rgba(255, 215, 0, 0.5); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15); }
   .collection-item.legendary-collect::before {
     background: linear-gradient(135deg,
       rgba(255, 215, 0, 0.12),
       rgba(255, 237, 78, 0.08) 50%,
       rgba(255, 215, 0, 0.12));
   }
-  .collection-item.legendary-collect .item-emoji {
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
-  }
-  .collection-item.legendary-collect .item-name {
-    color: #ffed4e;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-  }
+  .collection-item.legendary-collect .item-emoji { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); }
+  .collection-item.legendary-collect .item-name { color: #ffed4e; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
   .collection-item.legendary-collect::after {
-    content: '✨';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 18px;
-    animation: twinkle 2.5s ease-in-out infinite;
-    z-index: 2;
-    opacity: 0.8;
+    content: '✨'; position: absolute; top: 8px; right: 8px;
+    font-size: 18px; animation: twinkle 2.5s ease-in-out infinite; z-index: 2; opacity: 0.8;
   }
   .collection-empty { text-align: center; padding: 60px 20px; margin: 20px;
     background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
@@ -497,7 +429,7 @@
   .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; padding: 20px; }
   .game-card { background: rgba(20, 10, 50, 0.6); backdrop-filter: blur(10px);
     border: 2px solid #00e5ff; border-radius: 14px; padding: 20px; text-align: center;
-    box-shadow: 4px 4px 0 rgba(0, 229, 255, 0.3);
+    box-shadow: 4px 4px 0 rgba(0, 229, 255, 0.3); position: relative;
   }
   .game-card .game-emoji { font-size: 56px; margin-bottom: 10px; display: block; }
   .game-card h4 { color: #ffd700; font-size: 18px; margin-bottom: 8px; }
@@ -510,8 +442,45 @@
   }
   .play-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
 
+  /* Плашка "на ремонте" */
+  .repair-banner {
+    position: absolute;
+    top: 14px;
+    right: -35px;
+    background: repeating-linear-gradient(45deg, #ffd700, #ffd700 8px, #222 8px, #222 16px);
+    color: #ff0000;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 4px 40px;
+    transform: rotate(35deg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    border: 1px solid #ff0000;
+    z-index: 2;
+    -webkit-text-stroke: 1px #fff;
+  }
+  .game-card.repair {
+    border-color: #888;
+    opacity: 0.85;
+    background: rgba(40, 30, 50, 0.6);
+  }
+  .game-card.repair .game-emoji {
+    filter: grayscale(0.5);
+  }
+  .game-card.repair h4 {
+    color: #b8a8d0;
+  }
+  .game-card.repair .game-desc {
+    color: #888;
+    font-style: italic;
+  }
+  .game-card.repair .game-reward {
+    color: #888;
+    text-shadow: none;
+  }
+
   .game-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-  #tetrisCanvas, #snakeCanvas, #swagCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  #tetrisCanvas, #snakeCanvas, #ufoCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
   .game-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
   .game-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
   .game-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -545,28 +514,16 @@
   }
   .modal button.pay-btn:hover { background: linear-gradient(180deg, #00ffaa, #00ff88); color: #000; }
   .modal button.restart-btn {
-    background: linear-gradient(180deg, #ffd700, #b8860b);
-    color: #3a1f00;
-    font-size: 16px;
-    padding: 12px 28px;
-    border-color: #fff8dc;
+    background: linear-gradient(180deg, #ffd700, #b8860b); color: #3a1f00;
+    font-size: 16px; padding: 12px 28px; border-color: #fff8dc;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
   }
-  .modal button.restart-btn:hover {
-    background: linear-gradient(180deg, #ffed4e, #ffd700);
-    color: #3a1f00;
-  }
+  .modal button.restart-btn:hover { background: linear-gradient(180deg, #ffed4e, #ffd700); color: #3a1f00; }
   .modal button.exit-btn {
-    background: transparent;
-    color: #b8a8d0;
-    border: 1px solid #b8a8d0;
-    padding: 8px 20px;
-    font-size: 13px;
+    background: transparent; color: #b8a8d0; border: 1px solid #b8a8d0;
+    padding: 8px 20px; font-size: 13px;
   }
-  .modal button.exit-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #f0e8ff;
-  }
+  .modal button.exit-btn:hover { background: rgba(255, 255, 255, 0.05); color: #f0e8ff; }
   .modal button.remove-btn { background: linear-gradient(180deg, #ff4444, #aa0000); padding: 4px 10px; font-size: 11px; border-radius: 12px; }
 
   .cart-list { text-align: left; margin: 14px 0; max-height: 300px; overflow-y: auto; }
@@ -721,13 +678,16 @@
   <p class="earn-subtitle">Тсс... это секретный раздел. Играй и зарабатывай! 🤫</p>
   <div class="earn-warning">⚠️ ВНИМАНИЕ! Все заработанные сваговики идут напрямую в ваш баланс. Читерство карается превращением в жабу. 🐸</div>
   <div class="games-grid">
-    <div class="game-card">
+    <!-- TETRIS — НА РЕМОНТЕ -->
+    <div class="game-card repair">
+      <div class="repair-banner">🔧 РЕМОНТ 🔧</div>
       <span class="game-emoji">🧱</span>
       <h4>Космо-Тетрис</h4>
-      <p class="game-desc">Классический тетрис, но с пришельцами! Собирай линии и получай сваговики.</p>
-      <p class="game-reward">💰 0,1 🌸 за каждую линию</p>
-      <button class="play-btn" onclick="startTetris()">▶ ИГРАТЬ</button>
+      <p class="game-desc">🚧 Игра временно закрыта на межгалактический ремонт! Наши инженеры-пришельцы уже чинят упавшие блоки...</p>
+      <p class="game-reward" style="color: #888;">💰 Скоро вернётся!</p>
+      <button class="play-btn" disabled style="opacity: 0.4; cursor: not-allowed; background: linear-gradient(180deg, #666, #444); color: #aaa;">🔒 НА РЕМОНТЕ</button>
     </div>
+
     <div class="game-card">
       <span class="game-emoji">🐍</span>
       <h4>Змейка-пришелец</h4>
@@ -735,26 +695,22 @@
       <p class="game-reward">💰 0,2 🌸 за каждое яблоко</p>
       <button class="play-btn" onclick="startSnake()">▶ ИГРАТЬ</button>
     </div>
+
     <div class="game-card">
-      <span class="game-emoji">🧺</span>
-      <h4>Ловец Сваговиков</h4>
-      <p class="game-desc">Лови падающие с неба сваговики 🌸 и редкие алмазы 💎! Остерегайся бомб 💣 — их теперь много!</p>
-      <p class="game-reward">💰 0,1 🌸 за сваговик | 💎 0,3 🌸 за алмаз</p>
-      <button class="play-btn" onclick="startSwagCatcher()">▶ ИГРАТЬ</button>
-    </div>
-    <div class="game-card">
-      <span class="game-emoji">🎯</span>
+      <span class="game-emoji">🛸</span>
       <h4>Стрелялка по НЛО</h4>
-      <p class="game-desc">Скоро! Пушка сломалась, пока чиним. Приходите позже.</p>
-      <p class="game-reward">💰 0,1 🌸 за каждое НЛО</p>
-      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+      <p class="game-desc">Защити Землю от нашествия НЛО! Стреляй по тарелкам и не дай им добраться до твоего корабля. Остерегайся больших боссов 👾!</p>
+      <p class="game-reward">💰 0,1 🌸 за НЛО | 👾 0,3 🌸 за босса</p>
+      <button class="play-btn" onclick="startUfoShooter()">▶ ИГРАТЬ</button>
     </div>
-    <div class="game-card">
+
+    <div class="game-card repair">
+      <div class="repair-banner">🔧 РЕМОНТ 🔧</div>
       <span class="game-emoji">🧩</span>
       <h4>Пазл "Лицо Императора"</h4>
       <p class="game-desc">Скоро! Пазл разбежался по галактике. Ловим его.</p>
-      <p class="game-reward">💰 0,5 🌸 за сборку</p>
-      <button class="play-btn" disabled style="opacity: 0.5; cursor: not-allowed;">🔒 СКОРО</button>
+      <p class="game-reward" style="color: #888;">💰 0,5 🌸 за сборку</p>
+      <button class="play-btn" disabled style="opacity: 0.4; cursor: not-allowed; background: linear-gradient(180deg, #666, #444); color: #aaa;">🔒 СКОРО</button>
     </div>
   </div>
 </div>
@@ -928,24 +884,16 @@
     document.getElementById('modal').classList.add('active');
   }
   function closeModal() {
-    if (tetrisInterval) { cancelAnimationFrame(tetrisInterval); tetrisInterval = null; }
-    if (tetrisState && tetrisState.handleKey) {
-      document.removeEventListener('keydown', tetrisState.handleKey);
-      tetrisState = null;
-    }
     if (snakeInterval) { clearInterval(snakeInterval); snakeInterval = null; }
     if (snakeState && snakeState.handleKey) {
       document.removeEventListener('keydown', snakeState.handleKey);
       snakeState = null;
     }
-    if (swagCatcherInterval) { cancelAnimationFrame(swagCatcherInterval); swagCatcherInterval = null; }
-    if (swagCatcherState) {
-      if (swagCatcherState.handleKey) document.removeEventListener('keydown', swagCatcherState.handleKey);
-      if (swagCatcherState.handleKeyUp) document.removeEventListener('keyup', swagCatcherState.handleKeyUp);
-      if (swagCatcherState.handleMouse && swagCatcherState.canvas) {
-        swagCatcherState.canvas.removeEventListener('mousemove', swagCatcherState.handleMouse);
-      }
-      swagCatcherState = null;
+    if (ufoInterval) { cancelAnimationFrame(ufoInterval); ufoInterval = null; }
+    if (ufoState) {
+      if (ufoState.handleKey) document.removeEventListener('keydown', ufoState.handleKey);
+      if (ufoState.handleKeyUp) document.removeEventListener('keyup', ufoState.handleKeyUp);
+      ufoState = null;
     }
     modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.remove('active');
@@ -1202,214 +1150,6 @@
     });
     gridHTML += '</div>';
     contentEl.innerHTML = gridHTML;
-  }
-
-  // ========== TETRIS ==========
-  let tetrisInterval = null;
-  let tetrisState = null;
-
-  function startTetris() {
-    const bodyHTML = `
-      <div class="game-container">
-        <canvas id="tetrisCanvas" width="200" height="400"></canvas>
-        <div class="game-info">
-          <div class="stat"><div class="stat-label">ЛИНИИ</div><div class="stat-value" id="tetrisLines">0</div></div>
-          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="tetrisEarned">0 🌸</div></div>
-          <div class="game-controls">
-            <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> движение</div>
-            <div><kbd>↑</kbd> / <kbd>W</kbd> поворот</div>
-            <div><kbd>↓</kbd> / <kbd>S</kbd> ускорить</div>
-            <div><kbd>P</kbd> пауза</div>
-          </div>
-        </div>
-      </div>
-      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждую собранную линию</p>
-    `;
-    showModal('🧱 КОСМО-ТЕТРИС 🧱', bodyHTML, true);
-    setTimeout(initTetris, 50);
-  }
-
-  function initTetris() {
-    const canvas = document.getElementById('tetrisCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const COLS = 10, ROWS = 20, BLOCK = 20;
-    const COLORS = ['#00e5ff', '#ffd700', '#ff69b4', '#00ff88', '#b088ff', '#ff8844', '#ff4444'];
-    const SHAPES = [
-      [[1,1,1,1]], [[1,1],[1,1]], [[0,1,0],[1,1,1]],
-      [[1,0,0],[1,1,1]], [[0,0,1],[1,1,1]],
-      [[1,1,0],[0,1,1]], [[0,1,1],[1,1,0]]
-    ];
-    const board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
-    let current = null, currentX = 0, currentY = 0;
-    let lines = 0, earned = 0, paused = false, gameOver = false;
-    let dropCounter = 0, dropInterval = 500, lastTime = 0;
-
-    function newPiece() {
-      const idx = Math.floor(Math.random() * SHAPES.length);
-      current = { shape: SHAPES[idx], color: COLORS[idx] };
-      currentX = Math.floor((COLS - current.shape[0].length) / 2);
-      currentY = 0;
-      if (collides(currentX, currentY, current.shape)) { gameOver = true; endGame(); }
-    }
-    function collides(x, y, shape) {
-      for (let r = 0; r < shape.length; r++) {
-        for (let c = 0; c < shape[r].length; c++) {
-          if (shape[r][c]) {
-            const nx = x + c, ny = y + r;
-            if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
-            if (ny >= 0 && board[ny][nx]) return true;
-          }
-        }
-      }
-      return false;
-    }
-    function merge() {
-      for (let r = 0; r < current.shape.length; r++) {
-        for (let c = 0; c < current.shape[r].length; c++) {
-          if (current.shape[r][c]) {
-            const ny = currentY + r, nx = currentX + c;
-            if (ny >= 0) board[ny][nx] = current.color;
-          }
-        }
-      }
-    }
-    function rotate(shape) {
-      const rows = shape.length, cols = shape[0].length;
-      const result = Array.from({length: cols}, () => Array(rows).fill(0));
-      for (let r = 0; r < rows; r++)
-        for (let c = 0; c < cols; c++)
-          result[c][rows - 1 - r] = shape[r][c];
-      return result;
-    }
-    function clearLines() {
-      let cleared = 0;
-      for (let r = ROWS - 1; r >= 0; r--) {
-        if (board[r].every(cell => cell !== 0)) {
-          board.splice(r, 1);
-          board.unshift(Array(COLS).fill(0));
-          cleared++; r++;
-        }
-      }
-      if (cleared > 0) {
-        lines += cleared;
-        earned += cleared * 0.1;
-        earned = Math.round(earned * 10) / 10;
-        balance += cleared * 0.1;
-        balance = Math.round(balance * 10) / 10;
-        updateShopUI();
-        saveState();
-        const linesEl = document.getElementById('tetrisLines');
-        const earnedEl = document.getElementById('tetrisEarned');
-        if (linesEl) linesEl.textContent = lines;
-        if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
-      }
-    }
-    function draw() {
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = 'rgba(255, 215, 0, 0.1)';
-      ctx.lineWidth = 1;
-      for (let c = 0; c <= COLS; c++) {
-        ctx.beginPath(); ctx.moveTo(c * BLOCK, 0); ctx.lineTo(c * BLOCK, canvas.height); ctx.stroke();
-      }
-      for (let r = 0; r <= ROWS; r++) {
-        ctx.beginPath(); ctx.moveTo(0, r * BLOCK); ctx.lineTo(canvas.width, r * BLOCK); ctx.stroke();
-      }
-      for (let r = 0; r < ROWS; r++)
-        for (let c = 0; c < COLS; c++)
-          if (board[r][c]) drawBlock(c, r, board[r][c]);
-      if (current && !gameOver) {
-        for (let r = 0; r < current.shape.length; r++)
-          for (let c = 0; c < current.shape[r].length; c++)
-            if (current.shape[r][c]) drawBlock(currentX + c, currentY + r, current.color);
-      }
-      if (gameOver) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ffd700';
-        ctx.font = 'bold 20px Comic Neue, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
-        ctx.fillStyle = '#00ff88';
-        ctx.font = '14px Comic Neue, sans-serif';
-        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', canvas.width / 2, canvas.height / 2 + 15);
-      }
-    }
-    function drawBlock(x, y, color) {
-      ctx.fillStyle = color;
-      ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.fillRect(x * BLOCK + 2, y * BLOCK + 2, BLOCK - 4, 3);
-    }
-    function drop() {
-      if (!collides(currentX, currentY + 1, current.shape)) currentY++;
-      else { merge(); clearLines(); newPiece(); }
-      dropCounter = 0;
-    }
-    function update(time = 0) {
-      if (gameOver) { draw(); return; }
-      const delta = time - lastTime;
-      lastTime = time;
-      if (!paused) {
-        dropCounter += delta;
-        if (dropCounter > dropInterval) drop();
-        draw();
-      }
-      tetrisInterval = requestAnimationFrame(update);
-    }
-    function endGame() {
-      cancelAnimationFrame(tetrisInterval);
-      tetrisInterval = null;
-      draw();
-      // Показываем модалку с результатами и кнопкой рестарта
-      setTimeout(() => {
-        showModal('💥 GAME OVER 💥',
-          `<p>Линий собрано: <b style="color:#ffd700;">${lines}</b></p>
-           <p>Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
-           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Попробуй побить свой рекорд! 🚀</p>`,
-          false,
-          `<button class="restart-btn" onclick="restartTetris()">🔄 ИГРАТЬ СНОВА</button>
-           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
-        );
-      }, 400);
-    }
-    function handleKey(e) {
-      if (gameOver) return;
-      const key = e.key;
-      if (key === 'p' || key === 'P' || key === 'з' || key === 'З') { paused = !paused; return; }
-      if (paused) return;
-
-      if (key === 'ArrowLeft' || key === 'a' || key === 'A' || key === 'ф' || key === 'Ф') {
-        if (!collides(currentX - 1, currentY, current.shape)) currentX--;
-      }
-      else if (key === 'ArrowRight' || key === 'd' || key === 'D' || key === 'в' || key === 'В') {
-        if (!collides(currentX + 1, currentY, current.shape)) currentX++;
-      }
-      else if (key === 'ArrowDown' || key === 's' || key === 'S' || key === 'ы' || key === 'Ы') {
-        drop();
-      }
-      else if (key === 'ArrowUp' || key === 'w' || key === 'W' || key === 'ц' || key === 'Ц') {
-        const rotated = rotate(current.shape);
-        if (!collides(currentX, currentY, rotated)) current.shape = rotated;
-      }
-      else return;
-      e.preventDefault();
-      draw();
-    }
-    document.addEventListener('keydown', handleKey);
-    tetrisState = { handleKey };
-    newPiece();
-    lastTime = performance.now();
-    update();
-  }
-
-  function restartTetris() {
-    closeModal();
-    setTimeout(startTetris, 150);
   }
 
   // ========== SNAKE ==========
@@ -1675,84 +1415,121 @@
     setTimeout(startSnake, 150);
   }
 
-  // ========== SWAG CATCHER ==========
-  let swagCatcherInterval = null;
-  let swagCatcherState = null;
+  // ========== UFO SHOOTER ==========
+  let ufoInterval = null;
+  let ufoState = null;
 
-  function startSwagCatcher() {
+  function startUfoShooter() {
     const bodyHTML = `
       <div class="game-container">
-        <canvas id="swagCanvas" width="400" height="500"></canvas>
+        <canvas id="ufoCanvas" width="400" height="500"></canvas>
         <div class="game-info">
-          <div class="stat"><div class="stat-label">СВАГОВИКИ</div><div class="stat-value" id="swagCaught">0</div></div>
-          <div class="stat"><div class="stat-label">АЛМАЗЫ 💎</div><div class="stat-value" id="diamondsCaught">0</div></div>
-          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="swagEarned">0 🌸</div></div>
-          <div class="stat"><div class="stat-label">УРОВЕНЬ</div><div class="stat-value" id="swagLevel">1</div></div>
+          <div class="stat"><div class="stat-label">УНИЧТОЖЕНО</div><div class="stat-value" id="ufoKills">0</div></div>
+          <div class="stat"><div class="stat-label">БОССЫ 👾</div><div class="stat-value" id="ufoBossKills">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="ufoEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">ВОЛНА</div><div class="stat-value" id="ufoWave">1</div></div>
           <div class="game-controls">
             <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></div>
-            <div>или мышь</div>
+            <div>движение</div>
+            <div><kbd>SPACE</kbd> / <kbd>↑</kbd> / <kbd>W</kbd></div>
+            <div>стрельба</div>
             <div><kbd>P</kbd> пауза</div>
           </div>
         </div>
       </div>
-      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 🌸 = 0,1 сваговика | 💎 = 0,3 сваговика | 💣 = конец игры</p>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 🛸 = 0,1 🌸 | 👾 = 0,3 🌸 | 💥 = конец игры</p>
     `;
-    showModal('🧺 ЛОВЕЦ СВАГОВИКОВ 🧺', bodyHTML, true);
-    setTimeout(initSwagCatcher, 50);
+    showModal('🛸 СТРЕЛЯЛКА ПО НЛО 🛸', bodyHTML, true);
+    setTimeout(initUfoShooter, 50);
   }
 
-  function initSwagCatcher() {
-    const canvas = document.getElementById('swagCanvas');
+  function initUfoShooter() {
+    const canvas = document.getElementById('ufoCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const W = canvas.width;
     const H = canvas.height;
 
-    const basket = {
-      x: W / 2 - 35,
-      y: H - 60,
-      width: 70,
-      height: 40,
-      speed: 7
+    // Корабль игрока
+    const ship = {
+      x: W / 2,
+      y: H - 50,
+      width: 40,
+      height: 30,
+      speed: 6
     };
 
-    let items = [];
-    let caught = 0;
-    let diamondsCaught = 0;
+    let bullets = [];
+    let enemies = [];
+    let particles = [];
+    let kills = 0;
+    let bossKills = 0;
     let earned = 0;
-    let level = 1;
+    let wave = 1;
     let spawnTimer = 0;
-    let spawnInterval = 70;
-    let fallSpeed = 1.8;
+    let spawnInterval = 80;
+    let enemySpeed = 1.5;
+    let shootCooldown = 0;
     let paused = false;
     let gameOver = false;
     let frameCount = 0;
     let keysPressed = {};
+    let bgStars = [];
 
-    const ITEM_TYPES = [
-      { emoji: '🌸', reward: 0.1, chance: 0.50 },
-      { emoji: '💎', reward: 0.3, chance: 0.10 },
-      { emoji: '💣', reward: 0, chance: 0.40, isBomb: true }
-    ];
-
-    function spawnItem() {
-      const rand = Math.random();
-      let cumulative = 0;
-      let type = ITEM_TYPES[0];
-      for (const t of ITEM_TYPES) {
-        cumulative += t.chance;
-        if (rand <= cumulative) { type = t; break; }
-      }
-      items.push({
-        x: Math.random() * (W - 40) + 20,
-        y: -30,
-        emoji: type.emoji,
-        reward: type.reward,
-        isBomb: type.isBomb || false,
-        size: 32,
-        rotation: 0,
-        rotationSpeed: (Math.random() - 0.5) * 0.1
+    // Создаём звёзды фона
+    for (let i = 0; i < 50; i++) {
+      bgStars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: Math.random() * 1.5 + 0.5,
+        speed: Math.random() * 0.5 + 0.2
       });
+    }
+
+    function spawnEnemy() {
+      // Шанс босса растёт с волной
+      const bossChance = Math.min(0.25, 0.05 + wave * 0.02);
+      const isBoss = Math.random() < bossChance;
+
+      enemies.push({
+        x: Math.random() * (W - 60) + 30,
+        y: -40,
+        size: isBoss ? 40 : 28,
+        speed: isBoss ? enemySpeed * 0.7 : enemySpeed + Math.random() * 0.5,
+        isBoss: isBoss,
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: 0.03 + Math.random() * 0.02,
+        wobbleAmount: isBoss ? 1.5 : 0.8,
+        hp: isBoss ? 2 : 1
+      });
+    }
+
+    function shoot() {
+      if (shootCooldown > 0) return;
+      bullets.push({
+        x: ship.x,
+        y: ship.y - ship.height / 2,
+        speed: 8,
+        size: 4
+      });
+      shootCooldown = 12;
+    }
+
+    function createExplosion(x, y, color) {
+      for (let i = 0; i < 12; i++) {
+        const angle = (Math.PI * 2 * i) / 12;
+        const speed = 2 + Math.random() * 2;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 30,
+          maxLife: 30,
+          color: color,
+          size: 2 + Math.random() * 2
+        });
+      }
     }
 
     function update() {
@@ -1760,77 +1537,140 @@
 
       frameCount++;
 
+      // Движение корабля
       if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
-        basket.x -= basket.speed;
+        ship.x -= ship.speed;
       }
       if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) {
-        basket.x += basket.speed;
+        ship.x += ship.speed;
       }
 
-      if (basket.x < 0) basket.x = 0;
-      if (basket.x + basket.width > W) basket.x = W - basket.width;
+      // Стрельба
+      if (keysPressed[' '] || keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W'] || keysPressed['ц'] || keysPressed['Ц']) {
+        shoot();
+      }
 
+      if (shootCooldown > 0) shootCooldown--;
+
+      // Ограничение корабля
+      if (ship.x < ship.width / 2) ship.x = ship.width / 2;
+      if (ship.x > W - ship.width / 2) ship.x = W - ship.width / 2;
+
+      // Спавн врагов
       spawnTimer++;
       if (spawnTimer >= spawnInterval) {
-        spawnItem();
+        spawnEnemy();
         spawnTimer = 0;
       }
 
-      for (let i = items.length - 1; i >= 0; i--) {
-        const item = items[i];
-        item.y += fallSpeed;
-        item.rotation += item.rotationSpeed;
+      // Обновление звёзд фона
+      bgStars.forEach(s => {
+        s.y += s.speed;
+        if (s.y > H) {
+          s.y = 0;
+          s.x = Math.random() * W;
+        }
+      });
 
-        const itemCenterX = item.x;
-        const itemCenterY = item.y;
-        const basketTop = basket.y;
+      // Обновление пуль
+      for (let i = bullets.length - 1; i >= 0; i--) {
+        bullets[i].y -= bullets[i].speed;
+        if (bullets[i].y < -10) {
+          bullets.splice(i, 1);
+        }
+      }
 
-        if (itemCenterY + item.size / 2 >= basketTop &&
-            itemCenterY - item.size / 2 <= basketTop + basket.height &&
-            itemCenterX >= basket.x &&
-            itemCenterX <= basket.x + basket.width) {
+      // Обновление врагов
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        const e = enemies[i];
+        e.wobble += e.wobbleSpeed;
+        e.x += Math.sin(e.wobble) * e.wobbleAmount;
+        e.y += e.speed;
 
-          if (item.isBomb) {
-            gameOver = true;
-            endGame();
-            return;
-          } else {
-            if (item.emoji === '💎') {
-              diamondsCaught++;
-            } else {
-              caught++;
-            }
-            earned += item.reward;
-            earned = Math.round(earned * 10) / 10;
-            balance += item.reward;
-            balance = Math.round(balance * 10) / 10;
-            updateShopUI();
-            saveState();
-
-            const caughtEl = document.getElementById('swagCaught');
-            const diamondsEl = document.getElementById('diamondsCaught');
-            const earnedEl = document.getElementById('swagEarned');
-            if (caughtEl) caughtEl.textContent = caught;
-            if (diamondsEl) diamondsEl.textContent = diamondsCaught;
-            if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
-
-            items.splice(i, 1);
-
-            const totalCaught = caught + diamondsCaught;
-            const newLevel = Math.floor(totalCaught / 10) + 1;
-            if (newLevel > level) {
-              level = newLevel;
-              fallSpeed = 1.8 + (level - 1) * 0.4;
-              spawnInterval = Math.max(25, 70 - (level - 1) * 5);
-              const levelEl = document.getElementById('swagLevel');
-              if (levelEl) levelEl.textContent = level;
-            }
-            continue;
-          }
+        // Враг достиг корабля — конец игры
+        if (e.y + e.size / 2 >= ship.y - ship.height / 2 &&
+            Math.abs(e.x - ship.x) < (e.size / 2 + ship.width / 2)) {
+          createExplosion(ship.x, ship.y, '#ff6600');
+          gameOver = true;
+          endGame();
+          return;
         }
 
-        if (item.y > H + 40) {
-          items.splice(i, 1);
+        // Враг улетел за экран
+        if (e.y > H + 50) {
+          enemies.splice(i, 1);
+        }
+      }
+
+      // Коллизии пуль с врагами
+      for (let i = bullets.length - 1; i >= 0; i--) {
+        const b = bullets[i];
+        let hit = false;
+        for (let j = enemies.length - 1; j >= 0; j--) {
+          const e = enemies[j];
+          const dx = b.x - e.x;
+          const dy = b.y - e.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < e.size / 2 + b.size) {
+            e.hp--;
+            hit = true;
+            if (e.hp <= 0) {
+              // Уничтожен
+              createExplosion(e.x, e.y, e.isBoss ? '#ff00ff' : '#00e5ff');
+              if (e.isBoss) {
+                bossKills++;
+                earned += 0.3;
+              } else {
+                kills++;
+                earned += 0.1;
+              }
+              earned = Math.round(earned * 10) / 10;
+              balance += e.isBoss ? 0.3 : 0.1;
+              balance = Math.round(balance * 10) / 10;
+              updateShopUI();
+              saveState();
+              enemies.splice(j, 1);
+
+              // Обновление UI
+              const killsEl = document.getElementById('ufoKills');
+              const bossEl = document.getElementById('ufoBossKills');
+              const earnedEl = document.getElementById('ufoEarned');
+              if (killsEl) killsEl.textContent = kills;
+              if (bossEl) bossEl.textContent = bossKills;
+              if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+
+              // Повышение волны
+              const totalKills = kills + bossKills;
+              const newWave = Math.floor(totalKills / 8) + 1;
+              if (newWave > wave) {
+                wave = newWave;
+                enemySpeed = 1.5 + (wave - 1) * 0.3;
+                spawnInterval = Math.max(25, 80 - (wave - 1) * 6);
+                const waveEl = document.getElementById('ufoWave');
+                if (waveEl) waveEl.textContent = wave;
+              }
+            } else {
+              // Просто попали — мигание
+              createExplosion(b.x, b.y, '#ffd700');
+            }
+            break;
+          }
+        }
+        if (hit) {
+          bullets.splice(i, 1);
+        }
+      }
+
+      // Обновление частиц
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.95;
+        p.vy *= 0.95;
+        p.life--;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
         }
       }
 
@@ -1838,70 +1678,124 @@
     }
 
     function draw() {
+      // Фон — глубокий космос
       const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
-      bgGradient.addColorStop(0, '#0a0520');
+      bgGradient.addColorStop(0, '#05020f');
+      bgGradient.addColorStop(0.5, '#0a0520');
       bgGradient.addColorStop(1, '#1a0a3a');
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-      for (let i = 0; i < 30; i++) {
-        const sx = (i * 37 + frameCount * 0.1) % W;
-        const sy = (i * 53) % H;
-        ctx.fillRect(sx, sy, 1, 1);
-      }
+      // Звёзды фона
+      bgStars.forEach(s => {
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + s.size * 0.3})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
 
-      items.forEach(item => {
+      // Частицы
+      particles.forEach(p => {
+        const alpha = p.life / p.maxLife;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // Пули
+      bullets.forEach(b => {
+        // Светящийся след
+        const grad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + 15);
+        grad.addColorStop(0, '#ffd700');
+        grad.addColorStop(1, 'rgba(255, 215, 0, 0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(b.x - 1.5, b.y, 3, 15);
+        // Сама пуля
+        ctx.fillStyle = '#fff8dc';
+        ctx.shadowColor = '#ffd700';
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // Враги
+      enemies.forEach(e => {
         ctx.save();
-        ctx.translate(item.x, item.y);
-        ctx.rotate(item.rotation);
-        ctx.font = item.size + 'px serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        if (item.emoji === '💎') {
+        ctx.translate(e.x, e.y);
+        if (e.isBoss) {
+          // Босс — 👾
+          ctx.font = e.size + 'px serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.shadowColor = '#ff00ff';
+          ctx.shadowBlur = 20;
+          ctx.fillText('👾', 0, 0);
+        } else {
+          // Обычное НЛО — 🛸
+          ctx.font = e.size + 'px serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
           ctx.shadowColor = '#00e5ff';
           ctx.shadowBlur = 15;
-        } else if (item.isBomb) {
-          ctx.shadowColor = '#ff0000';
-          ctx.shadowBlur = 10;
-        } else {
-          ctx.shadowColor = '#ff69b4';
-          ctx.shadowBlur = 8;
+          ctx.fillText('🛸', 0, 0);
         }
-        ctx.fillText(item.emoji, 0, 0);
         ctx.restore();
       });
 
+      // Корабль игрока 🚀
       ctx.save();
-      ctx.font = '40px serif';
+      ctx.translate(ship.x, ship.y);
+      ctx.font = '36px serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.shadowColor = '#ffd700';
-      ctx.shadowBlur = 12;
-      ctx.fillText('🧺', basket.x + basket.width / 2, basket.y + basket.height / 2);
+      ctx.shadowBlur = 15;
+      ctx.fillText('🚀', 0, 0);
       ctx.restore();
 
-      ctx.fillStyle = 'rgba(255, 215, 0, 0.1)';
-      ctx.beginPath();
-      ctx.ellipse(basket.x + basket.width / 2, basket.y + basket.height + 5, basket.width / 2, 6, 0, 0, Math.PI * 2);
-      ctx.fill();
+      // Огонь из двигателя
+      if (!gameOver) {
+        const flicker = Math.sin(frameCount * 0.5) * 3;
+        ctx.fillStyle = '#ff6600';
+        ctx.shadowColor = '#ff6600';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.moveTo(ship.x - 5, ship.y + 12);
+        ctx.lineTo(ship.x, ship.y + 22 + flicker);
+        ctx.lineTo(ship.x + 5, ship.y + 12);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#ffcc00';
+        ctx.beginPath();
+        ctx.moveTo(ship.x - 3, ship.y + 12);
+        ctx.lineTo(ship.x, ship.y + 18 + flicker);
+        ctx.lineTo(ship.x + 3, ship.y + 12);
+        ctx.closePath();
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
 
+      // Game Over
       if (gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, W, H);
         ctx.fillStyle = '#ff4444';
         ctx.font = 'bold 32px Comic Neue, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('💥 БАБАХ! 💣', W / 2, H / 2 - 40);
+        ctx.fillText('💥 ПОРАЖЕНИЕ 💥', W / 2, H / 2 - 40);
         ctx.fillStyle = '#ffd700';
         ctx.font = 'bold 18px Comic Neue, sans-serif';
-        ctx.fillText('Вы поймали бомбу!', W / 2, H / 2 - 5);
+        ctx.fillText('НЛО протаранило корабль!', W / 2, H / 2 - 5);
         ctx.fillStyle = '#00ff88';
         ctx.font = '15px Comic Neue, sans-serif';
-        ctx.fillText('🌸 Поймано: ' + caught + ' | 💎 Алмазов: ' + diamondsCaught, W / 2, H / 2 + 25);
+        ctx.fillText('🛸 Уничтожено: ' + kills + ' | 👾 Боссов: ' + bossKills, W / 2, H / 2 + 25);
         ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 50);
       }
 
+      // Пауза
       if (paused && !gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fillRect(0, 0, W, H);
@@ -1913,18 +1807,18 @@
     }
 
     function endGame() {
-      cancelAnimationFrame(swagCatcherInterval);
-      swagCatcherInterval = null;
+      cancelAnimationFrame(ufoInterval);
+      ufoInterval = null;
       draw();
       setTimeout(() => {
-        showModal('💥 БАБАХ! 💣',
-          `<p>🌸 Поймано сваговиков: <b style="color:#ffd700;">${caught}</b></p>
-           <p>💎 Собрано алмазов: <b style="color:#00e5ff;">${diamondsCaught}</b></p>
-           <p>📊 Достигнут уровень: <b style="color:#ff69b4;">${level}</b></p>
+        showModal('💥 ПОРАЖЕНИЕ 💥',
+          `<p>🛸 Уничтожено НЛО: <b style="color:#ffd700;">${kills}</b></p>
+           <p>👾 Побеждено боссов: <b style="color:#ff69b4;">${bossKills}</b></p>
+           <p>📊 Достигнута волна: <b style="color:#00e5ff;">${wave}</b></p>
            <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
-           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">В следующий раз уворачивайся лучше! 🛸</p>`,
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Земля ждёт своего героя! 🚀</p>`,
           false,
-          `<button class="restart-btn" onclick="restartSwagCatcher()">🔄 ИГРАТЬ СНОВА</button>
+          `<button class="restart-btn" onclick="restartUfoShooter()">🔄 ИГРАТЬ СНОВА</button>
            <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
         );
       }, 400);
@@ -1936,7 +1830,8 @@
         if (!gameOver) { paused = !paused; draw(); }
         return;
       }
-      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', ' ', 'a', 'A', 'd', 'D', 'w', 'W',
+           'ф', 'Ф', 'в', 'В', 'ц', 'Ц'].includes(e.key)) {
         e.preventDefault();
       }
     }
@@ -1945,32 +1840,21 @@
       keysPressed[e.key] = false;
     }
 
-    function handleMouse(e) {
-      if (gameOver || paused) return;
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const scaleX = canvas.width / rect.width;
-      basket.x = mouseX * scaleX - basket.width / 2;
-      if (basket.x < 0) basket.x = 0;
-      if (basket.x + basket.width > W) basket.x = W - basket.width;
-    }
-
     document.addEventListener('keydown', handleKey);
     document.addEventListener('keyup', handleKeyUp);
-    canvas.addEventListener('mousemove', handleMouse);
 
-    swagCatcherState = { handleKey, handleKeyUp, handleMouse, canvas };
+    ufoState = { handleKey, handleKeyUp };
 
     draw();
-    swagCatcherInterval = requestAnimationFrame(function loop() {
+    ufoInterval = requestAnimationFrame(function loop() {
       update();
-      if (!gameOver) swagCatcherInterval = requestAnimationFrame(loop);
+      if (!gameOver) ufoInterval = requestAnimationFrame(loop);
     });
   }
 
-  function restartSwagCatcher() {
+  function restartUfoShooter() {
     closeModal();
-    setTimeout(startSwagCatcher, 150);
+    setTimeout(startUfoShooter, 150);
   }
 
   document.querySelector('.header h1').addEventListener('click', () => {
