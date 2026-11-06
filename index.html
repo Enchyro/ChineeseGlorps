@@ -364,6 +364,47 @@
     content: '✨'; position: absolute; top: 8px; right: 8px;
     font-size: 18px; animation: twinkle 2.5s ease-in-out infinite; z-index: 2; opacity: 0.8;
   }
+  /* Специальная VIP карточка */
+  .collection-item.vip-card-collect {
+    border-color: rgba(255, 215, 0, 0.8);
+    background: linear-gradient(135deg, rgba(80, 50, 10, 0.6), rgba(120, 80, 20, 0.5));
+    box-shadow: 0 4px 30px rgba(255, 215, 0, 0.3);
+  }
+  .collection-item.vip-card-collect::before {
+    background: linear-gradient(135deg,
+      rgba(255, 215, 0, 0.25),
+      rgba(255, 237, 78, 0.15) 25%,
+      rgba(255, 215, 0, 0.25) 50%,
+      rgba(255, 248, 220, 0.18) 75%,
+      rgba(255, 215, 0, 0.25));
+    background-size: 300% 300%;
+    animation: gold-shimmer 4s linear infinite;
+    opacity: 0.9;
+  }
+  .collection-item.vip-card-collect .item-emoji {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+    font-size: 90px;
+  }
+  .collection-item.vip-card-collect .item-name {
+    color: #fff8dc;
+    font-size: 18px;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.8), 0 0 4px #000;
+    letter-spacing: 1px;
+  }
+  .collection-item.vip-card-collect::after {
+    content: '👑 VIP';
+    position: absolute; top: 8px; right: 8px;
+    font-size: 12px; font-weight: 900;
+    background: linear-gradient(90deg, #ffd700, #fff8dc, #ffd700);
+    background-size: 200% 200%;
+    color: #3a1f00;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    animation: gold-shimmer 3s linear infinite;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  }
   .collection-empty { text-align: center; padding: 60px 20px; margin: 20px;
     background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
     border: 3px dashed #b088ff; border-radius: 16px;
@@ -442,45 +483,22 @@
   }
   .play-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
 
-  /* Плашка "на ремонте" */
   .repair-banner {
-    position: absolute;
-    top: 14px;
-    right: -35px;
+    position: absolute; top: 14px; right: -35px;
     background: repeating-linear-gradient(45deg, #ffd700, #ffd700 8px, #222 8px, #222 16px);
-    color: #ff0000;
-    font-size: 11px;
-    font-weight: 900;
-    padding: 4px 40px;
-    transform: rotate(35deg);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
-    border: 1px solid #ff0000;
-    z-index: 2;
+    color: #ff0000; font-size: 11px; font-weight: 900; padding: 4px 40px;
+    transform: rotate(35deg); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px; border: 1px solid #ff0000; z-index: 2;
     -webkit-text-stroke: 1px #fff;
   }
-  .game-card.repair {
-    border-color: #888;
-    opacity: 0.85;
-    background: rgba(40, 30, 50, 0.6);
-  }
-  .game-card.repair .game-emoji {
-    filter: grayscale(0.5);
-  }
-  .game-card.repair h4 {
-    color: #b8a8d0;
-  }
-  .game-card.repair .game-desc {
-    color: #888;
-    font-style: italic;
-  }
-  .game-card.repair .game-reward {
-    color: #888;
-    text-shadow: none;
-  }
+  .game-card.repair { border-color: #888; opacity: 0.85; background: rgba(40, 30, 50, 0.6); }
+  .game-card.repair .game-emoji { filter: grayscale(0.5); }
+  .game-card.repair h4 { color: #b8a8d0; }
+  .game-card.repair .game-desc { color: #888; font-style: italic; }
+  .game-card.repair .game-reward { color: #888; text-shadow: none; }
 
   .game-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-  #tetrisCanvas, #snakeCanvas, #ufoCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  #snakeCanvas, #asteroidCanvas, #arkanoidCanvas, #flappyCanvas, #whackCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
   .game-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
   .game-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
   .game-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -697,11 +715,35 @@
     </div>
 
     <div class="game-card">
+      <span class="game-emoji">☄️</span>
+      <h4>Уклонись от астероидов</h4>
+      <p class="game-desc">Пилотируй НЛО сквозь астероидный дождь! Каждое успешное уклонение приносит сваговики. Долго не выдержишь...</p>
+      <p class="game-reward">💰 0,1 🌸 за каждое уклонение</p>
+      <button class="play-btn" onclick="startAsteroidDodge()">▶ ИГРАТЬ</button>
+    </div>
+
+    <div class="game-card">
+      <span class="game-emoji">🧱</span>
+      <h4>Арканоид</h4>
+      <p class="game-desc">Разбивай космические блоки мячом! Не дай мячу упасть — используй ракетку. Классика жанра с инопланетным шармом.</p>
+      <p class="game-reward">💰 0,1 🌸 за каждый блок</p>
+      <button class="play-btn" onclick="startArkanoid()">▶ ИГРАТЬ</button>
+    </div>
+
+    <div class="game-card">
       <span class="game-emoji">🛸</span>
-      <h4>Стрелялка по НЛО</h4>
-      <p class="game-desc">Защити Землю от нашествия НЛО! Стреляй по тарелкам и не дай им добраться до твоего корабля. Остерегайся больших боссов 👾!</p>
-      <p class="game-reward">💰 0,1 🌸 за НЛО | 👾 0,3 🌸 за босса</p>
-      <button class="play-btn" onclick="startUfoShooter()">▶ ИГРАТЬ</button>
+      <h4>Flappy НЛО</h4>
+      <p class="game-desc">Проведи НЛО через космические порталы! Один клик или взмах — один рывок вверх. Не задевай стены, не падай!</p>
+      <p class="game-reward">💰 0,2 🌸 за каждый портал</p>
+      <button class="play-btn" onclick="startFlappy()">▶ ИГРАТЬ</button>
+    </div>
+
+    <div class="game-card">
+      <span class="game-emoji">👽</span>
+      <h4>Поймай пришельца</h4>
+      <p class="game-desc">Пришельцы выглядывают из нор! Кликай по ним быстро, пока они не спрятались. Осторожно: иногда появляются бомбы!</p>
+      <p class="game-reward">💰 0,1 🌸 за пришельца | 💣 = -жизнь</p>
+      <button class="play-btn" onclick="startWhackAMole()">▶ ИГРАТЬ</button>
     </div>
 
     <div class="game-card repair">
@@ -889,12 +931,38 @@
       document.removeEventListener('keydown', snakeState.handleKey);
       snakeState = null;
     }
-    if (ufoInterval) { cancelAnimationFrame(ufoInterval); ufoInterval = null; }
-    if (ufoState) {
-      if (ufoState.handleKey) document.removeEventListener('keydown', ufoState.handleKey);
-      if (ufoState.handleKeyUp) document.removeEventListener('keyup', ufoState.handleKeyUp);
-      ufoState = null;
+    if (asteroidInterval) { cancelAnimationFrame(asteroidInterval); asteroidInterval = null; }
+    if (asteroidState) {
+      if (asteroidState.handleKey) document.removeEventListener('keydown', asteroidState.handleKey);
+      if (asteroidState.handleKeyUp) document.removeEventListener('keyup', asteroidState.handleKeyUp);
+      if (asteroidState.handleMouse && asteroidState.canvas) {
+        asteroidState.canvas.removeEventListener('mousemove', asteroidState.handleMouse);
+      }
+      asteroidState = null;
     }
+    if (arkanoidInterval) { cancelAnimationFrame(arkanoidInterval); arkanoidInterval = null; }
+    if (arkanoidState) {
+      if (arkanoidState.handleKey) document.removeEventListener('keydown', arkanoidState.handleKey);
+      if (arkanoidState.handleKeyUp) document.removeEventListener('keyup', arkanoidState.handleKeyUp);
+      if (arkanoidState.handleMouse && arkanoidState.canvas) {
+        arkanoidState.canvas.removeEventListener('mousemove', arkanoidState.handleMouse);
+      }
+      arkanoidState = null;
+    }
+    if (flappyInterval) { cancelAnimationFrame(flappyInterval); flappyInterval = null; }
+    if (flappyState) {
+      if (flappyState.handleKey) document.removeEventListener('keydown', flappyState.handleKey);
+      if (flappyState.handleClick && flappyState.canvas) {
+        flappyState.canvas.removeEventListener('click', flappyState.handleClick);
+      }
+      flappyState = null;
+    }
+    if (whackInterval) { cancelAnimationFrame(whackInterval); whackInterval = null; }
+    if (whackTimer) { clearInterval(whackTimer); whackTimer = null; }
+    if (whackState && whackState.handleClick && whackState.canvas) {
+      whackState.canvas.removeEventListener('click', whackState.handleClick);
+    }
+    whackState = null;
     modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.remove('active');
   }
@@ -1066,7 +1134,7 @@
         buttonsHTML = '<button onclick="closeModal()">ПОНЯТНО</button>';
       } else {
         if (total >= 200) {
-          bodyHTML += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 При оплате вы получите VIP-статус!</p>';
+          bodyHTML += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 При оплате вы получите VIP-статус и золотую VIP-карту в коллекцию!</p>';
         }
         buttonsHTML = `<button onclick="closeModal()">ОТМЕНА</button><button class="pay-btn" onclick="checkout()">💳 ОПЛАТИТЬ ${total} 🌸</button>`;
       }
@@ -1099,14 +1167,34 @@
       });
     });
 
+    // Проверяем VIP-статус и добавляем золотую карту
+    let vipGranted = false;
+    if (total >= 200) {
+      const hasVipCard = collection.some(item => item.isVipCard === true);
+      if (!hasVipCard) {
+        collection.push({
+          name: 'Золотая VIP-карта',
+          price: 0,
+          emoji: '👑',
+          isLegendary: true,
+          isVipCard: true,
+          date: dateStr
+        });
+        vipGranted = true;
+      }
+    }
+
     cart = [];
     updateShopUI();
     saveState();
 
     let successMsg = `<p>Оплата прошла успешно! 🎉</p>
       <p>Все <b>${itemsCount}</b> предметов теперь в вашей <b style="color:#ffd700;">Коллекции</b> 🏛️</p>`;
-    if (total >= 200) {
-      successMsg += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 Поздравляем! Вы заслужили VIP-статус!</p>';
+    if (vipGranted) {
+      successMsg += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px; font-size: 17px;">👑✨ ПОЗДРАВЛЯЕМ! Вы получили <b>ЗОЛОТУЮ VIP-КАРТУ</b>! ✨👑</p>';
+      successMsg += '<p style="color: #ffe4b5; font-size: 13px; margin-top: 6px;">Теперь вы — почётный VIP-клиент партии. Карта заняла особое место в вашей коллекции!</p>';
+    } else if (total >= 200) {
+      successMsg += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 VIP-статус подтверждён!</p>';
     }
     const buttonsHTML = `<button onclick="closeModal()">УРА!</button><button onclick="closeModal(); navigateTo('collection');">🏛️ В КОЛЛЕКЦИЮ</button>`;
     showModal('✨ ПОКУПКА СОВЕРШЕНА! ✨', successMsg, false, buttonsHTML);
@@ -1132,17 +1220,22 @@
     let totalSpent = 0;
     collection.forEach(item => totalSpent += item.price);
     totalSpent = Math.round(totalSpent * 10) / 10;
-    statsEl.innerHTML = `🏛️ В вашей коллекции: <strong>${collection.length}</strong> предметов | 💰 Потрачено: <strong>${totalSpent}</strong> 🌸`;
+    const hasVip = collection.some(item => item.isVipCard === true);
+    const vipLabel = hasVip ? ' | 👑 <strong style="color:#ffd700;">VIP-СТАТУС</strong>' : '';
+    statsEl.innerHTML = `🏛️ В вашей коллекции: <strong>${collection.length}</strong> предметов | 💰 Потрачено: <strong>${totalSpent}</strong> 🌸${vipLabel}`;
 
     let gridHTML = '<div class="collection-grid">';
     const itemsToShow = [...collection].reverse();
     itemsToShow.forEach(item => {
-      const legendaryClass = item.isLegendary ? ' legendary-collect' : '';
+      let extraClass = '';
+      if (item.isVipCard) extraClass = ' vip-card-collect';
+      else if (item.isLegendary) extraClass = ' legendary-collect';
+      const priceLabel = item.price === 0 ? '🎁 НАГРАДА' : (item.price + ' 🌸');
       gridHTML += `
-        <div class="collection-item${legendaryClass}">
+        <div class="collection-item${extraClass}">
           <div class="item-emoji">${item.emoji}</div>
           <div class="item-name">${item.name}</div>
-          <div class="item-price">${item.price} 🌸</div>
+          <div class="item-price">${priceLabel}</div>
           <div class="pedestal"></div>
           <div class="item-date">Приобретено: ${item.date}</div>
         </div>
@@ -1415,119 +1508,93 @@
     setTimeout(startSnake, 150);
   }
 
-  // ========== UFO SHOOTER ==========
-  let ufoInterval = null;
-  let ufoState = null;
+  // ========== ASTEROID DODGE ==========
+  let asteroidInterval = null;
+  let asteroidState = null;
 
-  function startUfoShooter() {
+  function startAsteroidDodge() {
     const bodyHTML = `
       <div class="game-container">
-        <canvas id="ufoCanvas" width="400" height="500"></canvas>
+        <canvas id="asteroidCanvas" width="400" height="500"></canvas>
         <div class="game-info">
-          <div class="stat"><div class="stat-label">УНИЧТОЖЕНО</div><div class="stat-value" id="ufoKills">0</div></div>
-          <div class="stat"><div class="stat-label">БОССЫ 👾</div><div class="stat-value" id="ufoBossKills">0</div></div>
-          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="ufoEarned">0 🌸</div></div>
-          <div class="stat"><div class="stat-label">ВОЛНА</div><div class="stat-value" id="ufoWave">1</div></div>
+          <div class="stat"><div class="stat-label">УКЛОНЕНИЙ</div><div class="stat-value" id="dodges">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="asteroidEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">СКОРОСТЬ</div><div class="stat-value" id="asteroidSpeed">1x</div></div>
           <div class="game-controls">
             <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></div>
-            <div>движение</div>
-            <div><kbd>SPACE</kbd> / <kbd>↑</kbd> / <kbd>W</kbd></div>
-            <div>стрельба</div>
+            <div>или мышь</div>
             <div><kbd>P</kbd> пауза</div>
           </div>
         </div>
       </div>
-      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 🛸 = 0,1 🌸 | 👾 = 0,3 🌸 | 💥 = конец игры</p>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждый увернувшийся астероид</p>
     `;
-    showModal('🛸 СТРЕЛЯЛКА ПО НЛО 🛸', bodyHTML, true);
-    setTimeout(initUfoShooter, 50);
+    showModal('☄️ УКЛОНИСЬ ОТ АСТЕРОИДОВ ☄️', bodyHTML, true);
+    setTimeout(initAsteroidDodge, 50);
   }
 
-  function initUfoShooter() {
-    const canvas = document.getElementById('ufoCanvas');
+  function initAsteroidDodge() {
+    const canvas = document.getElementById('asteroidCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const W = canvas.width;
     const H = canvas.height;
 
-    // Корабль игрока
     const ship = {
       x: W / 2,
-      y: H - 50,
+      y: H - 60,
       width: 40,
       height: 30,
-      speed: 6
+      speed: 7
     };
 
-    let bullets = [];
-    let enemies = [];
+    let asteroids = [];
     let particles = [];
-    let kills = 0;
-    let bossKills = 0;
+    let dodges = 0;
     let earned = 0;
-    let wave = 1;
+    let speedMultiplier = 1;
     let spawnTimer = 0;
-    let spawnInterval = 80;
-    let enemySpeed = 1.5;
-    let shootCooldown = 0;
+    let spawnInterval = 50;
+    let baseSpeed = 3.5; // было 2.5, теперь быстрее
     let paused = false;
     let gameOver = false;
     let frameCount = 0;
     let keysPressed = {};
     let bgStars = [];
 
-    // Создаём звёзды фона
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 40; i++) {
       bgStars.push({
         x: Math.random() * W,
         y: Math.random() * H,
         size: Math.random() * 1.5 + 0.5,
-        speed: Math.random() * 0.5 + 0.2
+        speed: Math.random() * 0.8 + 0.3
       });
     }
 
-    function spawnEnemy() {
-      // Шанс босса растёт с волной
-      const bossChance = Math.min(0.25, 0.05 + wave * 0.02);
-      const isBoss = Math.random() < bossChance;
-
-      enemies.push({
-        x: Math.random() * (W - 60) + 30,
-        y: -40,
-        size: isBoss ? 40 : 28,
-        speed: isBoss ? enemySpeed * 0.7 : enemySpeed + Math.random() * 0.5,
-        isBoss: isBoss,
-        wobble: Math.random() * Math.PI * 2,
-        wobbleSpeed: 0.03 + Math.random() * 0.02,
-        wobbleAmount: isBoss ? 1.5 : 0.8,
-        hp: isBoss ? 2 : 1
+    function spawnAsteroid() {
+      const size = 15 + Math.random() * 20;
+      asteroids.push({
+        x: Math.random() * (W - size * 2) + size,
+        y: -size,
+        size: size,
+        speed: baseSpeed * speedMultiplier + Math.random() * 1,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.05,
+        passed: false
       });
-    }
-
-    function shoot() {
-      if (shootCooldown > 0) return;
-      bullets.push({
-        x: ship.x,
-        y: ship.y - ship.height / 2,
-        speed: 8,
-        size: 4
-      });
-      shootCooldown = 12;
     }
 
     function createExplosion(x, y, color) {
-      for (let i = 0; i < 12; i++) {
-        const angle = (Math.PI * 2 * i) / 12;
-        const speed = 2 + Math.random() * 2;
+      for (let i = 0; i < 15; i++) {
+        const angle = (Math.PI * 2 * i) / 15;
+        const speed = 2 + Math.random() * 3;
         particles.push({
-          x: x,
-          y: y,
+          x: x, y: y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          life: 30,
-          maxLife: 30,
+          life: 30, maxLife: 30,
           color: color,
-          size: 2 + Math.random() * 2
+          size: 2 + Math.random() * 3
         });
       }
     }
@@ -1537,7 +1604,6 @@
 
       frameCount++;
 
-      // Движение корабля
       if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
         ship.x -= ship.speed;
       }
@@ -1545,123 +1611,63 @@
         ship.x += ship.speed;
       }
 
-      // Стрельба
-      if (keysPressed[' '] || keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W'] || keysPressed['ц'] || keysPressed['Ц']) {
-        shoot();
-      }
-
-      if (shootCooldown > 0) shootCooldown--;
-
-      // Ограничение корабля
       if (ship.x < ship.width / 2) ship.x = ship.width / 2;
       if (ship.x > W - ship.width / 2) ship.x = W - ship.width / 2;
 
-      // Спавн врагов
+      bgStars.forEach(s => {
+        s.y += s.speed;
+        if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
+      });
+
       spawnTimer++;
       if (spawnTimer >= spawnInterval) {
-        spawnEnemy();
+        spawnAsteroid();
         spawnTimer = 0;
       }
 
-      // Обновление звёзд фона
-      bgStars.forEach(s => {
-        s.y += s.speed;
-        if (s.y > H) {
-          s.y = 0;
-          s.x = Math.random() * W;
-        }
-      });
+      for (let i = asteroids.length - 1; i >= 0; i--) {
+        const a = asteroids[i];
+        a.y += a.speed;
+        a.rotation += a.rotationSpeed;
 
-      // Обновление пуль
-      for (let i = bullets.length - 1; i >= 0; i--) {
-        bullets[i].y -= bullets[i].speed;
-        if (bullets[i].y < -10) {
-          bullets.splice(i, 1);
-        }
-      }
-
-      // Обновление врагов
-      for (let i = enemies.length - 1; i >= 0; i--) {
-        const e = enemies[i];
-        e.wobble += e.wobbleSpeed;
-        e.x += Math.sin(e.wobble) * e.wobbleAmount;
-        e.y += e.speed;
-
-        // Враг достиг корабля — конец игры
-        if (e.y + e.size / 2 >= ship.y - ship.height / 2 &&
-            Math.abs(e.x - ship.x) < (e.size / 2 + ship.width / 2)) {
+        const dx = a.x - ship.x;
+        const dy = a.y - ship.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < a.size / 2 + ship.width / 3) {
           createExplosion(ship.x, ship.y, '#ff6600');
           gameOver = true;
           endGame();
           return;
         }
 
-        // Враг улетел за экран
-        if (e.y > H + 50) {
-          enemies.splice(i, 1);
-        }
-      }
+        if (!a.passed && a.y > ship.y + ship.height) {
+          a.passed = true;
+          dodges++;
+          earned += 0.1;
+          earned = Math.round(earned * 10) / 10;
+          balance += 0.1;
+          balance = Math.round(balance * 10) / 10;
+          updateShopUI();
+          saveState();
 
-      // Коллизии пуль с врагами
-      for (let i = bullets.length - 1; i >= 0; i--) {
-        const b = bullets[i];
-        let hit = false;
-        for (let j = enemies.length - 1; j >= 0; j--) {
-          const e = enemies[j];
-          const dx = b.x - e.x;
-          const dy = b.y - e.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < e.size / 2 + b.size) {
-            e.hp--;
-            hit = true;
-            if (e.hp <= 0) {
-              // Уничтожен
-              createExplosion(e.x, e.y, e.isBoss ? '#ff00ff' : '#00e5ff');
-              if (e.isBoss) {
-                bossKills++;
-                earned += 0.3;
-              } else {
-                kills++;
-                earned += 0.1;
-              }
-              earned = Math.round(earned * 10) / 10;
-              balance += e.isBoss ? 0.3 : 0.1;
-              balance = Math.round(balance * 10) / 10;
-              updateShopUI();
-              saveState();
-              enemies.splice(j, 1);
+          const dodgesEl = document.getElementById('dodges');
+          const earnedEl = document.getElementById('asteroidEarned');
+          if (dodgesEl) dodgesEl.textContent = dodges;
+          if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
 
-              // Обновление UI
-              const killsEl = document.getElementById('ufoKills');
-              const bossEl = document.getElementById('ufoBossKills');
-              const earnedEl = document.getElementById('ufoEarned');
-              if (killsEl) killsEl.textContent = kills;
-              if (bossEl) bossEl.textContent = bossKills;
-              if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
-
-              // Повышение волны
-              const totalKills = kills + bossKills;
-              const newWave = Math.floor(totalKills / 8) + 1;
-              if (newWave > wave) {
-                wave = newWave;
-                enemySpeed = 1.5 + (wave - 1) * 0.3;
-                spawnInterval = Math.max(25, 80 - (wave - 1) * 6);
-                const waveEl = document.getElementById('ufoWave');
-                if (waveEl) waveEl.textContent = wave;
-              }
-            } else {
-              // Просто попали — мигание
-              createExplosion(b.x, b.y, '#ffd700');
-            }
-            break;
+          if (dodges % 5 === 0) {
+            speedMultiplier += 0.15;
+            spawnInterval = Math.max(20, spawnInterval - 2);
+            const speedEl = document.getElementById('asteroidSpeed');
+            if (speedEl) speedEl.textContent = speedMultiplier.toFixed(1) + 'x';
           }
         }
-        if (hit) {
-          bullets.splice(i, 1);
+
+        if (a.y > H + 50) {
+          asteroids.splice(i, 1);
         }
       }
 
-      // Обновление частиц
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx;
@@ -1669,16 +1675,13 @@
         p.vx *= 0.95;
         p.vy *= 0.95;
         p.life--;
-        if (p.life <= 0) {
-          particles.splice(i, 1);
-        }
+        if (p.life <= 0) particles.splice(i, 1);
       }
 
       draw();
     }
 
     function draw() {
-      // Фон — глубокий космос
       const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
       bgGradient.addColorStop(0, '#05020f');
       bgGradient.addColorStop(0.5, '#0a0520');
@@ -1686,13 +1689,11 @@
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, W, H);
 
-      // Звёзды фона
       bgStars.forEach(s => {
         ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + s.size * 0.3})`;
         ctx.fillRect(s.x, s.y, s.size, s.size);
       });
 
-      // Частицы
       particles.forEach(p => {
         const alpha = p.life / p.maxLife;
         ctx.fillStyle = p.color;
@@ -1703,99 +1704,72 @@
       });
       ctx.globalAlpha = 1;
 
-      // Пули
-      bullets.forEach(b => {
-        // Светящийся след
-        const grad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + 15);
-        grad.addColorStop(0, '#ffd700');
-        grad.addColorStop(1, 'rgba(255, 215, 0, 0)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(b.x - 1.5, b.y, 3, 15);
-        // Сама пуля
-        ctx.fillStyle = '#fff8dc';
-        ctx.shadowColor = '#ffd700';
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-
-      // Враги
-      enemies.forEach(e => {
+      asteroids.forEach(a => {
         ctx.save();
-        ctx.translate(e.x, e.y);
-        if (e.isBoss) {
-          // Босс — 👾
-          ctx.font = e.size + 'px serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.shadowColor = '#ff00ff';
-          ctx.shadowBlur = 20;
-          ctx.fillText('👾', 0, 0);
-        } else {
-          // Обычное НЛО — 🛸
-          ctx.font = e.size + 'px serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.shadowColor = '#00e5ff';
-          ctx.shadowBlur = 15;
-          ctx.fillText('🛸', 0, 0);
+        ctx.translate(a.x, a.y);
+        ctx.rotate(a.rotation);
+        ctx.fillStyle = '#8b7355';
+        ctx.strokeStyle = '#5c4a38';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < 8; i++) {
+          const angle = (Math.PI * 2 * i) / 8;
+          const radius = a.size / 2 + Math.sin(i * 2.3) * 3;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
         }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.beginPath();
+        ctx.arc(-a.size * 0.15, -a.size * 0.1, a.size * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(a.size * 0.1, a.size * 0.15, a.size * 0.1, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
       });
 
-      // Корабль игрока 🚀
+      // НЛО вместо ракеты
       ctx.save();
       ctx.translate(ship.x, ship.y);
       ctx.font = '36px serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.shadowColor = '#ffd700';
+      ctx.shadowColor = '#00e5ff';
       ctx.shadowBlur = 15;
-      ctx.fillText('🚀', 0, 0);
+      ctx.fillText('🛸', 0, 0);
       ctx.restore();
 
-      // Огонь из двигателя
+      // Луч от НЛО
       if (!gameOver) {
         const flicker = Math.sin(frameCount * 0.5) * 3;
-        ctx.fillStyle = '#ff6600';
-        ctx.shadowColor = '#ff6600';
-        ctx.shadowBlur = 10;
+        ctx.fillStyle = 'rgba(0, 229, 255, 0.3)';
         ctx.beginPath();
-        ctx.moveTo(ship.x - 5, ship.y + 12);
-        ctx.lineTo(ship.x, ship.y + 22 + flicker);
-        ctx.lineTo(ship.x + 5, ship.y + 12);
+        ctx.moveTo(ship.x - 8, ship.y + 12);
+        ctx.lineTo(ship.x + 8, ship.y + 12);
+        ctx.lineTo(ship.x + 14, ship.y + 22 + flicker);
+        ctx.lineTo(ship.x - 14, ship.y + 22 + flicker);
         ctx.closePath();
         ctx.fill();
-        ctx.fillStyle = '#ffcc00';
-        ctx.beginPath();
-        ctx.moveTo(ship.x - 3, ship.y + 12);
-        ctx.lineTo(ship.x, ship.y + 18 + flicker);
-        ctx.lineTo(ship.x + 3, ship.y + 12);
-        ctx.closePath();
-        ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
-      // Game Over
       if (gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, W, H);
         ctx.fillStyle = '#ff4444';
-        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('💥 ПОРАЖЕНИЕ 💥', W / 2, H / 2 - 40);
-        ctx.fillStyle = '#ffd700';
-        ctx.font = 'bold 18px Comic Neue, sans-serif';
-        ctx.fillText('НЛО протаранило корабль!', W / 2, H / 2 - 5);
+        ctx.fillText('💥 НЛО РАЗБИТО! 💥', W / 2, H / 2 - 30);
         ctx.fillStyle = '#00ff88';
         ctx.font = '15px Comic Neue, sans-serif';
-        ctx.fillText('🛸 Уничтожено: ' + kills + ' | 👾 Боссов: ' + bossKills, W / 2, H / 2 + 25);
-        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 50);
+        ctx.fillText('Уклонений: ' + dodges, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 30);
       }
 
-      // Пауза
       if (paused && !gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fillRect(0, 0, W, H);
@@ -1807,18 +1781,17 @@
     }
 
     function endGame() {
-      cancelAnimationFrame(ufoInterval);
-      ufoInterval = null;
+      cancelAnimationFrame(asteroidInterval);
+      asteroidInterval = null;
       draw();
       setTimeout(() => {
-        showModal('💥 ПОРАЖЕНИЕ 💥',
-          `<p>🛸 Уничтожено НЛО: <b style="color:#ffd700;">${kills}</b></p>
-           <p>👾 Побеждено боссов: <b style="color:#ff69b4;">${bossKills}</b></p>
-           <p>📊 Достигнута волна: <b style="color:#00e5ff;">${wave}</b></p>
+        showModal('💥 НЛО РАЗБИТО! 💥',
+          `<p>☄️ Астероидов уклонено: <b style="color:#ffd700;">${dodges}</b></p>
+           <p>⚡ Достигнута скорость: <b style="color:#ff69b4;">${speedMultiplier.toFixed(1)}x</b></p>
            <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
-           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Земля ждёт своего героя! 🚀</p>`,
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Космос не прощает ошибок! 🛸</p>`,
           false,
-          `<button class="restart-btn" onclick="restartUfoShooter()">🔄 ИГРАТЬ СНОВА</button>
+          `<button class="restart-btn" onclick="restartAsteroidDodge()">🔄 ИГРАТЬ СНОВА</button>
            <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
         );
       }, 400);
@@ -1830,8 +1803,7 @@
         if (!gameOver) { paused = !paused; draw(); }
         return;
       }
-      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', ' ', 'a', 'A', 'd', 'D', 'w', 'W',
-           'ф', 'Ф', 'в', 'В', 'ц', 'Ц'].includes(e.key)) {
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
         e.preventDefault();
       }
     }
@@ -1840,21 +1812,966 @@
       keysPressed[e.key] = false;
     }
 
+    function handleMouse(e) {
+      if (gameOver || paused) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const scaleX = canvas.width / rect.width;
+      ship.x = mouseX * scaleX;
+      if (ship.x < ship.width / 2) ship.x = ship.width / 2;
+      if (ship.x > W - ship.width / 2) ship.x = W - ship.width / 2;
+    }
+
     document.addEventListener('keydown', handleKey);
     document.addEventListener('keyup', handleKeyUp);
+    canvas.addEventListener('mousemove', handleMouse);
 
-    ufoState = { handleKey, handleKeyUp };
+    asteroidState = { handleKey, handleKeyUp, handleMouse, canvas };
 
     draw();
-    ufoInterval = requestAnimationFrame(function loop() {
+    asteroidInterval = requestAnimationFrame(function loop() {
       update();
-      if (!gameOver) ufoInterval = requestAnimationFrame(loop);
+      if (!gameOver) asteroidInterval = requestAnimationFrame(loop);
     });
   }
 
-  function restartUfoShooter() {
+  function restartAsteroidDodge() {
     closeModal();
-    setTimeout(startUfoShooter, 150);
+    setTimeout(startAsteroidDodge, 150);
+  }
+
+  // ========== ARKANOID ==========
+  let arkanoidInterval = null;
+  let arkanoidState = null;
+
+  function startArkanoid() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="arkanoidCanvas" width="400" height="500"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">БЛОКИ</div><div class="stat-value" id="blocksBroken">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="arkanoidEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">УРОВЕНЬ</div><div class="stat-value" id="arkanoidLevel">1</div></div>
+          <div class="game-controls">
+            <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></div>
+            <div>или мышь</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждый разбитый блок</p>
+    `;
+    showModal('🧱 АРКАНОИД 🧱', bodyHTML, true);
+    setTimeout(initArkanoid, 50);
+  }
+
+  function initArkanoid() {
+    const canvas = document.getElementById('arkanoidCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const paddle = {
+      x: W / 2 - 40,
+      y: H - 30,
+      width: 80,
+      height: 12,
+      speed: 8
+    };
+
+    const ball = {
+      x: W / 2,
+      y: H - 50,
+      radius: 7,
+      dx: 3.5,
+      dy: -3.5
+    };
+
+    const BRICK_ROWS = 5;
+    const BRICK_COLS = 8;
+    const BRICK_W = (W - 40) / BRICK_COLS;
+    const BRICK_H = 20;
+    const BRICK_OFFSET = 30;
+    const BRICK_COLORS = ['#ff69b4', '#ffd700', '#00e5ff', '#00ff88', '#b088ff'];
+
+    let bricks = [];
+    let blocksBroken = 0;
+    let earned = 0;
+    let level = 1;
+    let paused = false;
+    let gameOver = false;
+    let levelComplete = false;
+    let keysPressed = {};
+    let particles = [];
+
+    function createBricks() {
+      bricks = [];
+      for (let r = 0; r < BRICK_ROWS; r++) {
+        for (let c = 0; c < BRICK_COLS; c++) {
+          bricks.push({
+            x: c * BRICK_W + BRICK_OFFSET / 2 + 20,
+            y: r * BRICK_H + 40,
+            width: BRICK_W - 4,
+            height: BRICK_H - 4,
+            color: BRICK_COLORS[r],
+            active: true
+          });
+        }
+      }
+    }
+
+    createBricks();
+
+    function createParticles(x, y, color) {
+      for (let i = 0; i < 8; i++) {
+        const angle = (Math.PI * 2 * i) / 8;
+        const speed = 1.5 + Math.random() * 2;
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 20, maxLife: 20,
+          color: color,
+          size: 2 + Math.random() * 2
+        });
+      }
+    }
+
+    function update() {
+      if (gameOver || paused || levelComplete) return;
+
+      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
+        paddle.x -= paddle.speed;
+      }
+      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) {
+        paddle.x += paddle.speed;
+      }
+
+      if (paddle.x < 0) paddle.x = 0;
+      if (paddle.x + paddle.width > W) paddle.x = W - paddle.width;
+
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      if (ball.x - ball.radius < 0 || ball.x + ball.radius > W) {
+        ball.dx = -ball.dx;
+      }
+      if (ball.y - ball.radius < 0) {
+        ball.dy = -ball.dy;
+      }
+
+      if (ball.y + ball.radius >= paddle.y &&
+          ball.y - ball.radius <= paddle.y + paddle.height &&
+          ball.x >= paddle.x &&
+          ball.x <= paddle.x + paddle.width) {
+        const hitPos = (ball.x - paddle.x) / paddle.width - 0.5;
+        ball.dx = hitPos * 6;
+        ball.dy = -Math.abs(ball.dy);
+      }
+
+      if (ball.y - ball.radius > H) {
+        gameOver = true;
+        endGame();
+        return;
+      }
+
+      for (let i = 0; i < bricks.length; i++) {
+        const b = bricks[i];
+        if (!b.active) continue;
+        if (ball.x + ball.radius > b.x &&
+            ball.x - ball.radius < b.x + b.width &&
+            ball.y + ball.radius > b.y &&
+            ball.y - ball.radius < b.y + b.height) {
+
+          b.active = false;
+          blocksBroken++;
+          earned += 0.1;
+          earned = Math.round(earned * 10) / 10;
+          balance += 0.1;
+          balance = Math.round(balance * 10) / 10;
+          updateShopUI();
+          saveState();
+
+          createParticles(ball.x, ball.y, b.color);
+
+          const overlapX = Math.min(
+            Math.abs(ball.x + ball.radius - b.x),
+            Math.abs(ball.x - ball.radius - (b.x + b.width))
+          );
+          const overlapY = Math.min(
+            Math.abs(ball.y + ball.radius - b.y),
+            Math.abs(ball.y - ball.radius - (b.y + b.height))
+          );
+
+          if (overlapX < overlapY) {
+            ball.dx = -ball.dx;
+          } else {
+            ball.dy = -ball.dy;
+          }
+
+          const blocksEl = document.getElementById('blocksBroken');
+          const earnedEl = document.getElementById('arkanoidEarned');
+          if (blocksEl) blocksEl.textContent = blocksBroken;
+          if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+
+          if (bricks.every(br => !br.active)) {
+            levelComplete = true;
+            level++;
+            setTimeout(nextLevel, 1000);
+          }
+          break;
+        }
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.1;
+        p.life--;
+        if (p.life <= 0) particles.splice(i, 1);
+      }
+
+      draw();
+    }
+
+    function nextLevel() {
+      createBricks();
+      ball.x = W / 2;
+      ball.y = H - 50;
+      ball.dx = 3.5 + level * 0.3;
+      ball.dy = -(3.5 + level * 0.3);
+      levelComplete = false;
+      const levelEl = document.getElementById('arkanoidLevel');
+      if (levelEl) levelEl.textContent = level;
+      draw();
+    }
+
+    function draw() {
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
+      bgGradient.addColorStop(0, '#0a0520');
+      bgGradient.addColorStop(1, '#1a0a3a');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      for (let i = 0; i < 25; i++) {
+        const sx = (i * 47) % W;
+        const sy = (i * 31) % H;
+        ctx.fillRect(sx, sy, 1, 1);
+      }
+
+      bricks.forEach(b => {
+        if (!b.active) return;
+        ctx.fillStyle = b.color;
+        ctx.shadowColor = b.color;
+        ctx.shadowBlur = 8;
+        ctx.fillRect(b.x, b.y, b.width, b.height);
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(b.x, b.y, b.width, b.height);
+      });
+
+      particles.forEach(p => {
+        const alpha = p.life / p.maxLife;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = '#ffd700';
+      ctx.shadowColor = '#ffd700';
+      ctx.shadowBlur = 10;
+      ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillRect(paddle.x + 2, paddle.y + 2, paddle.width - 4, 3);
+
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = '#00e5ff';
+      ctx.shadowBlur = 15;
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💀 МЯЧ УПАЛ! 💀', W / 2, H / 2 - 30);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '15px Comic Neue, sans-serif';
+        ctx.fillText('Блоков разбито: ' + blocksBroken, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 30);
+      }
+
+      if (levelComplete) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('🎉 УРОВЕНЬ ПРОЙДЕН! 🎉', W / 2, H / 2);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '18px Comic Neue, sans-serif';
+        ctx.fillText('Следующий уровень: ' + level, W / 2, H / 2 + 30);
+      }
+
+      if (paused && !gameOver && !levelComplete) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏸ ПАУЗА', W / 2, H / 2);
+      }
+    }
+
+    function endGame() {
+      cancelAnimationFrame(arkanoidInterval);
+      arkanoidInterval = null;
+      draw();
+      setTimeout(() => {
+        showModal('💀 GAME OVER 💀',
+          `<p>🧱 Блоков разбито: <b style="color:#ffd700;">${blocksBroken}</b></p>
+           <p>📊 Достигнут уровень: <b style="color:#ff69b4;">${level}</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Мяч не прощает невнимательности! 🎾</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartArkanoid()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
+
+    function handleKey(e) {
+      keysPressed[e.key] = true;
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
+        if (!gameOver && !levelComplete) { paused = !paused; draw(); }
+        return;
+      }
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
+        e.preventDefault();
+      }
+    }
+
+    function handleKeyUp(e) {
+      keysPressed[e.key] = false;
+    }
+
+    function handleMouse(e) {
+      if (gameOver || paused || levelComplete) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const scaleX = canvas.width / rect.width;
+      paddle.x = mouseX * scaleX - paddle.width / 2;
+      if (paddle.x < 0) paddle.x = 0;
+      if (paddle.x + paddle.width > W) paddle.x = W - paddle.width;
+    }
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('keyup', handleKeyUp);
+    canvas.addEventListener('mousemove', handleMouse);
+
+    arkanoidState = { handleKey, handleKeyUp, handleMouse, canvas };
+
+    draw();
+    arkanoidInterval = requestAnimationFrame(function loop() {
+      update();
+      if (!gameOver) arkanoidInterval = requestAnimationFrame(loop);
+    });
+  }
+
+  function restartArkanoid() {
+    closeModal();
+    setTimeout(startArkanoid, 150);
+  }
+
+  // ========== FLAPPY НЛО ==========
+  let flappyInterval = null;
+  let flappyState = null;
+
+  function startFlappy() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="flappyCanvas" width="400" height="500"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">ПОРТАЛЫ</div><div class="stat-value" id="pipesPassed">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="flappyEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">РЕКОРД</div><div class="stat-value" id="flappyBest">0</div></div>
+          <div class="game-controls">
+            <div><kbd>↑</kbd> / <kbd>W</kbd></div>
+            <div>или клик мыши</div>
+            <div>рывок НЛО вверх</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,2 🌸 за каждый пройденный портал</p>
+    `;
+    showModal('🛸 FLAPPY НЛО 🛸', bodyHTML, true);
+    setTimeout(initFlappy, 50);
+  }
+
+  function initFlappy() {
+    const canvas = document.getElementById('flappyCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const ufo = {
+      x: 80,
+      y: H / 2,
+      width: 34,
+      height: 28,
+      velocity: 0,
+      gravity: 0.3, // было 0.4 — теперь проще
+      jump: -6.5,   // было -7.5 — теперь мягче
+      rotation: 0
+    };
+
+    let pipes = [];
+    let pipesPassed = 0;
+    let earned = 0;
+    let bestScore = 0;
+    let paused = false;
+    let gameOver = false;
+    let frameCount = 0;
+    let spawnTimer = 0;
+    let spawnInterval = 105; // было 90 — теперь реже
+    let pipeSpeed = 2.0;     // было 2.5 — теперь медленнее
+    let gapSize = 165;       // было 150 — теперь шире
+    let bgStars = [];
+
+    for (let i = 0; i < 30; i++) {
+      bgStars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: Math.random() * 1.5 + 0.5,
+        speed: Math.random() * 0.3 + 0.1
+      });
+    }
+
+    function spawnPipe() {
+      const gapY = 80 + Math.random() * (H - 200 - gapSize);
+      pipes.push({
+        x: W,
+        gapY: gapY,
+        gapSize: gapSize,
+        width: 50,
+        passed: false
+      });
+    }
+
+    function jump() {
+      if (gameOver || paused) return;
+      ufo.velocity = ufo.jump;
+    }
+
+    function update() {
+      if (gameOver || paused) return;
+
+      frameCount++;
+
+      ufo.velocity += ufo.gravity;
+      ufo.y += ufo.velocity;
+      ufo.rotation = Math.min(Math.max(ufo.velocity * 0.06, -0.4), 0.6);
+
+      bgStars.forEach(s => {
+        s.x -= s.speed;
+        if (s.x < 0) { s.x = W; s.y = Math.random() * H; }
+      });
+
+      spawnTimer++;
+      if (spawnTimer >= spawnInterval) {
+        spawnPipe();
+        spawnTimer = 0;
+      }
+
+      for (let i = pipes.length - 1; i >= 0; i--) {
+        const p = pipes[i];
+        p.x -= pipeSpeed;
+
+        if (!p.passed && p.x + p.width < ufo.x) {
+          p.passed = true;
+          pipesPassed++;
+          earned += 0.2;
+          earned = Math.round(earned * 10) / 10;
+          balance += 0.2;
+          balance = Math.round(balance * 10) / 10;
+          updateShopUI();
+          saveState();
+
+          const pipesEl = document.getElementById('pipesPassed');
+          const earnedEl = document.getElementById('flappyEarned');
+          const bestEl = document.getElementById('flappyBest');
+          if (pipesEl) pipesEl.textContent = pipesPassed;
+          if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+          if (bestEl && pipesPassed > bestScore) {
+            bestScore = pipesPassed;
+            bestEl.textContent = bestScore;
+          }
+
+          // Более плавное усложнение
+          if (pipesPassed % 6 === 0) {
+            pipeSpeed += 0.15;
+            spawnInterval = Math.max(70, spawnInterval - 2);
+            gapSize = Math.max(135, gapSize - 2);
+          }
+        }
+
+        if (ufo.x + ufo.width / 2 > p.x &&
+            ufo.x - ufo.width / 2 < p.x + p.width) {
+          if (ufo.y - ufo.height / 2 < p.gapY ||
+              ufo.y + ufo.height / 2 > p.gapY + p.gapSize) {
+            gameOver = true;
+            endGame();
+            return;
+          }
+        }
+
+        if (p.x + p.width < -10) {
+          pipes.splice(i, 1);
+        }
+      }
+
+      if (ufo.y - ufo.height / 2 < 0 || ufo.y + ufo.height / 2 > H) {
+        gameOver = true;
+        endGame();
+        return;
+      }
+
+      draw();
+    }
+
+    function draw() {
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
+      bgGradient.addColorStop(0, '#0a0520');
+      bgGradient.addColorStop(1, '#1a0a3a');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      bgStars.forEach(s => {
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + s.size * 0.3})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
+
+      pipes.forEach(p => {
+        const topGrad = ctx.createLinearGradient(p.x, 0, p.x + p.width, 0);
+        topGrad.addColorStop(0, '#00e5ff');
+        topGrad.addColorStop(0.5, '#0088aa');
+        topGrad.addColorStop(1, '#005577');
+        ctx.fillStyle = topGrad;
+        ctx.fillRect(p.x, 0, p.width, p.gapY);
+        ctx.fillStyle = '#ffd700';
+        ctx.fillRect(p.x - 3, p.gapY - 15, p.width + 6, 15);
+
+        ctx.fillStyle = topGrad;
+        ctx.fillRect(p.x, p.gapY + p.gapSize, p.width, H - p.gapY - p.gapSize);
+        ctx.fillStyle = '#ffd700';
+        ctx.fillRect(p.x - 3, p.gapY + p.gapSize, p.width + 6, 15);
+      });
+
+      // НЛО
+      ctx.save();
+      ctx.translate(ufo.x, ufo.y);
+      ctx.rotate(ufo.rotation);
+      ctx.font = '34px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#00e5ff';
+      ctx.shadowBlur = 18;
+      ctx.fillText('🛸', 0, 0);
+      ctx.restore();
+
+      // Луч снизу НЛО
+      if (!gameOver) {
+        const flicker = Math.sin(frameCount * 0.6) * 3;
+        ctx.fillStyle = 'rgba(0, 229, 255, 0.25)';
+        ctx.beginPath();
+        ctx.moveTo(ufo.x - 6, ufo.y + 12);
+        ctx.lineTo(ufo.x + 6, ufo.y + 12);
+        ctx.lineTo(ufo.x + 12, ufo.y + 20 + flicker);
+        ctx.lineTo(ufo.x - 12, ufo.y + 20 + flicker);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💥 КРУШЕНИЕ! 💥', W / 2, H / 2 - 30);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '15px Comic Neue, sans-serif';
+        ctx.fillText('Порталов пройдено: ' + pipesPassed, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 30);
+      }
+
+      if (paused && !gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏸ ПАУЗА', W / 2, H / 2);
+      }
+    }
+
+    function endGame() {
+      cancelAnimationFrame(flappyInterval);
+      flappyInterval = null;
+      draw();
+      setTimeout(() => {
+        showModal('💥 КРУШЕНИЕ! 💥',
+          `<p>🛸 Порталов пройдено: <b style="color:#ffd700;">${pipesPassed}</b></p>
+           <p>🏆 Рекорд сессии: <b style="color:#ff69b4;">${Math.max(pipesPassed, bestScore)}</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Гравитация — жестокая штука! 🌌</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartFlappy()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
+
+    function handleKey(e) {
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
+        if (!gameOver) { paused = !paused; draw(); }
+        return;
+      }
+      // Пробел УБРАН — только стрелка вверх и W
+      if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W' || e.key === 'ц' || e.key === 'Ц') {
+        e.preventDefault();
+        jump();
+      }
+    }
+
+    function handleClick() {
+      jump();
+    }
+
+    document.addEventListener('keydown', handleKey);
+    canvas.addEventListener('click', handleClick);
+
+    flappyState = { handleKey, handleClick, canvas };
+
+    draw();
+    flappyInterval = requestAnimationFrame(function loop() {
+      update();
+      if (!gameOver) flappyInterval = requestAnimationFrame(loop);
+    });
+  }
+
+  function restartFlappy() {
+    closeModal();
+    setTimeout(startFlappy, 150);
+  }
+
+  // ========== WHACK-A-MOLE ==========
+  let whackInterval = null;
+  let whackTimer = null;
+  let whackState = null;
+
+  function startWhackAMole() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="whackCanvas" width="400" height="400"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">ПОЙМАНО</div><div class="stat-value" id="whackHits">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="whackEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">ЖИЗНИ</div><div class="stat-value" id="whackLives">3</div></div>
+          <div class="stat"><div class="stat-label">ВРЕМЯ</div><div class="stat-value" id="whackTime">30</div></div>
+          <div class="game-controls">
+            <div>Кликай по пришельцам 👽</div>
+            <div>Избегай бомб 💣</div>
+            <div>30 секунд на раунд!</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за пришельца | 💣 = -1 жизнь</p>
+    `;
+    showModal('👽 ПОЙМАЙ ПРИШЕЛЬЦА 👽', bodyHTML, true);
+    setTimeout(initWhackAMole, 50);
+  }
+
+  function initWhackAMole() {
+    const canvas = document.getElementById('whackCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const GRID_SIZE = 3;
+    const CELL_W = W / GRID_SIZE;
+    const CELL_H = H / GRID_SIZE;
+
+    let holes = [];
+    for (let r = 0; r < GRID_SIZE; r++) {
+      for (let c = 0; c < GRID_SIZE; c++) {
+        holes.push({
+          x: c * CELL_W + CELL_W / 2,
+          y: r * CELL_H + CELL_H / 2,
+          row: r,
+          col: c,
+          occupant: null,
+          showTime: 0,
+          maxShowTime: 0
+        });
+      }
+    }
+
+    let hits = 0;
+    let earned = 0;
+    let lives = 3;
+    let timeLeft = 30;
+    let gameOver = false;
+    let timeUp = false;
+    let particles = [];
+    let frameCount = 0;
+    let spawnTimer = 0;
+    let spawnInterval = 40;
+
+    function spawnOccupant() {
+      const emptyHoles = holes.filter(h => h.occupant === null);
+      if (emptyHoles.length === 0) return;
+      const hole = emptyHoles[Math.floor(Math.random() * emptyHoles.length)];
+      const isBomb = Math.random() < 0.2;
+      hole.occupant = isBomb ? 'bomb' : 'alien';
+      hole.maxShowTime = isBomb ? 80 : 60;
+      hole.showTime = 0;
+    }
+
+    function createParticles(x, y, color, count) {
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count;
+        const speed = 2 + Math.random() * 3;
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 25, maxLife: 25,
+          color: color,
+          size: 3 + Math.random() * 3
+        });
+      }
+    }
+
+    function handleClick(e) {
+      if (gameOver || timeUp) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+      for (const hole of holes) {
+        if (hole.occupant === null) continue;
+        const dx = mouseX - hole.x;
+        const dy = mouseY - hole.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CELL_W / 2.5) {
+          if (hole.occupant === 'alien') {
+            hits++;
+            earned += 0.1;
+            earned = Math.round(earned * 10) / 10;
+            balance += 0.1;
+            balance = Math.round(balance * 10) / 10;
+            updateShopUI();
+            saveState();
+            createParticles(hole.x, hole.y, '#00ff88', 10);
+            const hitsEl = document.getElementById('whackHits');
+            const earnedEl = document.getElementById('whackEarned');
+            if (hitsEl) hitsEl.textContent = hits;
+            if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+          } else if (hole.occupant === 'bomb') {
+            lives--;
+            createParticles(hole.x, hole.y, '#ff4444', 15);
+            const livesEl = document.getElementById('whackLives');
+            if (livesEl) livesEl.textContent = lives;
+            if (lives <= 0) {
+              gameOver = true;
+              endGame('💥 ВСЕ ЖИЗНИ ПОТЕРЯНЫ! 💥');
+              return;
+            }
+          }
+          hole.occupant = null;
+          break;
+        }
+      }
+    }
+
+    function update() {
+      if (gameOver || timeUp) return;
+
+      frameCount++;
+
+      spawnTimer++;
+      if (spawnTimer >= spawnInterval) {
+        spawnOccupant();
+        spawnTimer = 0;
+        if (timeLeft < 20) spawnInterval = 30;
+        if (timeLeft < 10) spawnInterval = 22;
+      }
+
+      for (const hole of holes) {
+        if (hole.occupant !== null) {
+          hole.showTime++;
+          if (hole.showTime >= hole.maxShowTime) {
+            hole.occupant = null;
+          }
+        }
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.15;
+        p.life--;
+        if (p.life <= 0) particles.splice(i, 1);
+      }
+
+      draw();
+    }
+
+    function draw() {
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
+      bgGradient.addColorStop(0, '#1a0a3a');
+      bgGradient.addColorStop(1, '#2a1050');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      for (let i = 0; i < 20; i++) {
+        const sx = (i * 53) % W;
+        const sy = (i * 37) % H;
+        ctx.fillRect(sx, sy, 1, 1);
+      }
+
+      holes.forEach(hole => {
+        ctx.fillStyle = '#0a0520';
+        ctx.beginPath();
+        ctx.ellipse(hole.x, hole.y + 20, CELL_W / 2.5, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(176, 136, 255, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        if (hole.occupant !== null) {
+          const progress = hole.showTime / hole.maxShowTime;
+          const scale = progress < 0.2 ? progress / 0.2 : (progress > 0.8 ? (1 - progress) / 0.2 : 1);
+          const yOffset = (1 - scale) * 30;
+
+          ctx.save();
+          ctx.translate(hole.x, hole.y + yOffset);
+          ctx.scale(scale, scale);
+          ctx.font = '50px serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          if (hole.occupant === 'alien') {
+            ctx.shadowColor = '#00ff88';
+            ctx.shadowBlur = 15;
+            ctx.fillText('👽', 0, 0);
+          } else if (hole.occupant === 'bomb') {
+            ctx.shadowColor = '#ff4444';
+            ctx.shadowBlur = 15;
+            ctx.fillText('💣', 0, 0);
+          }
+          ctx.restore();
+        }
+      });
+
+      particles.forEach(p => {
+        const alpha = p.life / p.maxLife;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 24px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💥 ВСЕ ЖИЗНИ ПОТЕРЯНЫ! 💥', W / 2, H / 2 - 30);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '15px Comic Neue, sans-serif';
+        ctx.fillText('Поймано пришельцев: ' + hits, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 30);
+      }
+
+      if (timeUp) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 28px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏰ ВРЕМЯ ВЫШЛО! ⏰', W / 2, H / 2 - 30);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '15px Comic Neue, sans-serif';
+        ctx.fillText('Поймано пришельцев: ' + hits, W / 2, H / 2 + 5);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 30);
+      }
+    }
+
+    function endGame(message) {
+      cancelAnimationFrame(whackInterval);
+      clearInterval(whackTimer);
+      whackInterval = null;
+      whackTimer = null;
+      draw();
+      setTimeout(() => {
+        showModal(message,
+          `<p>👽 Поймано пришельцев: <b style="color:#ffd700;">${hits}</b></p>
+           <p>❤️ Осталось жизней: <b style="color:#ff69b4;">${Math.max(0, lives)}</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Пришельцы быстро бегают! 👽</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartWhackAMole()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
+
+    function tickTimer() {
+      timeLeft--;
+      const timeEl = document.getElementById('whackTime');
+      if (timeEl) timeEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        timeUp = true;
+        endGame('⏰ ВРЕМЯ ВЫШЛО! ⏰');
+      }
+    }
+
+    canvas.addEventListener('click', handleClick);
+    whackState = { handleClick, canvas };
+
+    draw();
+    whackInterval = requestAnimationFrame(function loop() {
+      update();
+      if (!gameOver && !timeUp) whackInterval = requestAnimationFrame(loop);
+    });
+    whackTimer = setInterval(tickTimer, 1000);
+  }
+
+  function restartWhackAMole() {
+    closeModal();
+    setTimeout(startWhackAMole, 150);
   }
 
   document.querySelector('.header h1').addEventListener('click', () => {
