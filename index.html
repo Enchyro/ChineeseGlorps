@@ -270,6 +270,50 @@
     font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
 
+  .floating-balance {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, rgba(20, 10, 50, 0.95), rgba(40, 15, 70, 0.95));
+    backdrop-filter: blur(12px);
+    border: 2px solid #ffd700;
+    border-radius: 16px;
+    padding: 12px 18px;
+    z-index: 1499;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 160px;
+  }
+  .floating-balance .balance-icon {
+    font-size: 26px;
+    filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.6));
+  }
+  .floating-balance .balance-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .floating-balance .balance-label {
+    font-size: 10px;
+    color: #b8a8d0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .floating-balance .balance-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00ff88;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+    font-family: 'Courier New', monospace;
+  }
+  .floating-balance .balance-value .currency {
+    font-size: 14px;
+    color: #ff69b4;
+    margin-left: 4px;
+  }
+
   .gallery-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
     text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
   }
@@ -285,88 +329,145 @@
     color: #00e5ff; font-size: 15px; font-weight: 700; border-top: 2px dashed #b088ff;
   }
 
-  .image-viewer {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(5, 2, 15, 0.95);
+  /* ========== COLLECTION — МЯГКИЙ ГРАДИЕНТ ========== */
+  .collection-title { text-align: center; font-size: 36px; color: #ffd700; margin: 30px 20px 8px;
+    text-shadow: 2px 2px 0 #ff69b4, 0 0 15px rgba(255, 215, 0, 0.5); letter-spacing: 2px;
+  }
+  .collection-subtitle { text-align: center; font-size: 15px; color: #00e5ff; margin-bottom: 22px; font-style: italic; }
+  .collection-stats { text-align: center; background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
+    border: 2px dashed #ffd700; border-radius: 12px; padding: 14px; margin: 20px; font-size: 15px; color: #b8a8d0;
+  }
+  .collection-stats strong { color: #ffd700; font-size: 22px; margin: 0 4px; }
+  .collection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
+  .collection-item {
+    background: linear-gradient(135deg, rgba(35, 20, 65, 0.55), rgba(50, 25, 80, 0.55));
     backdrop-filter: blur(10px);
-    z-index: 3000;
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    overflow: hidden;
+  }
+  .collection-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.55);
+  }
+  /* Мягкий полупрозрачный градиент-ореол */
+  .collection-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(255, 215, 0, 0.08),
+      rgba(255, 105, 180, 0.06) 30%,
+      rgba(176, 136, 255, 0.07) 60%,
+      rgba(0, 229, 255, 0.08));
+    background-size: 200% 200%;
+    border-radius: 16px;
+    z-index: 0;
+    animation: soft-shimmer 12s ease-in-out infinite;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .collection-item > * { position: relative; z-index: 1; }
+  @keyframes soft-shimmer {
+    0%, 100% { background-position: 0% 50%; opacity: 0.7; }
+    50% { background-position: 100% 50%; opacity: 1; }
+  }
+  .collection-item .pedestal {
+    width: 80%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+  .collection-item .item-emoji {
+    font-size: 80px;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+    animation: item-float 3s ease-in-out infinite;
+  }
+  @keyframes item-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .collection-item .item-name {
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.25);
+    line-height: 1.3;
+  }
+  .collection-item .item-price { font-size: 13px; color: #00e5ff; font-weight: 700; margin-bottom: 4px; }
+  .collection-item .item-date { font-size: 10px; color: #888; font-style: italic; margin-top: 4px; }
+  .collection-item.legendary-collect {
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+  }
+  .collection-item.legendary-collect::before {
+    background: linear-gradient(135deg,
+      rgba(255, 215, 0, 0.12),
+      rgba(255, 237, 78, 0.08) 50%,
+      rgba(255, 215, 0, 0.12));
+  }
+  .collection-item.legendary-collect .item-emoji {
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+  }
+  .collection-item.legendary-collect .item-name {
+    color: #ffed4e;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+  }
+  .collection-item.legendary-collect::after {
+    content: '✨';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 18px;
+    animation: twinkle 2.5s ease-in-out infinite;
+    z-index: 2;
+    opacity: 0.8;
+  }
+  .collection-empty { text-align: center; padding: 60px 20px; margin: 20px;
+    background: rgba(20, 10, 50, 0.55); backdrop-filter: blur(10px);
+    border: 3px dashed #b088ff; border-radius: 16px;
+  }
+  .collection-empty .empty-emoji { font-size: 80px; display: block; margin-bottom: 16px; animation: item-float 3s ease-in-out infinite; }
+  .collection-empty h3 { color: #ffd700; font-size: 24px; margin-bottom: 12px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+  .collection-empty p { color: #b8a8d0; font-size: 15px; line-height: 1.6; max-width: 500px; margin: 0 auto; }
+
+  .image-viewer { display: none; position: fixed; inset: 0;
+    background: rgba(5, 2, 15, 0.95); backdrop-filter: blur(10px);
+    z-index: 3000; align-items: center; justify-content: center; padding: 20px;
   }
   .image-viewer.active { display: flex; }
-  .image-viewer-content {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    animation: zoom-in 0.3s ease-out;
+  .image-viewer-content { position: relative; max-width: 90vw; max-height: 90vh; animation: zoom-in 0.3s ease-out; }
+  @keyframes zoom-in { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .image-viewer img { max-width: 100%; max-height: 75vh; border: 4px solid #ff69b4;
+    border-radius: 12px; box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
   }
-  @keyframes zoom-in {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+  .image-viewer-caption { text-align: center; color: #00e5ff; font-size: 18px; font-weight: 700;
+    margin-top: 15px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
   }
-  .image-viewer img {
-    max-width: 100%;
-    max-height: 75vh;
-    border: 4px solid #ff69b4;
-    border-radius: 12px;
-    box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+  .image-viewer-author { text-align: center; color: #b8a8d0; font-size: 14px; margin-top: 8px;
+    padding: 8px 16px; background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 105, 180, 0.4); border-radius: 20px;
+    display: inline-block; font-style: italic;
   }
-  .image-viewer-caption {
-    text-align: center;
-    color: #00e5ff;
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 15px;
-    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  .image-viewer-author a { color: #ff69b4; text-decoration: none; font-weight: 700; transition: all 0.2s; }
+  .image-viewer-author a:hover { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.6); }
+  .image-viewer-close { position: absolute; top: -15px; right: -15px;
+    background: linear-gradient(135deg, #ff69b4, #c71585); color: #fff;
+    border: 3px solid #ffd700; border-radius: 50%; width: 40px; height: 40px;
+    font-size: 20px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s; font-family: 'Comic Neue', cursive;
   }
-  .image-viewer-author {
-    text-align: center;
-    color: #b8a8d0;
-    font-size: 14px;
-    margin-top: 8px;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px dashed rgba(255, 105, 180, 0.4);
-    border-radius: 20px;
-    display: inline-block;
-    font-style: italic;
-  }
-  .image-viewer-author a {
-    color: #ff69b4;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.2s;
-  }
-  .image-viewer-author a:hover {
-    color: #ffd700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-  }
-  .image-viewer-close {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: linear-gradient(135deg, #ff69b4, #c71585);
-    color: #fff;
-    border: 3px solid #ffd700;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    font-family: 'Comic Neue', cursive;
-  }
-  .image-viewer-close:hover {
-    transform: scale(1.15) rotate(90deg);
-    background: linear-gradient(135deg, #00e5ff, #0088aa);
-  }
+  .image-viewer-close:hover { transform: scale(1.15) rotate(90deg); background: linear-gradient(135deg, #00e5ff, #0088aa); }
 
   .footer { background: rgba(5, 2, 15, 0.85); backdrop-filter: blur(10px); color: #b8a8d0;
     text-align: center; padding: 28px 20px; border-top: 3px double #ffd700; margin-top: 20px; font-size: 13px;
@@ -410,7 +511,7 @@
   .play-btn:hover { transform: scale(1.08); background: linear-gradient(180deg, #ffed4e, #ffd700); }
 
   .game-container { display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-  #tetrisCanvas, #snakeCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  #tetrisCanvas, #snakeCanvas, #swagCanvas { background: #000; border: 2px solid #ffd700; border-radius: 4px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
   .game-info { text-align: left; color: #f0e8ff; font-size: 13px; min-width: 140px; }
   .game-info .stat { background: rgba(0, 0, 0, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffd700; }
   .game-info .stat-label { color: #b8a8d0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -436,15 +537,44 @@
   .modal button { background: linear-gradient(180deg, #ff69b4, #c71585); color: #fff;
     border: 2px solid #ffd700; padding: 10px 26px; font-family: 'Comic Neue', cursive;
     font-size: 15px; font-weight: 700; cursor: pointer; border-radius: 20px; transition: transform 0.2s;
+    margin: 4px;
   }
   .modal button:hover { transform: scale(1.05); background: linear-gradient(180deg, #00e5ff, #0088aa); color: #000; }
+  .modal button.pay-btn { background: linear-gradient(180deg, #00ff88, #00aa55); color: #000;
+    font-size: 17px; padding: 12px 30px; border-color: #ffd700; box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  }
+  .modal button.pay-btn:hover { background: linear-gradient(180deg, #00ffaa, #00ff88); color: #000; }
+  .modal button.restart-btn {
+    background: linear-gradient(180deg, #ffd700, #b8860b);
+    color: #3a1f00;
+    font-size: 16px;
+    padding: 12px 28px;
+    border-color: #fff8dc;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  }
+  .modal button.restart-btn:hover {
+    background: linear-gradient(180deg, #ffed4e, #ffd700);
+    color: #3a1f00;
+  }
+  .modal button.exit-btn {
+    background: transparent;
+    color: #b8a8d0;
+    border: 1px solid #b8a8d0;
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  .modal button.exit-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f0e8ff;
+  }
+  .modal button.remove-btn { background: linear-gradient(180deg, #ff4444, #aa0000); padding: 4px 10px; font-size: 11px; border-radius: 12px; }
 
-  .cart-list { text-align: left; margin: 14px 0; }
+  .cart-list { text-align: left; margin: 14px 0; max-height: 300px; overflow-y: auto; }
   .cart-list-item { background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(255, 105, 180, 0.4);
     border-radius: 8px; padding: 10px 12px; margin-bottom: 6px;
-    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 13px; gap: 8px;
   }
-  .cart-list-item .item-name { font-weight: 700; color: #ff69b4; }
+  .cart-list-item .item-name { font-weight: 700; color: #ff69b4; flex-grow: 1; text-align: left; }
   .cart-list-item .item-price { color: #00e5ff; font-weight: 700; }
   .cart-total { font-size: 18px; font-weight: 700; color: #ffd700; margin: 14px 0; padding: 10px;
     background: rgba(0, 0, 0, 0.4); border: 2px solid #ffd700; border-radius: 8px;
@@ -452,28 +582,13 @@
   }
   .cart-empty { color: #888; font-style: italic; padding: 16px; }
 
-  /* Save notification */
-  .save-toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(135deg, #00ff88, #00aa55);
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
-    z-index: 4000;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    pointer-events: none;
+  .save-toast { position: fixed; bottom: 100px; right: 30px;
+    background: linear-gradient(135deg, #00ff88, #00aa55); color: #000;
+    padding: 10px 20px; border-radius: 20px; font-weight: 700; font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4); z-index: 4000;
+    opacity: 0; transform: translateY(20px); transition: all 0.3s; pointer-events: none;
   }
-  .save-toast.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .save-toast.show { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -490,6 +605,7 @@
   <button class="nav-btn active" data-page="home">🏠 Главная</button>
   <button class="nav-btn" data-page="shop">🛒 Магазин</button>
   <button class="nav-btn" data-page="gallery">🖼️ Галерея</button>
+  <button class="nav-btn" data-page="collection">🏛️ Коллекция</button>
 </nav>
 
 <!-- HOME PAGE -->
@@ -551,7 +667,7 @@
   <h2 class="shop-title">🛒 МАГАЗИН ПРИШЕЛЬЦЕВ 🛒</h2>
   <p class="shop-subtitle">Лучшие товары из других галактик! Оплата — сваговиками 🌸</p>
   <div class="cart-info">
-    🛍️ В вашей корзине: <strong id="cartCount">0</strong> товаров | 💰 Баланс сваговиков: <strong id="balance">0</strong> 🌸
+    🛍️ В вашей корзине: <strong id="cartCount">0</strong> товаров
   </div>
   <div class="vip-card">
     <h3><span class="vip-emoji">💎</span> VIP-КАРТА <span class="vip-emoji">💎</span></h3>
@@ -591,6 +707,14 @@
   </div>
 </div>
 
+<!-- COLLECTION PAGE -->
+<div class="page" id="page-collection">
+  <h2 class="collection-title">🏛️ КОЛЛЕКЦИЯ ПАРТИЙЦА 🏛️</h2>
+  <p class="collection-subtitle">Ваши приобретённые реликвии на музейных стендах!</p>
+  <div class="collection-stats" id="collectionStats"></div>
+  <div id="collectionContent"></div>
+</div>
+
 <!-- EARN PAGE -->
 <div class="page" id="page-earn">
   <h2 class="earn-title">🎮 ЗАРАБОТОК СВАГОВИКОВ 🎮</h2>
@@ -608,8 +732,15 @@
       <span class="game-emoji">🐍</span>
       <h4>Змейка-пришелец</h4>
       <p class="game-desc">Космическая змейка собирает инопланетные яблоки! Управляй ею стрелками и не врезайся в себя.</p>
-      <p class="game-reward">💰 0,1 🌸 за каждое яблоко</p>
+      <p class="game-reward">💰 0,2 🌸 за каждое яблоко</p>
       <button class="play-btn" onclick="startSnake()">▶ ИГРАТЬ</button>
+    </div>
+    <div class="game-card">
+      <span class="game-emoji">🧺</span>
+      <h4>Ловец Сваговиков</h4>
+      <p class="game-desc">Лови падающие с неба сваговики 🌸 и редкие алмазы 💎! Остерегайся бомб 💣 — их теперь много!</p>
+      <p class="game-reward">💰 0,1 🌸 за сваговик | 💎 0,3 🌸 за алмаз</p>
+      <button class="play-btn" onclick="startSwagCatcher()">▶ ИГРАТЬ</button>
     </div>
     <div class="game-card">
       <span class="game-emoji">🎯</span>
@@ -628,7 +759,17 @@
   </div>
 </div>
 
+<!-- FLOATING CART BUTTON -->
 <button class="floating-cart" id="floatingCart" onclick="openCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+
+<!-- FLOATING BALANCE WIDGET -->
+<div class="floating-balance" id="floatingBalance">
+  <div class="balance-icon">🌸</div>
+  <div class="balance-info">
+    <div class="balance-label">Сваговики</div>
+    <div class="balance-value"><span id="balanceValue">0</span><span class="currency">🌸</span></div>
+  </div>
+</div>
 
 <div class="footer">
   <p>© 2026 Китайская Пришельцева Партия</p>
@@ -646,7 +787,7 @@
   <div class="modal" id="modalBox">
     <h2 id="modalTitle">🎉 ПОЗДРАВЛЯЕМ! 🎉</h2>
     <div id="modalBody"><p id="modalText">Текст</p></div>
-    <button onclick="closeModal()">ЗАКРЫТЬ</button>
+    <div id="modalButtons"><button onclick="closeModal()">ЗАКРЫТЬ</button></div>
   </div>
 </div>
 
@@ -664,9 +805,10 @@
 <div class="save-toast" id="saveToast">💾 Прогресс сохранён!</div>
 
 <script>
-  // ========== LOCAL STORAGE (SAVE/LOAD) ==========
+  // ========== LOCAL STORAGE ==========
   const STORAGE_KEY_BALANCE = 'kpp_swagoviki_balance';
   const STORAGE_KEY_CART = 'kpp_swagoviki_cart';
+  const STORAGE_KEY_COLLECTION = 'kpp_swagoviki_collection';
 
   function loadState() {
     try {
@@ -680,10 +822,14 @@
         const parsed = JSON.parse(savedCart);
         if (Array.isArray(parsed)) cart = parsed;
       }
+      const savedCollection = localStorage.getItem(STORAGE_KEY_COLLECTION);
+      if (savedCollection !== null) {
+        const parsed = JSON.parse(savedCollection);
+        if (Array.isArray(parsed)) collection = parsed;
+      }
     } catch (e) {
       console.warn('Не удалось загрузить сохранение:', e);
-      balance = 0;
-      cart = [];
+      balance = 0; cart = []; collection = [];
     }
   }
 
@@ -691,6 +837,7 @@
     try {
       localStorage.setItem(STORAGE_KEY_BALANCE, String(balance));
       localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart));
+      localStorage.setItem(STORAGE_KEY_COLLECTION, JSON.stringify(collection));
       showSaveToast();
     } catch (e) {
       console.warn('Не удалось сохранить:', e);
@@ -703,9 +850,7 @@
     if (!toast) return;
     toast.classList.add('show');
     if (saveToastTimeout) clearTimeout(saveToastTimeout);
-    saveToastTimeout = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 1500);
+    saveToastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 1500);
   }
 
   // ========== STARFIELD ==========
@@ -755,6 +900,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (pageId === 'shop') floatingCart.classList.add('visible');
     else floatingCart.classList.remove('visible');
+    if (pageId === 'collection') renderCollection();
   }
   navBtns.forEach(btn => btn.addEventListener('click', () => navigateTo(btn.dataset.page)));
 
@@ -771,9 +917,12 @@
 
   // ========== MODALS ==========
   const modalBox = document.getElementById('modalBox');
-  function showModal(title, bodyHTML, noShake = false) {
+  function showModal(title, bodyHTML, noShake = false, buttonsHTML = null) {
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalBody').innerHTML = bodyHTML;
+    const buttonsContainer = document.getElementById('modalButtons');
+    if (buttonsHTML !== null) buttonsContainer.innerHTML = buttonsHTML;
+    else buttonsContainer.innerHTML = '<button onclick="closeModal()">ЗАКРЫТЬ</button>';
     if (noShake) modalBox.classList.add('no-shake');
     else modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.add('active');
@@ -788,6 +937,15 @@
     if (snakeState && snakeState.handleKey) {
       document.removeEventListener('keydown', snakeState.handleKey);
       snakeState = null;
+    }
+    if (swagCatcherInterval) { cancelAnimationFrame(swagCatcherInterval); swagCatcherInterval = null; }
+    if (swagCatcherState) {
+      if (swagCatcherState.handleKey) document.removeEventListener('keydown', swagCatcherState.handleKey);
+      if (swagCatcherState.handleKeyUp) document.removeEventListener('keyup', swagCatcherState.handleKeyUp);
+      if (swagCatcherState.handleMouse && swagCatcherState.canvas) {
+        swagCatcherState.canvas.removeEventListener('mousemove', swagCatcherState.handleMouse);
+      }
+      swagCatcherState = null;
     }
     modalBox.classList.remove('no-shake');
     document.getElementById('modal').classList.remove('active');
@@ -829,8 +987,8 @@
   // ========== SHOP ==========
   let balance = 0;
   let cart = [];
+  let collection = [];
 
-  // Load saved state FIRST
   loadState();
 
   const limitedItems = [
@@ -874,7 +1032,7 @@
       <p class="desc">${item.desc}</p>
       <div class="price">${priceHTML}</div>
       ${extraHTML}
-      <button class="buy-btn" onclick="buyLimited(${idx})">✨ КУПИТЬ ✨</button>
+      <button class="buy-btn" onclick="addToCart('limited', ${idx})">🛍️ В КОРЗИНУ</button>
     `;
     limitedGrid.appendChild(div);
   });
@@ -894,88 +1052,156 @@
       <h4>${item.name}</h4>
       <p class="desc">${item.desc}</p>
       <div class="price">${priceHTML}</div>
-      <button class="buy-btn" onclick="buy(${idx})">🛍️ КУПИТЬ</button>
+      <button class="buy-btn" onclick="addToCart('regular', ${idx})">🛍️ В КОРЗИНУ</button>
     `;
     shopGrid.appendChild(div);
   });
 
   function updateShopUI() {
     const balanceText = balance % 1 === 0 ? balance : (Math.round(balance * 10) / 10);
-    document.getElementById('balance').textContent = balanceText;
+    document.getElementById('balanceValue').textContent = balanceText;
     document.getElementById('cartCount').textContent = cart.length;
     document.getElementById('cartBadge').textContent = cart.length;
   }
 
-  // Initial UI update with loaded state
   updateShopUI();
 
-  function buy(idx) {
-    const item = shopItems[idx];
-    if (balance < item.price) {
-      showModal('💸 НЕ ХВАТАЕТ СВАГОВИКОВ!',
-        '<p>У вас недостаточно сваговиков для покупки "<b>' + item.name + '</b>". Попробуйте заработать больше!</p>');
-      return;
+  function addToCart(type, idx) {
+    let item;
+    if (type === 'limited') {
+      const src = limitedItems[idx];
+      item = { name: src.name, price: src.price, emoji: src.emoji, isLegendary: src.type === 'legendary' };
+    } else {
+      const src = shopItems[idx];
+      item = { name: src.name, price: src.price, emoji: src.emoji, isLegendary: false };
     }
-    balance -= item.price;
-    balance = Math.round(balance * 10) / 10;
-    cart.push({ name: item.name, price: item.price, emoji: item.emoji });
+    cart.push(item);
     updateShopUI();
     saveState();
-    showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
-      '<p>Вы купили "<b>' + item.name + '</b>"! Курьер-пришелец доставит заказ в течение 3-5 световых лет. Спасибо за сваговики! 🌸</p>');
+    showModal('🛍️ ДОБАВЛЕНО В КОРЗИНУ!',
+      `<p>"<b>${item.emoji} ${item.name}</b>" теперь ждёт оплаты в вашей корзине!</p>
+       <p style="font-size: 13px; color: #b8a8d0;">💰 Стоимость: ${item.price} 🌸</p>`);
   }
 
-  function buyLimited(idx) {
-    const item = limitedItems[idx];
-    if (balance < item.price) {
-      let msg;
-      if (item.type === 'legendary') {
-        msg = '<p>Для покупки "<b>' + item.name + '</b>" вам нужно <b style="color:#ffd700;">' + item.price.toLocaleString('ru-RU') + ' сваговиков</b>. Попробуйте заработать больше!</p>';
-      } else {
-        msg = '<p>У вас недостаточно сваговиков для покупки "<b>' + item.name + '</b>". Попробуйте заработать больше!</p>';
-      }
-      showModal('💸 НЕ ХВАТАЕТ СВАГОВИКОВ!', msg);
-      return;
-    }
-    balance -= item.price;
-    balance = Math.round(balance * 10) / 10;
-    cart.push({ name: item.name, price: item.price, emoji: item.emoji });
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
     updateShopUI();
     saveState();
-    if (item.type === 'legendary') {
-      showModal('✨ ЖЕЛАНИЕ ИСПОЛНЕНО! ✨',
-        '<p>Вы приобрели "<b style="color:#ffd700;">' + item.name + '</b>"! Ваше желание уже в пути к вам на межгалактической почте. Ожидайте доставку через 1000 лет. 🌟</p>');
-    } else if (item.emoji === '🧸') {
-      showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
-        '<p>Вы купили "<b>' + item.name + '</b>"! Ваш новый друг уже спешит к вам! 🧸✨</p>');
-    } else if (item.emoji === '🥐') {
-      showModal('🥐 ВКУСНЯТИНА! 🥐',
-        '<p>Вы купили "<b>' + item.name + '</b>"! Голубой чуррос уже летит к вам на межгалактической тарелке. Приятного аппетита! 🌟</p>');
-    } else {
-      showModal('🎉 ПОКУПКА СОВЕРШЕНА! 🎉',
-        '<p>Вы купили "<b>' + item.name + '</b>"! Курьер-пришелец доставит заказ в течение 3-5 световых лет. Спасибо за сваговики! 🌸</p>');
-    }
+    openCart();
   }
 
   function openCart() {
     let bodyHTML;
+    let buttonsHTML;
     if (cart.length === 0) {
       bodyHTML = '<p class="cart-empty">🛒 Корзина пуста! Самое время закупиться межгалактическими товарами 🌸</p>';
+      buttonsHTML = '<button onclick="closeModal()">ЗАКРЫТЬ</button>';
     } else {
       let total = 0;
       let listHTML = '<div class="cart-list">';
-      cart.forEach(item => {
+      cart.forEach((item, idx) => {
         total += item.price;
-        listHTML += `<div class="cart-list-item"><span class="item-name">${item.emoji} ${item.name}</span><span class="item-price">${item.price} 🌸</span></div>`;
+        listHTML += `<div class="cart-list-item">
+          <span class="item-name">${item.emoji} ${item.name}</span>
+          <span class="item-price">${item.price} 🌸</span>
+          <button class="remove-btn" onclick="removeFromCart(${idx})">✕</button>
+        </div>`;
       });
       listHTML += '</div>';
       total = Math.round(total * 10) / 10;
-      bodyHTML = listHTML + `<div class="cart-total">💰 ИТОГО: ${total} сваговиков 🌸</div>`;
-      if (total >= 200) {
-        bodyHTML += '<p style="color: #ffd700; font-weight: 700;">👑 Поздравляем! Вы заслужили VIP-статус!</p>';
+      const balanceText = balance % 1 === 0 ? balance : (Math.round(balance * 10) / 10);
+      bodyHTML = listHTML +
+        `<div class="cart-total">💰 ИТОГО К ОПЛАТЕ: ${total} сваговиков 🌸</div>
+         <p style="font-size: 13px; color: #b8a8d0;">Ваш баланс: <b style="color: #00ff88;">${balanceText} 🌸</b></p>`;
+      if (total > balance) {
+        bodyHTML += `<p style="color: #ff4444; font-weight: 700; margin-top: 10px;">⚠️ Недостаточно сваговиков! Попробуйте заработать в играх 🎮</p>`;
+        buttonsHTML = '<button onclick="closeModal()">ПОНЯТНО</button>';
+      } else {
+        if (total >= 200) {
+          bodyHTML += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 При оплате вы получите VIP-статус!</p>';
+        }
+        buttonsHTML = `<button onclick="closeModal()">ОТМЕНА</button><button class="pay-btn" onclick="checkout()">💳 ОПЛАТИТЬ ${total} 🌸</button>`;
       }
     }
-    showModal('🛒 ВАША КОРЗИНА 🛒', bodyHTML);
+    showModal('🛒 ВАША КОРЗИНА 🛒', bodyHTML, false, buttonsHTML);
+  }
+
+  function checkout() {
+    if (cart.length === 0) return;
+    let total = 0;
+    cart.forEach(item => total += item.price);
+    total = Math.round(total * 10) / 10;
+
+    if (balance < total) {
+      showModal('💸 НЕ ХВАТАЕТ СВАГОВИКОВ!',
+        '<p>У вас недостаточно сваговиков для оплаты. Попробуйте заработать больше в играх!</p>');
+      return;
+    }
+
+    balance -= total;
+    balance = Math.round(balance * 10) / 10;
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ru-RU');
+    const itemsCount = cart.length;
+    cart.forEach(item => {
+      collection.push({
+        name: item.name, price: item.price, emoji: item.emoji,
+        isLegendary: item.isLegendary || false, date: dateStr
+      });
+    });
+
+    cart = [];
+    updateShopUI();
+    saveState();
+
+    let successMsg = `<p>Оплата прошла успешно! 🎉</p>
+      <p>Все <b>${itemsCount}</b> предметов теперь в вашей <b style="color:#ffd700;">Коллекции</b> 🏛️</p>`;
+    if (total >= 200) {
+      successMsg += '<p style="color: #ffd700; font-weight: 700; margin-top: 10px;">👑 Поздравляем! Вы заслужили VIP-статус!</p>';
+    }
+    const buttonsHTML = `<button onclick="closeModal()">УРА!</button><button onclick="closeModal(); navigateTo('collection');">🏛️ В КОЛЛЕКЦИЮ</button>`;
+    showModal('✨ ПОКУПКА СОВЕРШЕНА! ✨', successMsg, false, buttonsHTML);
+  }
+
+  // ========== COLLECTION ==========
+  function renderCollection() {
+    const statsEl = document.getElementById('collectionStats');
+    const contentEl = document.getElementById('collectionContent');
+
+    if (collection.length === 0) {
+      statsEl.innerHTML = '🏛️ В вашей коллекции: <strong>0</strong> предметов | 💰 Потрачено: <strong>0</strong> 🌸';
+      contentEl.innerHTML = `
+        <div class="collection-empty">
+          <span class="empty-emoji">🏛️</span>
+          <h3>Ваша коллекция пуста!</h3>
+          <p>Загляните в <b style="color:#ffd700;">Магазин Пришельцев</b>, выберите понравившиеся реликвии, оплатите их — и они займут почётное место на ваших музейных стендах! 🛸✨</p>
+        </div>
+      `;
+      return;
+    }
+
+    let totalSpent = 0;
+    collection.forEach(item => totalSpent += item.price);
+    totalSpent = Math.round(totalSpent * 10) / 10;
+    statsEl.innerHTML = `🏛️ В вашей коллекции: <strong>${collection.length}</strong> предметов | 💰 Потрачено: <strong>${totalSpent}</strong> 🌸`;
+
+    let gridHTML = '<div class="collection-grid">';
+    const itemsToShow = [...collection].reverse();
+    itemsToShow.forEach(item => {
+      const legendaryClass = item.isLegendary ? ' legendary-collect' : '';
+      gridHTML += `
+        <div class="collection-item${legendaryClass}">
+          <div class="item-emoji">${item.emoji}</div>
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">${item.price} 🌸</div>
+          <div class="pedestal"></div>
+          <div class="item-date">Приобретено: ${item.date}</div>
+        </div>
+      `;
+    });
+    gridHTML += '</div>';
+    contentEl.innerHTML = gridHTML;
   }
 
   // ========== TETRIS ==========
@@ -990,9 +1216,9 @@
           <div class="stat"><div class="stat-label">ЛИНИИ</div><div class="stat-value" id="tetrisLines">0</div></div>
           <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="tetrisEarned">0 🌸</div></div>
           <div class="game-controls">
-            <div><kbd>←</kbd> <kbd>→</kbd> движение</div>
-            <div><kbd>↑</kbd> поворот</div>
-            <div><kbd>↓</kbd> ускорить</div>
+            <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> движение</div>
+            <div><kbd>↑</kbd> / <kbd>W</kbd> поворот</div>
+            <div><kbd>↓</kbd> / <kbd>S</kbd> ускорить</div>
             <div><kbd>P</kbd> пауза</div>
           </div>
         </div>
@@ -1135,18 +1361,42 @@
       }
       tetrisInterval = requestAnimationFrame(update);
     }
-    function endGame() { cancelAnimationFrame(tetrisInterval); draw(); }
+    function endGame() {
+      cancelAnimationFrame(tetrisInterval);
+      tetrisInterval = null;
+      draw();
+      // Показываем модалку с результатами и кнопкой рестарта
+      setTimeout(() => {
+        showModal('💥 GAME OVER 💥',
+          `<p>Линий собрано: <b style="color:#ffd700;">${lines}</b></p>
+           <p>Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Попробуй побить свой рекорд! 🚀</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartTetris()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
     function handleKey(e) {
       if (gameOver) return;
-      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') { paused = !paused; return; }
+      const key = e.key;
+      if (key === 'p' || key === 'P' || key === 'з' || key === 'З') { paused = !paused; return; }
       if (paused) return;
-      if (e.key === 'ArrowLeft') { if (!collides(currentX - 1, currentY, current.shape)) currentX--; }
-      else if (e.key === 'ArrowRight') { if (!collides(currentX + 1, currentY, current.shape)) currentX++; }
-      else if (e.key === 'ArrowDown') { drop(); }
-      else if (e.key === 'ArrowUp') {
+
+      if (key === 'ArrowLeft' || key === 'a' || key === 'A' || key === 'ф' || key === 'Ф') {
+        if (!collides(currentX - 1, currentY, current.shape)) currentX--;
+      }
+      else if (key === 'ArrowRight' || key === 'd' || key === 'D' || key === 'в' || key === 'В') {
+        if (!collides(currentX + 1, currentY, current.shape)) currentX++;
+      }
+      else if (key === 'ArrowDown' || key === 's' || key === 'S' || key === 'ы' || key === 'Ы') {
+        drop();
+      }
+      else if (key === 'ArrowUp' || key === 'w' || key === 'W' || key === 'ц' || key === 'Ц') {
         const rotated = rotate(current.shape);
         if (!collides(currentX, currentY, rotated)) current.shape = rotated;
-      } else return;
+      }
+      else return;
       e.preventDefault();
       draw();
     }
@@ -1155,6 +1405,11 @@
     newPiece();
     lastTime = performance.now();
     update();
+  }
+
+  function restartTetris() {
+    closeModal();
+    setTimeout(startTetris, 150);
   }
 
   // ========== SNAKE ==========
@@ -1171,12 +1426,12 @@
           <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="snakeEarned">0 🌸</div></div>
           <div class="game-controls">
             <div><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd></div>
-            <div>движение</div>
+            <div>или <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></div>
             <div><kbd>P</kbd> пауза</div>
           </div>
         </div>
       </div>
-      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,1 🌸 за каждое съеденное яблоко</p>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 0,2 🌸 за каждое съеденное яблоко</p>
     `;
     showModal('🐍 ЗМЕЙКА-ПРИШЕЛЕЦ 🐍', bodyHTML, true);
     setTimeout(initSnake, 50);
@@ -1188,7 +1443,7 @@
     const ctx = canvas.getContext('2d');
     const GRID = 20;
     const CELL = canvas.width / GRID;
-    const SPEED = 130;
+    const SPEED = 180;
 
     let snake = [
       { x: 10, y: 10 },
@@ -1238,9 +1493,9 @@
 
       if (head.x === food.x && head.y === food.y) {
         apples++;
-        earned += 0.1;
+        earned += 0.2;
         earned = Math.round(earned * 10) / 10;
-        balance += 0.1;
+        balance += 0.2;
         balance = Math.round(balance * 10) / 10;
         updateShopUI();
         saveState();
@@ -1371,30 +1626,40 @@
       clearInterval(snakeInterval);
       snakeInterval = null;
       draw();
+      setTimeout(() => {
+        showModal('💀 GAME OVER 💀',
+          `<p>🍎 Яблок съедено: <b style="color:#ffd700;">${apples}</b></p>
+           <p>📏 Длина змейки: <b style="color:#00e5ff;">${snake.length}</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">Может, в этот раз дальше? 🐍</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartSnake()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
     }
 
     function handleKey(e) {
       if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
-        if (!gameOver) {
-          paused = !paused;
-          draw();
-        }
+        if (!gameOver) { paused = !paused; draw(); }
         return;
       }
       if (paused || gameOver) return;
 
       const key = e.key;
-      if (key === 'ArrowUp' && direction.y !== 1) {
-        nextDirection = { x: 0, y: -1 };
-      } else if (key === 'ArrowDown' && direction.y !== -1) {
-        nextDirection = { x: 0, y: 1 };
-      } else if (key === 'ArrowLeft' && direction.x !== 1) {
-        nextDirection = { x: -1, y: 0 };
-      } else if (key === 'ArrowRight' && direction.x !== -1) {
-        nextDirection = { x: 1, y: 0 };
-      } else {
-        return;
+      if (key === 'ArrowUp' || key === 'w' || key === 'W' || key === 'ц' || key === 'Ц') {
+        if (direction.y !== 1) nextDirection = { x: 0, y: -1 };
       }
+      else if (key === 'ArrowDown' || key === 's' || key === 'S' || key === 'ы' || key === 'Ы') {
+        if (direction.y !== -1) nextDirection = { x: 0, y: 1 };
+      }
+      else if (key === 'ArrowLeft' || key === 'a' || key === 'A' || key === 'ф' || key === 'Ф') {
+        if (direction.x !== 1) nextDirection = { x: -1, y: 0 };
+      }
+      else if (key === 'ArrowRight' || key === 'd' || key === 'D' || key === 'в' || key === 'В') {
+        if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
+      }
+      else return;
       e.preventDefault();
     }
 
@@ -1403,6 +1668,309 @@
 
     draw();
     snakeInterval = setInterval(update, SPEED);
+  }
+
+  function restartSnake() {
+    closeModal();
+    setTimeout(startSnake, 150);
+  }
+
+  // ========== SWAG CATCHER ==========
+  let swagCatcherInterval = null;
+  let swagCatcherState = null;
+
+  function startSwagCatcher() {
+    const bodyHTML = `
+      <div class="game-container">
+        <canvas id="swagCanvas" width="400" height="500"></canvas>
+        <div class="game-info">
+          <div class="stat"><div class="stat-label">СВАГОВИКИ</div><div class="stat-value" id="swagCaught">0</div></div>
+          <div class="stat"><div class="stat-label">АЛМАЗЫ 💎</div><div class="stat-value" id="diamondsCaught">0</div></div>
+          <div class="stat"><div class="stat-label">ЗАРАБОТАНО</div><div class="stat-value earned" id="swagEarned">0 🌸</div></div>
+          <div class="stat"><div class="stat-label">УРОВЕНЬ</div><div class="stat-value" id="swagLevel">1</div></div>
+          <div class="game-controls">
+            <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></div>
+            <div>или мышь</div>
+            <div><kbd>P</kbd> пауза</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12px; color: #b8a8d0;">💰 🌸 = 0,1 сваговика | 💎 = 0,3 сваговика | 💣 = конец игры</p>
+    `;
+    showModal('🧺 ЛОВЕЦ СВАГОВИКОВ 🧺', bodyHTML, true);
+    setTimeout(initSwagCatcher, 50);
+  }
+
+  function initSwagCatcher() {
+    const canvas = document.getElementById('swagCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const basket = {
+      x: W / 2 - 35,
+      y: H - 60,
+      width: 70,
+      height: 40,
+      speed: 7
+    };
+
+    let items = [];
+    let caught = 0;
+    let diamondsCaught = 0;
+    let earned = 0;
+    let level = 1;
+    let spawnTimer = 0;
+    let spawnInterval = 70;
+    let fallSpeed = 1.8;
+    let paused = false;
+    let gameOver = false;
+    let frameCount = 0;
+    let keysPressed = {};
+
+    const ITEM_TYPES = [
+      { emoji: '🌸', reward: 0.1, chance: 0.50 },
+      { emoji: '💎', reward: 0.3, chance: 0.10 },
+      { emoji: '💣', reward: 0, chance: 0.40, isBomb: true }
+    ];
+
+    function spawnItem() {
+      const rand = Math.random();
+      let cumulative = 0;
+      let type = ITEM_TYPES[0];
+      for (const t of ITEM_TYPES) {
+        cumulative += t.chance;
+        if (rand <= cumulative) { type = t; break; }
+      }
+      items.push({
+        x: Math.random() * (W - 40) + 20,
+        y: -30,
+        emoji: type.emoji,
+        reward: type.reward,
+        isBomb: type.isBomb || false,
+        size: 32,
+        rotation: 0,
+        rotationSpeed: (Math.random() - 0.5) * 0.1
+      });
+    }
+
+    function update() {
+      if (gameOver || paused) return;
+
+      frameCount++;
+
+      if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A'] || keysPressed['ф'] || keysPressed['Ф']) {
+        basket.x -= basket.speed;
+      }
+      if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D'] || keysPressed['в'] || keysPressed['В']) {
+        basket.x += basket.speed;
+      }
+
+      if (basket.x < 0) basket.x = 0;
+      if (basket.x + basket.width > W) basket.x = W - basket.width;
+
+      spawnTimer++;
+      if (spawnTimer >= spawnInterval) {
+        spawnItem();
+        spawnTimer = 0;
+      }
+
+      for (let i = items.length - 1; i >= 0; i--) {
+        const item = items[i];
+        item.y += fallSpeed;
+        item.rotation += item.rotationSpeed;
+
+        const itemCenterX = item.x;
+        const itemCenterY = item.y;
+        const basketTop = basket.y;
+
+        if (itemCenterY + item.size / 2 >= basketTop &&
+            itemCenterY - item.size / 2 <= basketTop + basket.height &&
+            itemCenterX >= basket.x &&
+            itemCenterX <= basket.x + basket.width) {
+
+          if (item.isBomb) {
+            gameOver = true;
+            endGame();
+            return;
+          } else {
+            if (item.emoji === '💎') {
+              diamondsCaught++;
+            } else {
+              caught++;
+            }
+            earned += item.reward;
+            earned = Math.round(earned * 10) / 10;
+            balance += item.reward;
+            balance = Math.round(balance * 10) / 10;
+            updateShopUI();
+            saveState();
+
+            const caughtEl = document.getElementById('swagCaught');
+            const diamondsEl = document.getElementById('diamondsCaught');
+            const earnedEl = document.getElementById('swagEarned');
+            if (caughtEl) caughtEl.textContent = caught;
+            if (diamondsEl) diamondsEl.textContent = diamondsCaught;
+            if (earnedEl) earnedEl.textContent = earned.toFixed(1) + ' 🌸';
+
+            items.splice(i, 1);
+
+            const totalCaught = caught + diamondsCaught;
+            const newLevel = Math.floor(totalCaught / 10) + 1;
+            if (newLevel > level) {
+              level = newLevel;
+              fallSpeed = 1.8 + (level - 1) * 0.4;
+              spawnInterval = Math.max(25, 70 - (level - 1) * 5);
+              const levelEl = document.getElementById('swagLevel');
+              if (levelEl) levelEl.textContent = level;
+            }
+            continue;
+          }
+        }
+
+        if (item.y > H + 40) {
+          items.splice(i, 1);
+        }
+      }
+
+      draw();
+    }
+
+    function draw() {
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, H);
+      bgGradient.addColorStop(0, '#0a0520');
+      bgGradient.addColorStop(1, '#1a0a3a');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      for (let i = 0; i < 30; i++) {
+        const sx = (i * 37 + frameCount * 0.1) % W;
+        const sy = (i * 53) % H;
+        ctx.fillRect(sx, sy, 1, 1);
+      }
+
+      items.forEach(item => {
+        ctx.save();
+        ctx.translate(item.x, item.y);
+        ctx.rotate(item.rotation);
+        ctx.font = item.size + 'px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        if (item.emoji === '💎') {
+          ctx.shadowColor = '#00e5ff';
+          ctx.shadowBlur = 15;
+        } else if (item.isBomb) {
+          ctx.shadowColor = '#ff0000';
+          ctx.shadowBlur = 10;
+        } else {
+          ctx.shadowColor = '#ff69b4';
+          ctx.shadowBlur = 8;
+        }
+        ctx.fillText(item.emoji, 0, 0);
+        ctx.restore();
+      });
+
+      ctx.save();
+      ctx.font = '40px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#ffd700';
+      ctx.shadowBlur = 12;
+      ctx.fillText('🧺', basket.x + basket.width / 2, basket.y + basket.height / 2);
+      ctx.restore();
+
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.1)';
+      ctx.beginPath();
+      ctx.ellipse(basket.x + basket.width / 2, basket.y + basket.height + 5, basket.width / 2, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('💥 БАБАХ! 💣', W / 2, H / 2 - 40);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 18px Comic Neue, sans-serif';
+        ctx.fillText('Вы поймали бомбу!', W / 2, H / 2 - 5);
+        ctx.fillStyle = '#00ff88';
+        ctx.font = '15px Comic Neue, sans-serif';
+        ctx.fillText('🌸 Поймано: ' + caught + ' | 💎 Алмазов: ' + diamondsCaught, W / 2, H / 2 + 25);
+        ctx.fillText('Заработано: ' + earned.toFixed(1) + ' 🌸', W / 2, H / 2 + 50);
+      }
+
+      if (paused && !gameOver) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 32px Comic Neue, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⏸ ПАУЗА', W / 2, H / 2);
+      }
+    }
+
+    function endGame() {
+      cancelAnimationFrame(swagCatcherInterval);
+      swagCatcherInterval = null;
+      draw();
+      setTimeout(() => {
+        showModal('💥 БАБАХ! 💣',
+          `<p>🌸 Поймано сваговиков: <b style="color:#ffd700;">${caught}</b></p>
+           <p>💎 Собрано алмазов: <b style="color:#00e5ff;">${diamondsCaught}</b></p>
+           <p>📊 Достигнут уровень: <b style="color:#ff69b4;">${level}</b></p>
+           <p>💰 Заработано: <b style="color:#00ff88;">${earned.toFixed(1)} 🌸</b></p>
+           <p style="font-size: 13px; color: #b8a8d0; margin-top: 8px;">В следующий раз уворачивайся лучше! 🛸</p>`,
+          false,
+          `<button class="restart-btn" onclick="restartSwagCatcher()">🔄 ИГРАТЬ СНОВА</button>
+           <button class="exit-btn" onclick="closeModal()">🚪 ВЫЙТИ</button>`
+        );
+      }, 400);
+    }
+
+    function handleKey(e) {
+      keysPressed[e.key] = true;
+      if (e.key === 'p' || e.key === 'P' || e.key === 'з' || e.key === 'З') {
+        if (!gameOver) { paused = !paused; draw(); }
+        return;
+      }
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D', 'ф', 'Ф', 'в', 'В'].includes(e.key)) {
+        e.preventDefault();
+      }
+    }
+
+    function handleKeyUp(e) {
+      keysPressed[e.key] = false;
+    }
+
+    function handleMouse(e) {
+      if (gameOver || paused) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const scaleX = canvas.width / rect.width;
+      basket.x = mouseX * scaleX - basket.width / 2;
+      if (basket.x < 0) basket.x = 0;
+      if (basket.x + basket.width > W) basket.x = W - basket.width;
+    }
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('keyup', handleKeyUp);
+    canvas.addEventListener('mousemove', handleMouse);
+
+    swagCatcherState = { handleKey, handleKeyUp, handleMouse, canvas };
+
+    draw();
+    swagCatcherInterval = requestAnimationFrame(function loop() {
+      update();
+      if (!gameOver) swagCatcherInterval = requestAnimationFrame(loop);
+    });
+  }
+
+  function restartSwagCatcher() {
+    closeModal();
+    setTimeout(startSwagCatcher, 150);
   }
 
   document.querySelector('.header h1').addEventListener('click', () => {
